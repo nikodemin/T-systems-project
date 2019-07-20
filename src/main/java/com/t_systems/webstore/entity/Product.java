@@ -13,8 +13,9 @@ public class Product
     private String name;
     private String price;
     private Integer spicy;
-    @OneToOne
-    private Category category;
+    private String category;
+    @OneToMany
+    private List<Tag> tags;
     @OneToMany
     private List<Ingredient> ingredients;
 
