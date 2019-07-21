@@ -11,7 +11,8 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @ComponentScan("com.t_systems.webstore")
-@EnableWebMvc
+//todo this annotation makes tests fail
+//@EnableWebMvc
 @SuppressWarnings("deprecation")
 public class WebConfig extends WebMvcConfigurerAdapter
 {

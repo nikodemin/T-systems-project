@@ -18,7 +18,7 @@ public class User
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
-    @OneToOne(orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
     @Id

@@ -9,8 +9,9 @@ import javax.persistence.*;
 @Data
 public class Ingredient
 {
+    @Column(unique = true, nullable = false)
     private String name;
-    private String price;
+    private Integer price;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -29,12 +29,11 @@ public class UserDao
         return em.createQuery("FROM User", User.class).getResultList();
     }
 
-    public User addUser(User user)
+    public void addUser(User user)
     {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
-        return user;
     }
 
     public User getUserByEmail(String email)

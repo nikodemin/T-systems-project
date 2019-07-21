@@ -149,48 +149,23 @@
                     </button>
                </div>
                <div class="leaders">
-                    <div class="leadersItem card">
-                         <img class="card-img-top" src="resources/img/pizza.jpg">
-                         <div class="card-body">
-                              <h5 class="card-title">Пицца Оливер</h5>
-                              <p class="card-text">
-                                   Томатный соус, сыр моцарелла, пепперони,
-                                   ароматная свинина, ветчина, шампиньоны,
-                                   сладкий зеленый перец, лук, черные оливки
-                              </p>
-                              <a href="#" class="btn btn-primary btn-warning">
-                                   <i class="fas fa-shopping-cart"></i>В корзину
-                              </a>
+                    <c:forEach var="leader" items="${leaders}">
+                         <div class="leadersItem card">
+                              <img class="card-img-top" src="<c:out value="${leader.image}"/>">
+                              <div class="card-body">
+                                   <h4 class="card-title"><c:out value="${leader.name}"></c:out></h4>
+                                   <h5><c:out value="${leader.price}"></c:out> Руб</h5>
+                                   <p class="card-text">
+                                        <c:forEach var="ingredient" items="${leader.ingredients}">
+                                             <c:out value="${ingredient.name}, "></c:out>
+                                        </c:forEach>
+                                   </p>
+                                   <a href="#" class="btn btn-primary btn-warning">
+                                        <i class="fas fa-shopping-cart"></i>В корзину
+                                   </a>
+                              </div>
                          </div>
-                    </div>
-                    <div class="leadersItem card">
-                         <img class="card-img-top" src="resources/img/pizza.jpg">
-                         <div class="card-body">
-                              <h5 class="card-title">Пицца Оливер</h5>
-                              <p class="card-text">
-                                   Томатный соус, сыр моцарелла, пепперони,
-                                   ароматная свинина, ветчина, шампиньоны,
-                                   сладкий зеленый перец, лук, черные оливки
-                              </p>
-                              <a href="#" class="btn btn-primary btn-warning">
-                                   <i class="fas fa-shopping-cart"></i>В корзину
-                              </a>
-                         </div>
-                    </div>
-                    <div class="leadersItem card">
-                         <img class="card-img-top" src="resources/img/pizza.jpg">
-                         <div class="card-body">
-                              <h5 class="card-title">Пицца Оливер</h5>
-                              <p class="card-text">
-                                   Томатный соус, сыр моцарелла, пепперони,
-                                   ароматная свинина, ветчина, шампиньоны,
-                                   сладкий зеленый перец, лук, черные оливки
-                              </p>
-                              <a href="#" class="btn btn-primary btn-warning">
-                                   <i class="fas fa-shopping-cart"></i> В корзину
-                              </a>
-                         </div>
-                    </div>
+                    </c:forEach>
                </div>
           </section>
           <footer>

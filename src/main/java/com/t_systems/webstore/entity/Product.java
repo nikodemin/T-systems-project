@@ -1,5 +1,6 @@
 package com.t_systems.webstore.entity;
 
+import com.t_systems.webstore.model.Category;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,13 +11,16 @@ import java.util.List;
 @Data
 public class Product
 {
+    @Column(unique = true, nullable = false)
     private String name;
-    private String price;
+    private Integer price;
     private Integer spicy;
-    private String category;
-    @OneToMany
+    private String image;
+    @Column(nullable = false)
+    private Category category;
+    @ManyToMany
     private List<Tag> tags;
-    @OneToMany
+    @ManyToMany
     private List<Ingredient> ingredients;
 
     @Id
