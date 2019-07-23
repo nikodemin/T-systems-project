@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan("com.t_systems.webstore")
 //todo this annotation makes tests fail
-//@EnableWebMvc
+@EnableWebMvc
 @SuppressWarnings("deprecation")
 public class WebConfig extends WebMvcConfigurerAdapter
 {
@@ -47,5 +47,11 @@ public class WebConfig extends WebMvcConfigurerAdapter
     {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry)
+    {
+        registry.addViewController("/login").setViewName("login");
     }
 }

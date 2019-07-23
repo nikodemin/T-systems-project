@@ -1,7 +1,7 @@
 package com.t_systems.webstore.entity;
 
-import com.t_systems.webstore.model.DeliveryMethod;
-import com.t_systems.webstore.model.OrderStatus;
+import com.t_systems.webstore.model.enums.DeliveryMethod;
+import com.t_systems.webstore.model.enums.OrderStatus;
 import lombok.Data;
 
 import javax.persistence.*;

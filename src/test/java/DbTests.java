@@ -1,8 +1,8 @@
 import com.t_systems.webstore.config.WebConfig;
 import com.t_systems.webstore.entity.*;
-import com.t_systems.webstore.model.Category;
-import com.t_systems.webstore.model.DeliveryMethod;
-import com.t_systems.webstore.model.OrderStatus;
+import com.t_systems.webstore.model.enums.Category;
+import com.t_systems.webstore.model.enums.DeliveryMethod;
+import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.service.OrderService;
 import com.t_systems.webstore.service.ProductService;
 import com.t_systems.webstore.service.UserService;

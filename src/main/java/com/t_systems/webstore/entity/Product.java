@@ -1,6 +1,6 @@
 package com.t_systems.webstore.entity;
 
-import com.t_systems.webstore.model.Category;
+import com.t_systems.webstore.model.enums.Category;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,4 +26,14 @@ public class Product
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    public List<Ingredient> getSubListIngredients()
+    {
+        return ingredients.subList(0,ingredients.size()-2);
+    }
+
+    public Ingredient getLastIngredient()
+    {
+        return ingredients.get(ingredients.size()-1);
+    }
 }

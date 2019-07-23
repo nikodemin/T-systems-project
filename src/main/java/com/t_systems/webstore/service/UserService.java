@@ -9,6 +9,6 @@ public interface UserService
 {
     User findUser(String username);
     List<User> getAllUsers();
-    void addUser(User user);
+    boolean addUser(User user);
     void addAddress(Address address);
 }

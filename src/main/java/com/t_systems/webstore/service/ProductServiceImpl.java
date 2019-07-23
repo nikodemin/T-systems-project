@@ -7,7 +7,7 @@ import com.t_systems.webstore.dao.TagDao;
 import com.t_systems.webstore.entity.Ingredient;
 import com.t_systems.webstore.entity.Product;
 import com.t_systems.webstore.entity.Tag;
-import com.t_systems.webstore.model.Category;
+import com.t_systems.webstore.model.enums.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

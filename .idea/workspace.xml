@@ -6,62 +6,60 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1fee9fc5-5fd7-4b26-aa07-ddce47a0eb33" name="Default Changelist" comment="some frontend">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/DbFiller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/AddressDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/IngredientDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/OrderDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/ProductDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/TagDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/DeliveryMethod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/OrderStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/OrderServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductServiceImpl.java" afterDir="false" />
+    <list default="true" id="1fee9fc5-5fd7-4b26-aa07-ddce47a0eb33" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/RegisterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/dto/RegistrationForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/UserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/validator/RegistrationValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/_footer.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/_header.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/register.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/messages.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/DbFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/DbFiller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/JpaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/JpaConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Ingredient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/_Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/ProductDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/interceptor/SessionInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/interceptor/SessionInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/Categories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/_Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/_Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/DeliveryMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/DeliveryMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/OrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/jpa.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/jpa.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/DbTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DbTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/config/JpaConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/config/JpaConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/config/WebConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/dao/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/Ingredient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/Ingredient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/controller/MainController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/Product.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/interceptor/SessionInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/interceptor/SessionInterceptor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/service/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/service/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/t_systems/webstore/service/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jpa.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jpa.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/DbTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/DbTests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/config/JpaConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/config/JpaConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/config/WebConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/dao/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/Category.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/Ingredient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/Ingredient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/controller/MainController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/Product.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/interceptor/SessionInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/interceptor/SessionInterceptor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/service/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/service/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/com/t_systems/webstore/service/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/jpa.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/classes/jpa.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/jsp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/WEB-INF/jsp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/resources/data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/resources/jpa.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/webstore-0.0.1-SNAPSHOT/resources/jpa.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -91,40 +89,54 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/DbFiller.java">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="30">
+              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/DispatcherServletInitializer.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/RegisterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/register.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="159" column="53" selection-start-line="159" selection-start-column="53" selection-end-line="159" selection-end-column="53" />
+            <state relative-caret-position="90">
+              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Product.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/validator/RegistrationValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state relative-caret-position="-90">
+              <caret line="9" column="34" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#494#495#0" expanded="true" />
+                <element signature="e#522#523#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -133,38 +145,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/MainController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/Category.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/DeliveryMethod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="74" column="29" lean-forward="true" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2084#2085#0" expanded="true" />
-                <element signature="e#2126#2127#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/TagDao.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/OrderStatus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#724#725#0" expanded="true" />
-                <element signature="e#0#8#0" expanded="true" />
-                <element signature="e#799#800#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -175,8 +188,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Jsp File" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -194,9 +208,13 @@
       <find>id=</find>
       <find>uk_ifunf4kowpbasp73e8n6x20t5</find>
       <find>removed</find>
+      <find>configAuthentication</find>
+      <find>AuthenticationManagerBuilder</find>
+      <find>appUserForm</find>
     </findStrings>
     <replaceStrings>
       <replace>,</replace>
+      <replace>registerForm</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -205,23 +223,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebApplicationContextConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/HomeController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Item.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Items/Ingradient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Items/Ingredient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Items/Item.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Items/Product.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Product.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Ingredient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Category.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Address.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/Order.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/welcome.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/import.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/Cart.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/css/main.css" />
         <option value="$PROJECT_DIR$/src/main/resources/jpa.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
@@ -233,7 +238,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/IngredientDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/AddressDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/OrderService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/OrderServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/interceptor/SessionInterceptor.java" />
@@ -243,19 +247,33 @@
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/TagDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Orders.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/OrderStatus.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/jpa.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/JpaConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/DeliveryMethod.java" />
         <option value="$PROJECT_DIR$/src/test/java/DbTests.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/OrderDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/_Order.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Product.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/DbFiller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Product.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/_footer.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/_header.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/UserRole.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/SecurityConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/jpa.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/JpaConfig.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/messages.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/validator/registrationValidator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/validator/RegistrationValidator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/dto/RegistrationForm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/RegisterController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/register.jsp" />
       </list>
     </option>
   </component>
@@ -274,7 +292,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="27" />
+    <option name="y" value="61" />
     <option name="width" value="1152" />
     <option name="height" value="811" />
   </component>
@@ -286,8 +304,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -382,6 +398,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="webstore" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="dto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webstore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webstore" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="webstore" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -398,15 +424,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webstore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webstore" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="webstore" type="b2602c69:ProjectViewProjectNode" />
@@ -442,13 +459,15 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Facets" />
@@ -465,6 +484,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/resources" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp" />
       <recent name="$PROJECT_DIR$/src/main/webapp/resources/img" />
     </key>
   </component>
@@ -586,7 +606,9 @@
       <workItem from="1563528815192" duration="9695000" />
       <workItem from="1563542991218" duration="17651000" />
       <workItem from="1563616028498" duration="14134000" />
-      <workItem from="1563703489757" duration="21102000" />
+      <workItem from="1563703489757" duration="21234000" />
+      <workItem from="1563787773933" duration="6295000" />
+      <workItem from="1563871306640" duration="6997000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1563564984297</created>
@@ -595,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1563564984297</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="some backend; Png image not found; need to remove last comma">
+      <created>1563733283330</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1563733283330</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -631,7 +660,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73684000" />
+    <option name="totallyTimeSpent" value="87108000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -646,7 +675,7 @@
     <frame x="-1" y="0" width="1154" height="839" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23603603" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23603603" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -657,7 +686,7 @@
       <window_info id="Persistence" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4972973" visible="true" weight="0.44101125" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4972973" visible="true" weight="0.44101125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.44662923" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -671,6 +700,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
       <window_info anchor="bottom" id="Database Changes" order="14" />
       <window_info anchor="bottom" id="Version Control" order="15" />
+      <window_info anchor="right" id="Bean Validation" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24954955" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -681,42 +711,6 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23603603" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Web" order="7" side_tool="true" />
-      <window_info id="Persistence" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4972973" weight="0.5196629" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.44662923" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286517" />
-      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.3286517" />
-      <window_info anchor="bottom" id="Spring" order="8" weight="0.3286517" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5027027" side_tool="true" weight="0.3497191" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.3286517" />
-      <window_info anchor="bottom" id="Java Enterprise" order="13" />
-      <window_info anchor="bottom" id="Database Changes" order="14" />
-      <window_info anchor="bottom" id="Version Control" order="15" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24954955" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -724,7 +718,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="some frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="some frontend" />
+    <MESSAGE value="some backend; Png image not found; need to remove last comma" />
+    <option name="LAST_COMMIT_MESSAGE" value="some backend; Png image not found; need to remove last comma" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -740,35 +735,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/PropertiesConfig.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entities/AbstractEntityWithLongId.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/persistence.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Category.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.8.RELEASE/spring-webmvc-5.1.8.RELEASE.jar!/org/springframework/web/servlet/config/annotation/WebMvcConfigurerAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="38" column="34" lean-forward="true" selection-start-line="38" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.8.RELEASE/spring-webmvc-5.1.8.RELEASE.jar!/org/springframework/web/servlet/handler/HandlerInterceptorAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/Cart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.1.8.RELEASE/spring-core-5.1.8.RELEASE.jar!/org/springframework/util/CollectionUtils.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -844,33 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#556#557#0" expanded="true" />
-            <element signature="e#604#605#0" expanded="true" />
-            <element signature="e#1010#1011#0" expanded="true" />
-            <element signature="e#1056#1057#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#0#32#0" expanded="true" />
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/OrderServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -881,70 +820,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#286#287#0" expanded="true" />
-            <element signature="e#315#316#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/OrderStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding>
-            <element signature="e#126#127#0" expanded="true" />
-            <element signature="e#155#156#0" expanded="true" />
-            <element signature="e#144#145#0" expanded="true" />
-            <element signature="e#183#184#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/jpa.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.2.6/postgresql-42.2.6.jar!/org/postgresql/core/SetupQueryRunner.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/JpaConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="61" column="10" selection-start-line="61" selection-start-column="10" selection-end-line="61" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1546#1547#0" expanded="true" />
-            <element signature="e#1618#1619#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -972,13 +851,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/DeliveryMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1014,30 +886,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Ingredient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1064,55 +916,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="74" column="29" lean-forward="true" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2084#2085#0" expanded="true" />
-            <element signature="e#2126#2127#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/TagDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#724#725#0" expanded="true" />
-            <element signature="e#0#8#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/img/sushi.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/DbFiller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        <state relative-caret-position="90">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1126,10 +936,249 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/ProductServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="74" column="29" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2084#2085#0" expanded="true" />
+            <element signature="e#2126#2127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/TagDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#724#725#0" expanded="true" />
+            <element signature="e#799#800#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.8.RELEASE/spring-webmvc-5.1.8.RELEASE.jar!/org/springframework/web/servlet/config/annotation/WebMvcConfigurerAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="47" column="57" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/_footer.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="7" lean-forward="true" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/_header.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="73" column="75" lean-forward="true" selection-start-line="73" selection-start-column="75" selection-end-line="73" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/5.1.5.RELEASE/spring-security-config-5.1.5.RELEASE.jar!/org/springframework/security/config/annotation/web/configuration/WebSecurityConfigurerAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="65" column="40" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-120">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="159" column="53" selection-start-line="159" selection-start-column="53" selection-end-line="159" selection-end-column="53" />
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="17" column="23" lean-forward="true" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/SecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/JpaConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6">
+          <caret line="60" column="95" selection-start-line="60" selection-start-column="95" selection-end-line="60" selection-end-column="95" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1546#1547#0" expanded="true" />
+            <element signature="e#1618#1619#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/jpa.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/config/WebConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/Category.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/DeliveryMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/OrderStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/enums/UserRole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="16" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="129" column="17" selection-start-line="129" selection-start-column="17" selection-end-line="129" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/messages.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/service/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/model/dto/RegistrationForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/validator/RegistrationValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#494#495#0" expanded="true" />
+            <element signature="e#522#523#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/t_systems/webstore/controller/RegisterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/register.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
         </state>
       </provider>
     </entry>

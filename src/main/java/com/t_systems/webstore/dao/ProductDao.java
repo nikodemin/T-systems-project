@@ -1,7 +1,7 @@
 package com.t_systems.webstore.dao;
 
 import com.t_systems.webstore.entity.Product;
-import com.t_systems.webstore.model.Category;
+import com.t_systems.webstore.model.enums.Category;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
