@@ -1,20 +1,17 @@
 package com.t_systems.webstore.model.enums;
 
-public enum OrderStatus
-{
-    UNPAID("Не оплачен"),
-    PAID("Оплачен"),
-    DELIVERED("Доставлен");
+public enum OrderStatus {
+    UNPAID("Unpaid"),
+    PAID("Paid"),
+    DELIVERED("Delivered");
     private String text;
 
-    OrderStatus(String str)
-    {
-        this.text=str;
+    OrderStatus(String str) {
+        this.text = str;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return text;
     }
 }

@@ -1,11 +1,13 @@
 import com.t_systems.webstore.config.WebConfig;
-import com.t_systems.webstore.entity.*;
+import com.t_systems.webstore.model.entity.*;
+import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.enums.Category;
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
-import com.t_systems.webstore.service.OrderService;
-import com.t_systems.webstore.service.ProductService;
-import com.t_systems.webstore.service.UserService;
+import com.t_systems.webstore.model.enums.UserRole;
+import com.t_systems.webstore.service.api.OrderService;
+import com.t_systems.webstore.service.api.ProductService;
+import com.t_systems.webstore.service.api.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,35 +31,38 @@ public class DbTests
     private ProductService productService;
 
     @Test
-    public void usersTest()
+    public void usersTest() throws UserExistsException
     {
         Address address= new Address();
         address.setCity("SPB");
         address.setCountry("Russia");
-        userService.addAddress(address);
 
         User user = new User();
         user.setEmail("niko@gmail.com");
         user.setUsername("niko");
         user.setAddress(address);
         user.setDateOfBirth(new Date());
-        userService.addUser(user);
-
-        user = new User();
-        user.setEmail("bob@gmail.com");
-        user.setUsername("bob");
+        user.setPassword("123");
+        user.setRole(UserRole.USER);
         userService.addUser(user);
 
         user = new User();
         user.setEmail("emily@gmail.com");
         user.setUsername("emily");
+        user.setPassword("123");
+        user.setRole(UserRole.USER);
         userService.addUser(user);
 
         user = new User();
         user.setEmail("alice@gmail.com");
         user.setUsername("alice");
+        user.setPassword("123");
+        user.setRole(UserRole.USER);
         userService.addUser(user);
-        userService.addUser(user);
+        try {
+            userService.addUser(user);
+        }
+        catch (UserExistsException e){}
         Assert.assertEquals(4,userService.getAllUsers().size());
 
         Assert.assertNotEquals(null,userService.findUser("niko"));
@@ -97,7 +102,7 @@ public class DbTests
         productService.addProduct(product);
 
         Assert.assertEquals(1,productService.getAllTags().size());
-        Assert.assertEquals(1,productService.getProductsByCategory(Category.PIZZA).size());
+        Assert.assertEquals(11,productService.getProductsByCategory(Category.PIZZA).size());
 
         _Order order = new _Order();
         order.setByCard(true);
@@ -108,9 +113,9 @@ public class DbTests
         order.setItems(productService.getProductsByCategory(Category.PIZZA));
         orderService.addOrder(order);
 
-        Assert.assertEquals(1,orderService.getAllOrders().size());
-        Assert.assertEquals(1,orderService.getRecentOrders().size());
-        Assert.assertEquals(1,productService.getTopProducts().size());
+        Assert.assertEquals(3,orderService.getAllOrders().size());
+        Assert.assertEquals(3,orderService.getRecentOrders().size());
+        Assert.assertEquals(6,productService.getTopProducts().size());
     }
 
 }

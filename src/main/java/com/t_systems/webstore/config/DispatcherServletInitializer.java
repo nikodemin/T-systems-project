@@ -3,24 +3,19 @@ package com.t_systems.webstore.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class DispatcherServletInitializer extends
-        AbstractAnnotationConfigDispatcherServletInitializer
-{
+        AbstractAnnotationConfigDispatcherServletInitializer {
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return null;
+    }
 
-     @Override
-     protected Class<?>[] getRootConfigClasses()
-     {
-          return null;
-     }
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebConfig.class};
+    }
 
-     @Override
-     protected Class<?>[] getServletConfigClasses()
-     {
-          return new Class[] { WebConfig.class };
-     }
-
-     @Override
-     protected String[] getServletMappings()
-     {
-          return new String[] { "/" };
-     }
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
 }

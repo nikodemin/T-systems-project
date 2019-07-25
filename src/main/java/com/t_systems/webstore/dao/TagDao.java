@@ -1,36 +1,20 @@
 package com.t_systems.webstore.dao;
 
-import com.t_systems.webstore.entity.Tag;
+import com.t_systems.webstore.model.entity.Tag;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Repository
-public class TagDao
-{
-    @PersistenceUnit
-    private EntityManagerFactory emf;
-    private EntityManager em;
+public class TagDao extends AbstractDao{
 
-    @PostConstruct
-    public void init()
-    {
-        em = emf.createEntityManager();
-    }
-
-    public void addTag(Tag tag)
-    {
+    public void addTag(Tag tag) {
         em.getTransaction().begin();
         em.persist(tag);
         em.getTransaction().commit();
     }
 
-    public List<Tag> getAllTags()
-    {
-        return em.createQuery("FROM Tag",Tag.class).getResultList();
+    public List<Tag> getAllTags() {
+        return em.createQuery("FROM Tag", Tag.class).getResultList();
     }
 }

@@ -3,24 +3,27 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <c:import url="_header.jsp"></c:import>
 <section>
-     <form action="<c:url value="/check"></c:url>" method="post">
+     <form action="<c:url value="/login"></c:url>" method="post">
           <c:if test="${param.error != null}">
                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                          <span>&times;</span>
                     </button>
-                    <span>Неверный логин или пароль</span>
+                    <span>Wrong login or password</span>
                </div>
           </c:if>
           <div class="input-group mb-2">
-               <input name="username" type="text" class="form-control" placeholder="Логин">
+               <input name="username" type="text" class="form-control" placeholder="Login">
           </div>
           <div class="input-group mb-2">
-               <input name="password" type="password" class="form-control" placeholder="Пароль">
+               <input name="password" type="password" class="form-control" placeholder="Password">
           </div>
           <div class="input-group">
-               <button type="submit" class="btn btn-primary">Войти</button>
+               <button type="submit" class="btn btn-primary">Sign in</button>
           </div>
+          <input type="hidden"
+                 name="${_csrf.parameterName}"
+                 value="${_csrf.token}"/>
      </form>
 </section>
 <style>

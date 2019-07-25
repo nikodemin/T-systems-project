@@ -3,8 +3,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <footer>
     <p>
-        © Copyright 2004 — 2019 ООО «2Пицца» Все права защищены. Возраст 6+
-        Все права защищены. Возраст 6+
+        © Copyright 2004 — 2019 ООО «PizzaMaker» All rights reserved. Age 6+
+        All rights reserved. Age 6+
     </p>
 </footer>
 <script src="https://kit.fontawesome.com/c08c803562.js"></script>

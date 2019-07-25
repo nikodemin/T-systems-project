@@ -4,14 +4,124 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <c:import url="_header.jsp"></c:import>
 <section>
-    <form:form action="/register" method="post" modelAttribute="form">
+    <c:url value="/register" var="postUrl"></c:url>
+    <form:form action="${postUrl}" method="post" modelAttribute="form">
+        <h4>Registration</h4>
         <table>
             <tr>
                 <td>
-                    <form:input type="text" class="form-control" placeholder="Эл. почта" path="email"/>
+                    <form:input type="email" class="form-control form-control-sm" placeholder="Email" path="email"/>
                 </td>
                 <td>
                     <form:errors path="email" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Username" path="username"/>
+                </td>
+                <td>
+                    <form:errors path="username" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="password" class="form-control form-control-sm" placeholder="Password" path="password"/>
+                </td>
+                <td>
+                    <form:errors path="password" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="password" class="form-control form-control-sm" placeholder="Confirm password" path="confirm"/>
+                </td>
+                <td>
+                    <form:errors path="confirm" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="First name" path="firstName"/>
+                </td>
+                <td>
+                    <form:errors path="firstName" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Last name" path="lastName"/>
+                </td>
+                <td>
+                    <form:errors path="lastName" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="date" class="form-control form-control-sm" placeholder="Date of birth" path="dateOfBirth"/>
+                </td>
+                <td>
+                    <form:errors path="dateOfBirth" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>For delivery:</h5>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Country" path="country"/>
+                </td>
+                <td>
+                    <form:errors path="country" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="City" path="city"/>
+                </td>
+                <td>
+                    <form:errors path="city" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Post code" path="postCode"/>
+                </td>
+                <td>
+                    <form:errors path="postCode" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Street" path="street"/>
+                </td>
+                <td>
+                    <form:errors path="street" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="House number" path="house"/>
+                </td>
+                <td>
+                    <form:errors path="flat" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Flat number" path="flat"/>
+                </td>
+                <td>
+                    <form:errors path="flat" cssClass="alert alert-danger" element="div"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
                 </td>
             </tr>
             <tr>

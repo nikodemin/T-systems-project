@@ -2,7 +2,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,36 +22,36 @@
         <ul class="list-unstyled inline-list float-right d-none d-md-block">
             <li class="list-inline-item">
                 <a href="#">
-                    <i class="fas fa-book-open"></i> Меню
+                    <i class="fas fa-book-open"></i> Menu
                 </a>
             </li>
             <c:if test="${sessionScope.username == null}">
                 <li class="list-inline-item">
-                    <a href="#">
-                        <i class="fas fa-user"></i> Войти
+                    <a href="<c:url value="/login"></c:url>">
+                        <i class="fas fa-user"></i> Sign in
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#">
-                        <i class="fas fa-user-plus"></i> Регистрация
+                    <a href="<c:url value="/register"></c:url>">
+                        <i class="fas fa-user-plus"></i> Sign up
                     </a>
                 </li>
             </c:if>
             <c:if test="${sessionScope.username != null}">
                 <li class="list-inline-item">
-                    <a href="#">
-                        <i class="fas fa-cog"></i> Настройки
+                    <a href="<c:url value="/settings"></c:url>">
+                        <i class="fas fa-cog"></i> Settings
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i> Выйти
+                    <a href="<c:url value="/logout"></c:url>">
+                        <i class="fas fa-sign-out-alt"></i> Sign out
                     </a>
                 </li>
             </c:if>
             <li class="list-inline-item">
                 <a href="#">
-                    <i class="fas fa-shopping-cart"></i> Корзина
+                    <i class="fas fa-shopping-cart"></i> Cart
                 </a>
             </li>
         </ul>
@@ -59,19 +59,19 @@
             <button class="btn btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                Меню
+                Menu
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#"><i class="fas fa-book-open"></i> Меню</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-book-open"></i> Menu</a>
                 <c:if test="${sessionScope.username == null}">
-                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Войти</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-user-plus"></i> Регистрация</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Sign in</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-user-plus"></i> Sign up</a>
                 </c:if>
                 <c:if test="${sessionScope.username != null}">
-                    <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Настройки</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a>
                 </c:if>
-                <a class="dropdown-item" href="#"><i class="fas fa-shopping-cart"></i> Корзина</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
             </div>
         </div>
     </nav>

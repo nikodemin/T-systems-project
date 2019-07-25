@@ -13,19 +13,19 @@
                <div class="carousel-item active">
                     <img class="d-block w-100" src="resources/img/pizza.jpg">
                     <div class="carousel-caption d-none d-md-block">
-                         <h3>Большой выбор пиццы на любой вкус!</h3>
+                         <h3>Large selection of pizza for every taste!</h3>
                     </div>
                </div>
                <div class="carousel-item">
                     <img class="d-block w-100" src="resources/img/sushi.png">
                     <div class="carousel-caption d-none d-md-block">
-                         <h3>Попробуйте наши новые суши наборы!</h3>
+                         <h3>Try out our new sushi sets!</h3>
                     </div>
                </div>
                <div class="carousel-item">
                     <img class="d-block w-100" src="resources/img/burgerAndCola.jpg">
                     <div class="carousel-caption d-none d-md-block">
-                         <h3>Скидки на наборы!</h3>
+                         <h3>Discounts on sets!</h3>
                     </div>
                </div>
           </div>
@@ -35,63 +35,63 @@
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/burger.jpg">
-               <p>Бургеры</p>
+               <p>Burgers</p>
           </a>
      </div>
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/drink.jpg">
-               <p>Напитки</p>
+               <p>Drinks</p>
           </a>
      </div>
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/hot.jpg">
-               <p>Горячее</p>
+               <p>Hot</p>
           </a>
      </div>
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/pizza.jpg">
-               <p>Пицца</p>
+               <p>Pizza</p>
           </a>
      </div>
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/set.jpg">
-               <p>Наборы</p>
+               <p>Sets</p>
           </a>
      </div>
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/sushi.jpg">
-               <p>Суши</p>
+               <p>Sushi</p>
           </a>
      </div>
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/sweet.jpg">
-               <p>Десерты</p>
+               <p>Desserts</p>
           </a>
      </div>
      <div class="menuItem">
           <a href="#">
                <img src="resources/img/cat/wok.jpg">
-               <p>Воки</p>
+               <p>Wok</p>
           </a>
      </div>
 </section>
 <section class="leaders">
-     <h2 class="mt-2 ml-2">Лидеры продаж:</h2>
+     <h2 class="mt-2 ml-2">Top sales:</h2>
      <div class="tags d-block my-4 ml-2">
           <button class="btn btn-outline-warning" data-toggle="button" aria-pressed="false">
-               <i class="fas fa-plus-circle"></i> Острое
+               <i class="fas fa-plus-circle"></i> Spicy
           </button>
           <button class="btn btn-outline-warning" data-toggle="button" aria-pressed="false">
-               <i class="fas fa-plus-circle"></i> Острое
+               <i class="fas fa-plus-circle"></i> Spicy
           </button>
           <button class="btn btn-outline-warning" data-toggle="button" aria-pressed="false">
-               <i class="fas fa-plus-circle"></i> Острое
+               <i class="fas fa-plus-circle"></i> Spicy
           </button>
      </div>
      <div class="leaders">
@@ -100,7 +100,7 @@
                     <img class="card-img-top" src="<c:out value="${leader.image}"/>">
                     <div class="card-body">
                          <h4 class="card-title"><c:out value="${leader.name}"></c:out></h4>
-                         <h5><c:out value="${leader.price}"></c:out> Руб</h5>
+                         <h5><c:out value="${leader.price}"></c:out> $</h5>
                          <p class="card-text">
                               <c:forEach var="ingredient" items="${leader.subListIngredients}">
                                    <c:out value="${ingredient.name}, "></c:out>
@@ -108,7 +108,7 @@
                               <c:out value="${leader.lastIngredient.name}"></c:out>
                          </p>
                          <a href="#" class="btn btn-primary btn-warning">
-                              <i class="fas fa-shopping-cart"></i>В корзину
+                              <i class="fas fa-shopping-cart"></i>Add to cart
                          </a>
                     </div>
                </div>
