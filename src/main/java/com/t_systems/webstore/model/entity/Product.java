@@ -1,6 +1,5 @@
 package com.t_systems.webstore.model.entity;
 
-import com.t_systems.webstore.model.enums.Category;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +14,7 @@ public class Product {
     private Integer price;
     private Integer spicy;
     private String image;
-    @Column(nullable = false)
+    @ManyToOne
     private Category category;
     @ManyToMany
     private List<Tag> tags;

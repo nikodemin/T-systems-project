@@ -1,0 +1,17 @@
+div.products
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+div.product
+{
+    width: 33%;
+    padding: 10px;
+    border: black 2px;
+    border-radius: 4px;
+    text-align: center;
+}
+div.product img
+{
+    width: 100%;
+}

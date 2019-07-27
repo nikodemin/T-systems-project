@@ -2,7 +2,6 @@ package com.t_systems.webstore.config;
 
 import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.entity.*;
-import com.t_systems.webstore.model.enums.Category;
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.model.enums.UserRole;
@@ -36,10 +35,10 @@ public class DbFiller implements ApplicationListener {
             address.setCity("SPB");
             address.setStreet("Veteranov");
             user.setAddress(address);
-            user.setEmail("bob@gmail.com");
-            user.setUsername("bob");
-            user.setPassword("123");
-            user.setRole(UserRole.USER);
+            user.setEmail("niko.demin@gmail.com");
+            user.setUsername("admin");
+            user.setPassword("1234");
+            user.setRole(UserRole.ADMIN);
             try {
                 userService.addUser(user);
             }
@@ -64,11 +63,14 @@ public class DbFiller implements ApplicationListener {
                 ingredients.add(ingredient);
             }
 
+            Category pizza = new Category();
+            pizza.setName("Pizza");
+            productService.addCategory(pizza);
             for (int i = 0; i < 10; i++) {
                 Product product = new Product();
                 product.setName("pizza" + i);
                 product.setImage("resources/img/pizza.jpg");
-                product.setCategory(Category.PIZZA);
+                product.setCategory(pizza);
                 product.setIngredients(ingredients);
                 product.setPrice(999);
                 products.add(product);
@@ -83,7 +85,7 @@ public class DbFiller implements ApplicationListener {
             order.setClient(user);
             order.setDeliveryMethod(DeliveryMethod.COURIER);
             order.setStatus(OrderStatus.PAID);
-            List<Product> products2 = productService.getProductsByCategory(Category.PIZZA);
+            List<Product> products2 = productService.getProductsByCategory("Pizza");
             products2.remove(9);
             products2.remove(8);
             order.setItems(products2);

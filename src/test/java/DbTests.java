@@ -1,7 +1,6 @@
 import com.t_systems.webstore.config.WebConfig;
 import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.exception.UserExistsException;
-import com.t_systems.webstore.model.enums.Category;
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.model.enums.UserRole;
@@ -66,7 +65,6 @@ public class DbTests
         Assert.assertEquals(4,userService.getAllUsers().size());
 
         Assert.assertNotEquals(null,userService.findUser("niko"));
-        Assert.assertNotEquals(null,userService.findUser("bob"));
         Assert.assertNotEquals(null,userService.findUser("emily"));
         Assert.assertNotEquals(null,userService.findUser("alice"));
     }
@@ -88,7 +86,7 @@ public class DbTests
         productService.addTag(tag);
 
         Product product = new Product();
-        product.setCategory(Category.PIZZA);
+        product.setCategory(productService.getCategory("Pizza"));
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(ingredient);
         ingredients.add(ingredient2);
@@ -102,7 +100,7 @@ public class DbTests
         productService.addProduct(product);
 
         Assert.assertEquals(1,productService.getAllTags().size());
-        Assert.assertEquals(11,productService.getProductsByCategory(Category.PIZZA).size());
+        Assert.assertEquals(11,productService.getProductsByCategory("Pizza").size());
 
         _Order order = new _Order();
         order.setByCard(true);
@@ -110,7 +108,7 @@ public class DbTests
         order.setDeliveryMethod(DeliveryMethod.PICKUP);
         order.setDate(new Date());
         order.setStatus(OrderStatus.PAID);
-        order.setItems(productService.getProductsByCategory(Category.PIZZA));
+        order.setItems(productService.getProductsByCategory("Pizza"));
         orderService.addOrder(order);
 
         Assert.assertEquals(3,orderService.getAllOrders().size());
