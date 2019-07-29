@@ -3,15 +3,18 @@ package com.t_systems.webstore.dao;
 import com.t_systems.webstore.model.entity._Order;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class OrderDao extends AbstractDao {
+public class OrderDao {
+
+    @PersistenceContext
+    private EntityManager em;
 
     public void addOrder(_Order order) {
-        em.getTransaction().begin();
         em.persist(order);
-        em.getTransaction().commit();
     }
 
     public List<_Order> getAllOrders() {

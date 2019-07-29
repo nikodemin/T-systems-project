@@ -7,13 +7,9 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "category")
-public class Category {
+public class Category extends AbstractEntity{
 
     @Column(unique = true, nullable = false)
     private String name;
     private String image;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 }

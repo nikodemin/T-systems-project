@@ -5,18 +5,20 @@ import com.t_systems.webstore.model.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class IngredientDao extends AbstractDao {
+public class IngredientDao {
 
     private final ProductDao productDao;
+    @PersistenceContext
+    private EntityManager em;
 
     public void addIngredient(Ingredient ingredient) {
-        em.getTransaction().begin();
         em.persist(ingredient);
-        em.getTransaction().commit();
     }
 
     public List<Ingredient> getAllIngredients() {
@@ -31,13 +33,11 @@ public class IngredientDao extends AbstractDao {
     }
 
     public void removeIngredient(String name) {
-        em.getTransaction().begin();
         Ingredient ing = getIngredient(name);
         em.createQuery("FROM Product p WHERE :ingredient IN elements(p.ingredients)",
                 Product.class).setParameter("ingredient", ing)
                 .getResultList()
                 .forEach(p -> productDao.removeIngredientFromProduct(p, ing));
         em.remove(ing);
-        em.getTransaction().commit();
     }
 }

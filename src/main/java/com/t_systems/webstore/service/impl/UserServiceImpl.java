@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,21 +28,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserDao userDao;
     private final ModelMapper modelMapper;
 
+    @Transactional(readOnly = true)
     @Override
     public User findUser(String username) {
         return userDao.getUser(username);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User findUserByEmail(String email) {
         return userDao.getUserByEmail(email);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
+    @Transactional
     @Override
     public void addUser(User user) throws UserExistsException {
 
@@ -55,6 +60,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         throw new UserExistsException();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (userDao.getUser(username) != null)

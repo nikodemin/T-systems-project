@@ -5,11 +5,13 @@ import com.t_systems.webstore.model.entity._Order;
 import com.t_systems.webstore.service.api.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao;
 

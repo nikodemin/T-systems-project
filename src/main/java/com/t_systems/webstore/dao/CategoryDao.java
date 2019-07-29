@@ -4,18 +4,20 @@ import com.t_systems.webstore.model.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CategoryDao extends AbstractDao {
+public class CategoryDao {
 
     @Autowired
     private ProductDao productDao;
+    @PersistenceContext
+    private EntityManager em;
 
     public void addCategory(Category category) {
-        em.getTransaction().begin();
         em.persist(category);
-        em.getTransaction().commit();
     }
 
     public Category getCategory(String name) {
@@ -29,9 +31,7 @@ public class CategoryDao extends AbstractDao {
     }
 
     public void removeCategory(String name) {
-        em.getTransaction().begin();
         productDao.getProductsByCat(name).forEach(p -> productDao.detachProduct(p));
         em.remove(getCategory(name));
-        em.getTransaction().commit();
     }
 }

@@ -5,18 +5,20 @@ import com.t_systems.webstore.model.entity.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class TagDao extends AbstractDao {
+public class TagDao {
 
+    @PersistenceContext
+    private EntityManager em;
     private final ProductDao productDao;
 
     public void addTag(Tag tag) {
-        em.getTransaction().begin();
         em.persist(tag);
-        em.getTransaction().commit();
     }
 
     public List<Tag> getAllTags() {
@@ -30,13 +32,11 @@ public class TagDao extends AbstractDao {
     }
 
     public void removeTag(String name) {
-        em.getTransaction().begin();
         Tag tag = getTag(name);
         em.createQuery("FROM Product p WHERE :tag IN elements(p.tags)",
                 Product.class).setParameter("tag", tag)
                 .getResultList()
                 .forEach(p -> productDao.removeTagFromProduct(p, tag));
         em.remove(tag);
-        em.getTransaction().commit();
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-public class User implements UserDetails {
+public class User extends AbstractEntity implements UserDetails {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
@@ -24,14 +24,10 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @Embedded
     private Address address;
     @Column(nullable = false)
     private UserRole role;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 @Table(name = "address")
 @Data
 public class Address {
@@ -14,8 +14,4 @@ public class Address {
     private String street;
     private String house;
     private String flat;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 }

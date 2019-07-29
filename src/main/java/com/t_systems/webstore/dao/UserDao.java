@@ -3,21 +3,23 @@ package com.t_systems.webstore.dao;
 import com.t_systems.webstore.model.entity.User;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDao extends AbstractDao {
+public class UserDao {
+
+    @PersistenceContext
+    private EntityManager em;
 
     public List<User> getAllUsers() {
-
         return em.createQuery("FROM User", User.class).getResultList();
     }
 
     public void addUser(User user) {
-        em.getTransaction().begin();
         em.persist(user);
-        em.getTransaction().commit();
     }
 
     public User getUserByEmail(String email) {
