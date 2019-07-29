@@ -47,8 +47,7 @@ public class RegisterController {
 
         try {
             userService.addUser(user);
-        }
-        catch (UserExistsException e) {
+        } catch (UserExistsException e) {
             e.printStackTrace();
             return "register";
         }

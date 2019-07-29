@@ -17,8 +17,12 @@ public class Product {
     @ManyToOne
     private Category category;
     @ManyToMany
+    @JoinTable(name = "product_tag", joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags;
     @ManyToMany
+    @JoinTable(name = "product_ingredient", joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 
     @Id

@@ -7,7 +7,7 @@ import javax.persistence.NoResultException;
 import java.util.List;
 
 @Repository
-public class UserDao extends AbstractDao{
+public class UserDao extends AbstractDao {
 
     public List<User> getAllUsers() {
 

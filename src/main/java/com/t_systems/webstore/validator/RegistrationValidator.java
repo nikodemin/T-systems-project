@@ -36,11 +36,11 @@ public class RegistrationValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "house", "NotEmpty.registerForm.house");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "flat", "NotEmpty.registerForm.flat");
 
-        if (userService.findUser(form.getUsername()) !=null)
-            errors.rejectValue("username","Duplicate.registerForm.username");
-        if (userService.findUserByEmail(form.getEmail()) !=null)
-            errors.rejectValue("username","Duplicate.registerForm.email");
+        if (userService.findUser(form.getUsername()) != null)
+            errors.rejectValue("username", "Duplicate.registerForm.username");
+        if (userService.findUserByEmail(form.getEmail()) != null)
+            errors.rejectValue("username", "Duplicate.registerForm.email");
         if (!form.getPassword().equals(form.getConfirm()))
-            errors.rejectValue("confirm","DontMatch.registerForm.password");
+            errors.rejectValue("confirm", "DontMatch.registerForm.password");
     }
 }

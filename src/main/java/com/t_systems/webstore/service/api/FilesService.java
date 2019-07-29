@@ -1,6 +1,5 @@
 package com.t_systems.webstore.service.api;
 
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.IOException;

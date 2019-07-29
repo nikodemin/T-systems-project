@@ -4,12 +4,9 @@ import com.t_systems.webstore.service.api.FilesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,13 +34,13 @@ public class FilesServiceImpl implements FilesService {
             if (file.isEmpty()) {
                 continue;
             }
-            String uploadFilePath = UPLOAD_DIR + "/" + (new Date()).getTime() + "_"
-                    +file.getOriginalFilename();
+            String fileName = (new Date()).getTime() + "_" + file.getOriginalFilename();
+            String uploadFilePath = UPLOAD_DIR + "/" + fileName;
 
             byte[] bytes = file.getBytes();
             Path path = Paths.get(uploadFilePath);
             Files.write(path, bytes);
-            paths.add(uploadFilePath);
+            paths.add("uploads/" + fileName);
         }
         return paths;
     }

@@ -67,6 +67,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Ingredient> getAllIngredients() {
+        return ingredientDao.getAllIngredients();
+    }
+
+    @Override
+    public void removeIngredient(String name) {
+        ingredientDao.removeIngredient(name);
+    }
+
+    @Override
+    public Ingredient getIngredient(String name) {
+        return ingredientDao.getIngredient(name);
+    }
+
+    @Override
     public void addTag(Tag tag) {
         tagDao.addTag(tag);
     }
@@ -74,6 +89,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Tag> getAllTags() {
         return tagDao.getAllTags();
+    }
+
+    @Override
+    public void removeTag(String name) {
+        tagDao.removeTag(name);
+    }
+
+    @Override
+    public Tag getTag(String name) {
+        return tagDao.getTag(name);
     }
 
     @Override
@@ -93,8 +118,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto toProductDto(Product product) {
-        ProductDto res = modelMapper.map(product, ProductDto.class);
-        return res;
+        return modelMapper.map(product, ProductDto.class);
     }
 
     @Override
@@ -103,9 +127,42 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public IngredientDto toIngredientDto(Ingredient ingredient) {
+        return modelMapper.map(ingredient, IngredientDto.class);
+    }
+
+    @Override
+    public TagDto toTagDto(Tag tag) {
+        return modelMapper.map(tag, TagDto.class);
+    }
+
+    @Override
+    public void addIngToProduct(Product product, String ingredient) {
+        productDao.addIngToProduct(product, ingredientDao.getIngredient(ingredient));
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        productDao.updateProduct(product);
+    }
+
+    @Override
     public void removeCategory(String name) {
         categoryDao.removeCategory(name);
     }
 
+    @Override
+    public void removeIngredientFromProduct(Product product, String ingredient) {
+        productDao.removeIngredientFromProduct(product, ingredientDao.getIngredient(ingredient));
+    }
 
+    @Override
+    public void removeTagFromProduct(Product product, String tag) {
+        productDao.removeTagFromProduct(product, tagDao.getTag(tag));
+    }
+
+    @Override
+    public void addTagToProduct(Product product, String tag) {
+        productDao.addTagToProduct(product, tagDao.getTag(tag));
+    }
 }

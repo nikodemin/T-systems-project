@@ -1,12 +1,12 @@
 package com.t_systems.webstore.exception;
 
-public class UserExistsException extends Exception{
+public class UserExistsException extends Exception {
 
-    UserExistsException(String message){
+    UserExistsException(String message) {
         super(message);
     }
 
-    public UserExistsException(){
+    public UserExistsException() {
         super("User already exists!");
     }
 }

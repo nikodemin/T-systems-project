@@ -1,6 +1,6 @@
 import com.t_systems.webstore.config.WebConfig;
-import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.exception.UserExistsException;
+import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.model.enums.UserRole;
@@ -20,8 +20,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
-public class DbTests
-{
+public class DbTests {
     @Autowired
     private UserService userService;
     @Autowired
@@ -30,9 +29,8 @@ public class DbTests
     private ProductService productService;
 
     @Test
-    public void usersTest() throws UserExistsException
-    {
-        Address address= new Address();
+    public void usersTest() throws UserExistsException {
+        Address address = new Address();
         address.setCity("SPB");
         address.setCountry("Russia");
 
@@ -60,18 +58,17 @@ public class DbTests
         userService.addUser(user);
         try {
             userService.addUser(user);
+        } catch (UserExistsException e) {
         }
-        catch (UserExistsException e){}
-        Assert.assertEquals(4,userService.getAllUsers().size());
+        Assert.assertEquals(4, userService.getAllUsers().size());
 
-        Assert.assertNotEquals(null,userService.findUser("niko"));
-        Assert.assertNotEquals(null,userService.findUser("emily"));
-        Assert.assertNotEquals(null,userService.findUser("alice"));
+        Assert.assertNotEquals(null, userService.findUser("niko"));
+        Assert.assertNotEquals(null, userService.findUser("emily"));
+        Assert.assertNotEquals(null, userService.findUser("alice"));
     }
 
     @Test
-    public void productsAndOrdersTest()
-    {
+    public void productsAndOrdersTest() {
         Ingredient ingredient = new Ingredient();
         ingredient.setName("Cheese");
         ingredient.setPrice(100);
@@ -99,8 +96,8 @@ public class DbTests
         product.setTags(tags);
         productService.addProduct(product);
 
-        Assert.assertEquals(1,productService.getAllTags().size());
-        Assert.assertEquals(11,productService.getProductsByCategory("Pizza").size());
+        Assert.assertEquals(1, productService.getAllTags().size());
+        Assert.assertEquals(11, productService.getProductsByCategory("Pizza").size());
 
         _Order order = new _Order();
         order.setByCard(true);
@@ -111,9 +108,9 @@ public class DbTests
         order.setItems(productService.getProductsByCategory("Pizza"));
         orderService.addOrder(order);
 
-        Assert.assertEquals(3,orderService.getAllOrders().size());
-        Assert.assertEquals(3,orderService.getRecentOrders().size());
-        Assert.assertEquals(6,productService.getTopProducts().size());
+        Assert.assertEquals(3, orderService.getAllOrders().size());
+        Assert.assertEquals(3, orderService.getRecentOrders().size());
+        Assert.assertEquals(6, productService.getTopProducts().size());
     }
 
 }

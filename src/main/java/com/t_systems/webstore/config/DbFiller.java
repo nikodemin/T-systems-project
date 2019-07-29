@@ -41,8 +41,7 @@ public class DbFiller implements ApplicationListener {
             user.setRole(UserRole.ADMIN);
             try {
                 userService.addUser(user);
-            }
-            catch (UserExistsException e){
+            } catch (UserExistsException e) {
                 e.printStackTrace();
             }
 
@@ -65,6 +64,15 @@ public class DbFiller implements ApplicationListener {
 
             Category pizza = new Category();
             pizza.setName("Pizza");
+            List<Tag> tags = new ArrayList<>();
+            Tag tag = new Tag();
+            tag.setName("Spicy");
+            productService.addTag(tag);
+            tags.add(tag);
+            tag = new Tag();
+            tag.setName("With Mushrooms");
+            productService.addTag(tag);
+            tags.add(tag);
             productService.addCategory(pizza);
             for (int i = 0; i < 10; i++) {
                 Product product = new Product();
@@ -74,6 +82,7 @@ public class DbFiller implements ApplicationListener {
                 product.setIngredients(ingredients);
                 product.setPrice(999);
                 products.add(product);
+                product.setTags(tags);
                 productService.addProduct(product);
             }
             order.setItems(products);

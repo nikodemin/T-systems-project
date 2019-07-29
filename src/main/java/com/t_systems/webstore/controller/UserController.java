@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     @GetMapping("/settings")
-    public String getSettingsPage(){
+    public String getSettingsPage() {
         return "settings";
     }
 
     @GetMapping("/cart")
-    public String getCartPage(Model model, HttpSession session){
-        model.addAttribute("cart",session.getAttribute("cart"));
+    public String getCartPage(Model model, HttpSession session) {
+        model.addAttribute("cart", session.getAttribute("cart"));
         return "cart";
     }
 

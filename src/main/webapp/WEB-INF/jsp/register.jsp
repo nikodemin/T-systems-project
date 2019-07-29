@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <c:import url="_header.jsp"></c:import>
 <section>
@@ -18,7 +18,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="text" class="form-control form-control-sm" placeholder="Username" path="username"/>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Username"
+                                path="username"/>
                 </td>
                 <td>
                     <form:errors path="username" cssClass="alert alert-danger" element="div"/>
@@ -26,7 +27,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="password" class="form-control form-control-sm" placeholder="Password" path="password"/>
+                    <form:input type="password" class="form-control form-control-sm" placeholder="Password"
+                                path="password"/>
                 </td>
                 <td>
                     <form:errors path="password" cssClass="alert alert-danger" element="div"/>
@@ -34,7 +36,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="password" class="form-control form-control-sm" placeholder="Confirm password" path="confirm"/>
+                    <form:input type="password" class="form-control form-control-sm" placeholder="Confirm password"
+                                path="confirm"/>
                 </td>
                 <td>
                     <form:errors path="confirm" cssClass="alert alert-danger" element="div"/>
@@ -42,7 +45,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="text" class="form-control form-control-sm" placeholder="First name" path="firstName"/>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="First name"
+                                path="firstName"/>
                 </td>
                 <td>
                     <form:errors path="firstName" cssClass="alert alert-danger" element="div"/>
@@ -50,7 +54,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="text" class="form-control form-control-sm" placeholder="Last name" path="lastName"/>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Last name"
+                                path="lastName"/>
                 </td>
                 <td>
                     <form:errors path="lastName" cssClass="alert alert-danger" element="div"/>
@@ -58,7 +63,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="date" class="form-control form-control-sm" placeholder="Date of birth" path="dateOfBirth"/>
+                    <form:input type="date" class="form-control form-control-sm" placeholder="Date of birth"
+                                path="dateOfBirth"/>
                 </td>
                 <td>
                     <form:errors path="dateOfBirth" cssClass="alert alert-danger" element="div"/>
@@ -87,7 +93,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="text" class="form-control form-control-sm" placeholder="Post code" path="postCode"/>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="Post code"
+                                path="postCode"/>
                 </td>
                 <td>
                     <form:errors path="postCode" cssClass="alert alert-danger" element="div"/>
@@ -103,7 +110,8 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="text" class="form-control form-control-sm" placeholder="House number" path="house"/>
+                    <form:input type="text" class="form-control form-control-sm" placeholder="House number"
+                                path="house"/>
                 </td>
                 <td>
                     <form:errors path="flat" cssClass="alert alert-danger" element="div"/>
@@ -133,11 +141,10 @@
     </form:form>
 </section>
 <style>
-     form
-     {
-          max-width: 350px;
-          margin: 100px auto;
-     }
+    form {
+        max-width: 350px;
+        margin: 100px auto;
+    }
 </style>
 <c:import url="_footer.jsp"></c:import>
 

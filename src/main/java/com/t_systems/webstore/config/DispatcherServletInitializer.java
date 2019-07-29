@@ -25,6 +25,6 @@ public class DispatcherServletInitializer extends
     @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter("UTF-8", true);
-        return new Filter[] {filter};
+        return new Filter[]{filter};
     }
 }

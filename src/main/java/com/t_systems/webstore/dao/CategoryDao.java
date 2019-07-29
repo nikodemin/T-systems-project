@@ -12,27 +12,25 @@ public class CategoryDao extends AbstractDao {
     @Autowired
     private ProductDao productDao;
 
-    public void addCategory(Category category){
+    public void addCategory(Category category) {
         em.getTransaction().begin();
         em.persist(category);
         em.getTransaction().commit();
     }
 
-    public Category getCategory(String name){
-        return em.createQuery("FROM Category c WHERE c.name=:name",Category.class)
-                .setParameter("name",name).getSingleResult();
+    public Category getCategory(String name) {
+        return em.createQuery("FROM Category c WHERE c.name=:name", Category.class)
+                .setParameter("name", name).getSingleResult();
     }
 
-    public List<Category> getAllCategories()
-    {
+    public List<Category> getAllCategories() {
         return em.createQuery("FROM Category", Category.class)
                 .getResultList();
     }
 
-    public void removeCategory(String name)
-    {
+    public void removeCategory(String name) {
         em.getTransaction().begin();
-        productDao.getProductsByCat(name).forEach(p->productDao.detachProduct(p));
+        productDao.getProductsByCat(name).forEach(p -> productDao.detachProduct(p));
         em.remove(getCategory(name));
         em.getTransaction().commit();
     }

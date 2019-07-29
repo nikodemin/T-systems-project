@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class OrderDao extends AbstractDao{
+public class OrderDao extends AbstractDao {
 
     public void addOrder(_Order order) {
         em.getTransaction().begin();
@@ -15,6 +15,7 @@ public class OrderDao extends AbstractDao{
     }
 
     public List<_Order> getAllOrders() {
+        em.clear();
         return em.createQuery("FROM _Order", _Order.class)
                 .getResultList();
     }

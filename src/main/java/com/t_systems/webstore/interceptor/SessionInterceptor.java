@@ -28,7 +28,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         if (!username.equals("anonymousUser"))
-            session.setAttribute("username",username);
+            session.setAttribute("username", username);
 
         return true;
     }

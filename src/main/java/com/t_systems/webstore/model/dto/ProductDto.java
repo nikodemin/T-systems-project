@@ -1,7 +1,7 @@
 package com.t_systems.webstore.model.dto;
 
-import com.t_systems.webstore.model.entity.Category;
 import lombok.Data;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.List;
 
@@ -12,7 +12,8 @@ public class ProductDto {
     private Integer price;
     private Integer spicy;
     private String image;
-    private Category category;
+    private CategoryDto category;
+    private CommonsMultipartFile[] files;
     private List<TagDto> tags;
     private List<IngredientDto> ingredients;
 }

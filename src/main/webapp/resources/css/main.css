@@ -1,52 +1,51 @@
-#logo
-{
+#logo {
     height: 60px;
 }
-body
-{
+
+body {
     max-width: 800px;
     margin: auto;
 }
-#topMenu
-{
+
+#topMenu {
     height: 80px;
 }
-#topMenu h3
-{
+
+#topMenu h3 {
     display: inline;
 }
-#topMenu ul a
-{
+
+#topMenu ul a {
     color: coral;
 }
-#topMenu ul a:hover
-{
+
+#topMenu ul a:hover {
     color: black;
 }
-#slider img
-{
+
+#slider img {
     width: 100%;
 }
-#slider .carousel-inner
-{
-    width:100%;
+
+#slider .carousel-inner {
+    width: 100%;
     max-height: 400px !important;
 }
-#slider .carousel-caption
-{
+
+#slider .carousel-caption {
     position: absolute;
     top: 50%;
     transform: translateY(-20%);
     text-shadow: 1px 1px 1px black;
 }
-section.menu
-{
+
+section.menu {
     display: flex;
     flex-wrap: wrap;
     position: relative;
 }
-div.menuItem
-{
+
+div.menuItem {
     display: inline-block;
     text-align: center;
     font-size: 120%;
@@ -55,37 +54,37 @@ div.menuItem
     padding: 20px;
     border: black 1px;
 }
-div.menuItem img
-{
+
+div.menuItem img {
     width: 100%;
     max-width: 120px;
 }
-div.menuItem a
-{
+
+div.menuItem a {
     color: coral;
 }
-div.menuItem a:hover
-{
+
+div.menuItem a:hover {
     color: black;
     text-decoration: none;
 }
-div.leaders
-{
+
+div.leaders {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-section.leaders div.tags button
-{
+
+section.leaders div.tags button {
     display: inline-block;
 }
-section.leaders div.leadersItem
-{
+
+section.leaders div.leadersItem {
     width: 33%;
     min-width: 210px;
 }
-footer
-{
+
+footer {
     background-color: rgba(0, 0, 0, 0.58);
     padding: 30px;
 }
