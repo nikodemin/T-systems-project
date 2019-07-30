@@ -3,6 +3,7 @@ $(function () {
     var baseUrl = window.location.origin + '/webstore_war'
     var currentCategory
     var currentProduct
+    var isEditProduct = false
 
     var vueData = {
         categories: [],
@@ -233,6 +234,7 @@ $(function () {
             },
             editProduct: function (e) {
                 currentProduct = $(e.target).siblings('h5.name').text()
+                isEditProduct = true
                 $('#shadow').show()
                 $('#dialog').show()
                 $('a.close').one('click', function () {
@@ -241,10 +243,14 @@ $(function () {
                 })
             },
             submitProduct: function (e) {
-                var data = new FormData($('#editProductForm')[0])
-
+                var data = new FormData($('#editProductForm')[0]),
+                    url
+                if (isEditProduct)
+                    url = baseUrl + '/admin/updateProduct/' + currentCategory + '/' + currentProduct
+                else
+                    url = baseUrl + '/admin/addProdcut/' + currentCategory
                 $.ajax({
-                    url: baseUrl + '/admin/updateProduct/' + currentCategory + '/' + currentProduct,
+                    url: url,
                     type: 'POST',
                     enctype: 'multipart/form-data',
                     data: data,
@@ -266,7 +272,16 @@ $(function () {
                 })
             },
             deleteProduct: function (e) {
-
+                $.ajax({
+                    url: baseUrl + '/admin/deleteProduct/' + currentCategory + '/' + currentProduct,
+                    type: 'DELETE',
+                    success: function (data) {
+                        getProducts()
+                    },
+                    error: function (jqXHR, status, errorThrown) {
+                        console.log('ERROR: ' + jqXHR.responseText)
+                    }
+                })
             },
             addTagToProduct: function (e) {
                 $.ajax({
@@ -288,6 +303,27 @@ $(function () {
                     type: 'PUT',
                     success: function (data) {
                         getProducts()
+                    },
+                    error: function (jqXHR, status, errorThrown) {
+                        console.log('ERROR: ' + jqXHR.responseText)
+                    }
+                })
+            },
+            addProduct: function (e) {
+                isEditProduct = false
+                $('#shadow').show()
+                $('#dialog').show()
+                $('a.close').one('click', function () {
+                    $('#shadow').hide()
+                    $('#dialog').hide()
+                })
+            },
+            getTopProducts: function (e) {
+                $.ajax({
+                    url: baseUrl + '/admin/getTopProducts/',
+                    type: 'get',
+                    success: function (data) {
+                        vueData.products = data
                     },
                     error: function (jqXHR, status, errorThrown) {
                         console.log('ERROR: ' + jqXHR.responseText)

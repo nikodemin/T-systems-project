@@ -40,23 +40,19 @@ public interface ProductService {
 
     Category getCategory(String name);
 
+    void removeProduct(String productName);
+
     void removeCategory(String name);
 
-    void removeIngredientFromProduct(Product product, String ingredient);
-
-    void removeTagFromProduct(Product product, String tag);
-
-    void addTagToProduct(Product product, String tag);
-
-    ProductDto toProductDto(Product product);
-
-    CategoryDto toCategoryDto(Category category);
-
-    IngredientDto toIngredientDto(Ingredient ingredient);
-
-    TagDto toTagDto(Tag tag);
-
-    void addIngToProduct(Product product, String ingredient);
+    void addIngToProduct(String productName, String ingredient);
 
     void updateProduct(Product product);
+
+    void removeIngredientFromProduct(String productName, String ingredient);
+
+    void removeTagFromProduct(String productName, String tag);
+
+    void addTagToProduct(String productName, String tag);
+
+    Product getProduct(String name);
 }

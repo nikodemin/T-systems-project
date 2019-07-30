@@ -9,6 +9,7 @@ import com.t_systems.webstore.model.entity.Ingredient;
 import com.t_systems.webstore.model.entity.Product;
 import com.t_systems.webstore.model.entity.Tag;
 import com.t_systems.webstore.service.api.FilesService;
+import com.t_systems.webstore.service.api.MappingService;
 import com.t_systems.webstore.service.api.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class AdminRestController {
 
     private final ProductService productService;
     private final FilesService filesService;
+    private final MappingService mappingService;
 
 
     @InitBinder
@@ -49,7 +51,7 @@ public class AdminRestController {
         System.out.println("CAT=" + productService
                 .getProductsByCategory(category));
         return productService
-                .getProductsByCategory(category).stream().map(e -> productService.toProductDto(e))
+                .getProductsByCategory(category).stream().map(e -> mappingService.toProductDto(e))
                 .collect(Collectors.toList());
     }
 
@@ -79,7 +81,7 @@ public class AdminRestController {
 
     @GetMapping("/getCategories")
     public List<CategoryDto> getCategories() {
-        return productService.getAllCategories().stream().map(e -> productService.toCategoryDto(e))
+        return productService.getAllCategories().stream().map(e -> mappingService.toCategoryDto(e))
                 .collect(Collectors.toList());
     }
 
@@ -97,7 +99,7 @@ public class AdminRestController {
 
     @GetMapping("/getIngredients")
     public List<IngredientDto> getAllIngredients() {
-        return productService.getAllIngredients().stream().map(e -> productService.toIngredientDto(e))
+        return productService.getAllIngredients().stream().map(e -> mappingService.toIngredientDto(e))
                 .collect(Collectors.toList());
     }
 
@@ -129,7 +131,7 @@ public class AdminRestController {
 
     @GetMapping("/getTags")
     public List<TagDto> getTags() {
-        return productService.getAllTags().stream().map(t -> productService.toTagDto(t))
+        return productService.getAllTags().stream().map(t -> mappingService.toTagDto(t))
                 .collect(Collectors.toList());
     }
 
@@ -163,9 +165,10 @@ public class AdminRestController {
                                                   @PathVariable("product") String product,
                                                   @PathVariable("tag") String tag) {
         try {
-            productService.removeTagFromProduct(getProduct(category, product), tag);
+            productService.removeTagFromProduct(product, tag);
             return new ResponseEntity<>("Tag deleted!", HttpStatus.OK);
         } catch (NoResultException e) {
+            e.printStackTrace();
             return new ResponseEntity<>("Tag not exists!", HttpStatus.BAD_REQUEST);
         }
     }
@@ -175,9 +178,10 @@ public class AdminRestController {
                                                          @PathVariable("product") String product,
                                                          @PathVariable("ingredient") String ingredient) {
         try {
-            productService.removeIngredientFromProduct(getProduct(category, product), ingredient);
+            productService.removeIngredientFromProduct(product, ingredient);
             return new ResponseEntity<>("Ingredient deleted!", HttpStatus.OK);
         } catch (NoResultException e) {
+            e.printStackTrace();
             return new ResponseEntity<>("Ingredient not exists!", HttpStatus.BAD_REQUEST);
         }
     }
@@ -187,12 +191,13 @@ public class AdminRestController {
                                              @PathVariable("product") String product,
                                              @PathVariable("tag") String tag) {
         try {
-            if (getProduct(category, product).getTags().contains(productService.getTag(tag)))
+            if (productService.getProduct(product).getTags().contains(productService.getTag(tag)))
                 return new ResponseEntity<>("Tag already exists!", HttpStatus.BAD_REQUEST);
 
-            productService.addTagToProduct(getProduct(category, product), tag);
+            productService.addTagToProduct(product, tag);
             return new ResponseEntity<>("Tag added!", HttpStatus.OK);
         } catch (NoResultException e) {
+            e.printStackTrace();
             return new ResponseEntity<>("Product or tag not exists!", HttpStatus.BAD_REQUEST);
         }
     }
@@ -202,12 +207,13 @@ public class AdminRestController {
                                              @PathVariable("product") String product,
                                              @PathVariable("ingredient") String ingredient) {
         try {
-            if (getProduct(category, product).getIngredients().contains(productService.getIngredient(ingredient)))
+            if (productService.getProduct(product).getIngredients().contains(productService.getIngredient(ingredient)))
                 return new ResponseEntity<>("Ingredient already exists!", HttpStatus.BAD_REQUEST);
 
-            productService.addIngToProduct(getProduct(category, product), ingredient);
+            productService.addIngToProduct(product, ingredient);
             return new ResponseEntity<>("Ingredient added!", HttpStatus.OK);
         } catch (NoResultException e) {
+            e.printStackTrace();
             return new ResponseEntity<>("Product or ingredient not exists!", HttpStatus.BAD_REQUEST);
         }
     }
@@ -217,30 +223,45 @@ public class AdminRestController {
                                            @PathVariable("product") String productName,
                                            @ModelAttribute("productDto") ProductDto productDto) {
         try {
-            Product product = getProduct(category, productName);
-            if (productDto.getName() != null && productDto.getName().trim().length() != 0)
-                product.setName(productDto.getName());
-            if (productDto.getPrice() != null)
-                product.setPrice(productDto.getPrice());
-            List<String> image = filesService.saveUploadedFiles(productDto.getFiles());
-            if (image.size() > 0) {
-                product.setImage(image.get(0));
-            }
-            if (productDto.getSpicy() != null)
-                product.setSpicy(productDto.getSpicy());
+            Product product = productService.getProduct(productName);
+            mappingService.toProduct(product,productDto);
             productService.updateProduct(product);
             return new ResponseEntity<>("Product updated!", HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    private Product getProduct(String category, String product) throws NoResultException {
-        List<Product> productList = productService.getProductsByCategory(category).stream()
-                .filter(p -> p.getName().equals(product))
+    @PostMapping("/addProdcut/{category}")
+    public ResponseEntity<?> addProduct(@PathVariable("category") String category,
+                                           @ModelAttribute("productDto") ProductDto productDto) {
+        try {
+            Product product = mappingService.toProduct(null,productDto);
+            product.setCategory(productService.getCategory(category));
+            productService.addProduct(product);
+            return new ResponseEntity<>("Product added!", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping ("/deleteProduct/{category}/{product}")
+    public ResponseEntity<?> deleteProduct(@PathVariable("category") String category,
+                                        @PathVariable("product") String productName) {
+        try {
+            productService.removeProduct(productName);
+            return new ResponseEntity<>("Product removed!", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/getTopProducts")
+    public List<ProductDto> getTopProducts(){
+        return productService.getTopProducts().stream().map(p->mappingService.toProductDto(p))
                 .collect(Collectors.toList());
-        if (productList.size() == 0)
-            throw new NoResultException();
-        return productList.get(0);
     }
 }

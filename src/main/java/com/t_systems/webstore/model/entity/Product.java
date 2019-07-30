@@ -28,13 +28,4 @@ public class Product extends AbstractEntity {
     @JoinTable(name = "product_ingredient", joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
-
-
-    public List<Ingredient> getSubListIngredients() {
-        return ingredients.subList(0, ingredients.size() - 2);
-    }
-
-    public Ingredient getLastIngredient() {
-        return ingredients.get(ingredients.size() - 1);
-    }
 }

@@ -8,6 +8,7 @@
     <div>
         <button v-for="cat in categories" @click="getProductsByClick" class="btn btn-primary catBtn ml-3">{{cat.name}}
         </button>
+        <button @click="getTopProducts" class="btn btn-primary ml-3">Top products</button>
     </div>
     <h4>Delete category:</h4>
     <div>
@@ -79,6 +80,9 @@
                 </div>
             </h5>
             <button @click="editProduct" class="btn btn-primary">Edit</button>
+        </div>
+        <div class="product">
+            <button @click="addProduct" class="btn btn-primary" style="margin: auto;">Add Product</button>
         </div>
     </div>
     <div id="shadow"></div>

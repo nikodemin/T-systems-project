@@ -59,4 +59,9 @@ public class ProductDao {
     public void updateProduct(Product product) {
         em.merge(product);
     }
+
+    public Product getProduct(String name) {
+        return em.createQuery("FROM Product p WHERE p.name=:name",Product.class)
+                .setParameter("name",name).getSingleResult();
+    }
 }

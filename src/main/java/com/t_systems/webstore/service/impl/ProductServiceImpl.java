@@ -1,17 +1,12 @@
 package com.t_systems.webstore.service.impl;
 
 import com.t_systems.webstore.dao.*;
-import com.t_systems.webstore.model.dto.CategoryDto;
-import com.t_systems.webstore.model.dto.IngredientDto;
-import com.t_systems.webstore.model.dto.ProductDto;
-import com.t_systems.webstore.model.dto.TagDto;
 import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Ingredient;
 import com.t_systems.webstore.model.entity.Product;
 import com.t_systems.webstore.model.entity.Tag;
 import com.t_systems.webstore.service.api.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +24,6 @@ public class ProductServiceImpl implements ProductService {
     private final OrderDao orderDao;
     private final TagDao tagDao;
     private final CategoryDao categoryDao;
-    private final ModelMapper modelMapper;
 
     @Override
     public void addProduct(Product product) {
@@ -46,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
         //get sorted products from last orders
         List<Product> sortedProducts = orderDao.getRecentOrders().stream()
                 .flatMap(o -> o.getItems().stream())
+                .filter(p->p.getCategory() != null)
                 .sorted((p1, p2) -> p1.getId().compareTo(p2.getId()))
                 .collect(Collectors.toList());
 
@@ -60,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
 
         //get top products related to it quantity
         return map.entrySet().stream().sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
-                .limit(6).map(e -> e.getKey()).collect(Collectors.toList());
+                .limit(10).map(e -> e.getKey()).collect(Collectors.toList());
     }
 
     @Override
@@ -119,27 +114,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto toProductDto(Product product) {
-        return modelMapper.map(product, ProductDto.class);
-    }
-
-    @Override
-    public CategoryDto toCategoryDto(Category category) {
-        return modelMapper.map(category, CategoryDto.class);
-    }
-
-    @Override
-    public IngredientDto toIngredientDto(Ingredient ingredient) {
-        return modelMapper.map(ingredient, IngredientDto.class);
-    }
-
-    @Override
-    public TagDto toTagDto(Tag tag) {
-        return modelMapper.map(tag, TagDto.class);
-    }
-
-    @Override
-    public void addIngToProduct(Product product, String ingredient) {
+    public void addIngToProduct(String productName, String ingredient) {
+        Product product = productDao.getProduct(productName);
         productDao.addIngToProduct(product, ingredientDao.getIngredient(ingredient));
     }
 
@@ -149,22 +125,36 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void removeProduct(String productName) {
+        Product product = productDao.getProduct(productName);
+        productDao.detachProduct(product);
+    }
+
+    @Override
     public void removeCategory(String name) {
         categoryDao.removeCategory(name);
     }
 
     @Override
-    public void removeIngredientFromProduct(Product product, String ingredient) {
+    public void removeIngredientFromProduct(String productName, String ingredient) {
+        Product product = productDao.getProduct(productName);
         productDao.removeIngredientFromProduct(product, ingredientDao.getIngredient(ingredient));
     }
 
     @Override
-    public void removeTagFromProduct(Product product, String tag) {
+    public void removeTagFromProduct(String productName, String tag) {
+        Product product = productDao.getProduct(productName);
         productDao.removeTagFromProduct(product, tagDao.getTag(tag));
     }
 
     @Override
-    public void addTagToProduct(Product product, String tag) {
+    public void addTagToProduct(String productName, String tag) {
+        Product product = productDao.getProduct(productName);
         productDao.addTagToProduct(product, tagDao.getTag(tag));
+    }
+
+    @Override
+    public Product getProduct(String name) {
+        return productDao.getProduct(name);
     }
 }
