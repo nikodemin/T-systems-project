@@ -28,4 +28,9 @@ public class AdminController {
         model.addAttribute("productDto", new ProductDto());
         return "admin";
     }
+
+    @GetMapping("/stats")
+    public String getAdminStatsPage(){
+        return "adminStats";
+    }
 }
