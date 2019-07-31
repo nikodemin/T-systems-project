@@ -1,13 +1,7 @@
 package com.t_systems.webstore.service.impl;
 
-import com.t_systems.webstore.model.dto.CategoryDto;
-import com.t_systems.webstore.model.dto.IngredientDto;
-import com.t_systems.webstore.model.dto.ProductDto;
-import com.t_systems.webstore.model.dto.TagDto;
-import com.t_systems.webstore.model.entity.Category;
-import com.t_systems.webstore.model.entity.Ingredient;
-import com.t_systems.webstore.model.entity.Product;
-import com.t_systems.webstore.model.entity.Tag;
+import com.t_systems.webstore.model.dto.*;
+import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.service.api.FilesService;
 import com.t_systems.webstore.service.api.MappingService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -63,5 +58,35 @@ public class MappingServiceImpl implements MappingService {
         return product;
     }
 
+    @Override
+    public OrderDto toOrderDto(_Order order) {
+        OrderDto res = new OrderDto();
+        res.setDate(order.getDate().toString());
+        res.setDeliveryMethod(order.getDeliveryMethod().toString());
+        List<ProductDto> items = order.getItems().stream()
+                .map(p->toProductDto(p)).collect(Collectors.toList());
+        res.setItems(items);
+        res.setStatus(order.getStatus().toString());
+        res.setUsername(order.getClient().getUsername());
+        res.setPaymentMethod(order.getPaymentType().toString());
+        return res;
+    }
 
+    @Override
+    public Category toCategory(CategoryDto categoryDto, String path) {
+        Category category = new Category();
+        category.setName(categoryDto.getName());
+        category.setImage(path);
+        return category;
+    }
+
+    @Override
+    public Ingredient toIngredient(IngredientDto ingredientDto) {
+        return modelMapper.map(ingredientDto, Ingredient.class);
+    }
+
+    @Override
+    public Tag toTag(TagDto tagDto) {
+        return modelMapper.map(tagDto, Tag.class);
+    }
 }

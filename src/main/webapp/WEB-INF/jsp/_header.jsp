@@ -10,13 +10,13 @@
     <title>PizzaMaker</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/>">
 </head>
 <body>
 <section id="topMenu">
     <nav class="navbar navbar-light fixed-top px-4 bg-light">
         <a class="navbar-brand" href="#">
-            <img src="resources/img/logo.png" id="logo">
+            <img src="<c:url value="/resources/img/logo.png"/>" id="logo">
             <h3>Pizza Maker</h3>
         </a>
         <ul class="list-unstyled inline-list float-right d-none d-md-block">

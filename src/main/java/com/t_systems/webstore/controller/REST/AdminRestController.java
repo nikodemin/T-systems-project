@@ -1,15 +1,13 @@
 package com.t_systems.webstore.controller.REST;
 
-import com.t_systems.webstore.model.dto.CategoryDto;
-import com.t_systems.webstore.model.dto.IngredientDto;
-import com.t_systems.webstore.model.dto.ProductDto;
-import com.t_systems.webstore.model.dto.TagDto;
+import com.t_systems.webstore.model.dto.*;
 import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Ingredient;
 import com.t_systems.webstore.model.entity.Product;
 import com.t_systems.webstore.model.entity.Tag;
 import com.t_systems.webstore.service.api.FilesService;
 import com.t_systems.webstore.service.api.MappingService;
+import com.t_systems.webstore.service.api.OrderService;
 import com.t_systems.webstore.service.api.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +26,7 @@ import java.util.stream.Collectors;
 public class AdminRestController {
 
     private final ProductService productService;
+    private final OrderService orderService;
     private final FilesService filesService;
     private final MappingService mappingService;
 
@@ -68,11 +67,7 @@ public class AdminRestController {
                 e2.printStackTrace();
                 return new ResponseEntity<>("Error: " + e2.getMessage(), HttpStatus.BAD_REQUEST);
             }
-
-            Category cat = new Category();
-            cat.setName(category.getName());
-            cat.setImage(path);
-            productService.addCategory(cat);
+            productService.addCategory(mappingService.toCategory(category, path));
 
             return new ResponseEntity<String>("Category added!", HttpStatus.OK);
         }
@@ -120,10 +115,7 @@ public class AdminRestController {
         try {
             productService.getIngredient(ingredientDto.getName());
         } catch (NoResultException e) {
-            Ingredient ingredient = new Ingredient();
-            ingredient.setName(ingredientDto.getName());
-            ingredient.setPrice(ingredientDto.getPrice());
-            productService.addIngredient(ingredient);
+            productService.addIngredient(mappingService.toIngredient(ingredientDto));
             return new ResponseEntity<>("Ingredient added!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Ingredient already exists!", HttpStatus.BAD_REQUEST);
@@ -152,9 +144,7 @@ public class AdminRestController {
         try {
             productService.getTag(tagDto.getName());
         } catch (NoResultException e) {
-            Tag tag = new Tag();
-            tag.setName(tagDto.getName());
-            productService.addTag(tag);
+            productService.addTag(mappingService.toTag(tagDto));
             return new ResponseEntity<>("Tag added!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Tag already exists!", HttpStatus.BAD_REQUEST);
@@ -262,6 +252,12 @@ public class AdminRestController {
     @GetMapping("/getTopProducts")
     public List<ProductDto> getTopProducts(){
         return productService.getTopProducts().stream().map(p->mappingService.toProductDto(p))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/getOrders")
+    public List<OrderDto> getOrders(){
+        return orderService.getAllOrders().stream().map(o->mappingService.toOrderDto(o))
                 .collect(Collectors.toList());
     }
 }

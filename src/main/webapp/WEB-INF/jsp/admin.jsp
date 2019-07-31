@@ -129,5 +129,5 @@
     </div>
 </section>
 <c:import url="_footer.jsp"></c:import>
-<script src="resources/js/admin.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/css/admin.css">
+<script src="<c:url value="/resources/js/admin.js"/>"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
