@@ -69,17 +69,17 @@ div.menuItem a:hover {
     text-decoration: none;
 }
 
-div.leaders {
+div.products {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-section.leaders div.tags button {
+div.tags button {
     display: inline-block;
 }
 
-section.leaders div.leadersItem {
+div.products div.productItem {
     width: 33%;
     min-width: 210px;
 }

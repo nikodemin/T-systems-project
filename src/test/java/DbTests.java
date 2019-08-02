@@ -3,6 +3,7 @@ import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
+import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.model.enums.UserRole;
 import com.t_systems.webstore.service.api.OrderService;
 import com.t_systems.webstore.service.api.ProductService;
@@ -100,7 +101,7 @@ public class DbTests {
         Assert.assertEquals(11, productService.getProductsByCategory("Pizza").size());
 
         _Order order = new _Order();
-        order.setByCard(true);
+        order.setPaymentMethod(PaymentMethod.CARD);
         order.setClient(userService.findUser("niko"));
         order.setDeliveryMethod(DeliveryMethod.PICKUP);
         order.setDate(new Date());

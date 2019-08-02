@@ -5,8 +5,5 @@
 <section>
 
 </section>
-<style>
-
-</style>
 <c:import url="_footer.jsp"></c:import>
 

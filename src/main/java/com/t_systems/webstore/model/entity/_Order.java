@@ -2,6 +2,7 @@ package com.t_systems.webstore.model.entity;
 
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
+import com.t_systems.webstore.model.enums.PaymentMethod;
 import lombok.Data;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -16,11 +17,12 @@ import java.util.List;
 public class _Order extends AbstractEntity{
     @ManyToOne(fetch = FetchType.EAGER)
     private User client;
-    private Boolean byCard; //or cash
+    private PaymentMethod paymentMethod; //or cash
     private DeliveryMethod deliveryMethod;
     private Date date;
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Product> items;
     private OrderStatus status;
+    private Integer total;
 }

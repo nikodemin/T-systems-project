@@ -40,7 +40,7 @@ public class FilesServiceImpl implements FilesService {
             byte[] bytes = file.getBytes();
             Path path = Paths.get(uploadFilePath);
             Files.write(path, bytes);
-            paths.add("uploads/" + fileName);
+            paths.add("/uploads/" + fileName);
         }
         return paths;
     }

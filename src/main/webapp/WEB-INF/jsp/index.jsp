@@ -31,6 +31,7 @@
         </div>
     </div>
 </section>
+<a name="menu"></a>
 <section class="menu">
     <div class="menuItem">
         <a href="#">
@@ -94,22 +95,22 @@
             <i class="fas fa-plus-circle"></i> Spicy
         </button>
     </div>
-    <div class="leaders">
-        <c:forEach var="leader" items="${leaders}">
-            <div class="leadersItem card">
-                <img class="card-img-top" src="<c:out value="${leader.image}"/>">
+    <div class="products">
+        <c:forEach var="product" items="${leaders}">
+            <div class="productItem card">
+                <img class="card-img-top" src="<c:url value="${product.image}"/>">
                 <div class="card-body">
-                    <h4 class="card-title"><c:out value="${leader.name}"></c:out></h4>
-                    <h5><c:out value="${leader.price}"></c:out> $</h5>
+                    <h4 class="card-title productName"><c:out value="${product.name}"></c:out></h4>
+                    <h5><c:out value="${product.price}"></c:out> $</h5>
                     <p class="card-text">
-                        <c:forEach var="ingredient" items="${leader.subListIngredients}">
+                        <c:forEach var="ingredient" items="${product.subListIngredients}">
                             <c:out value="${ingredient.name}, "></c:out>
                         </c:forEach>
-                        <c:out value="${leader.lastIngredient.name}"></c:out>
+                        <c:out value="${product.lastIngredient.name}"></c:out>
                     </p>
-                    <a href="#" class="btn btn-primary btn-warning">
+                    <button class="btn btn-primary btn-warning addToCart">
                         <i class="fas fa-shopping-cart"></i>Add to cart
-                    </a>
+                    </button>
                 </div>
             </div>
         </c:forEach>

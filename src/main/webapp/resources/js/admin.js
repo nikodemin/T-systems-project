@@ -77,7 +77,7 @@ $(function () {
         data: vueData,
         methods: {
             getImgUrl: function (url) {
-                return baseUrl + '/' + url
+                return baseUrl + url
             },
             addCategory: function (e) {
                 e.preventDefault()

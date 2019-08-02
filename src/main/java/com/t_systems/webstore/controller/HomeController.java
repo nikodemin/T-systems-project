@@ -20,14 +20,14 @@ import java.util.stream.Collectors;
 @Controller
 @RequiredArgsConstructor
 @PropertySource("classpath:server.properties")
-public class MainController {
+public class HomeController {
 
     private final ProductService productService;
     private final MappingService mappingService;
     @Value("${server.uploadDir}")
     private String UPLOAD_DIR;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String getIndexPage(Model model) {
         model.addAttribute("leaders",
                 productService.getTopProducts().stream()

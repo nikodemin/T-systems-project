@@ -22,7 +22,7 @@ public class IngredientDao {
     }
 
     public List<Ingredient> getAllIngredients() {
-        return em.createQuery("FROM Ingredient", Ingredient.class)
+        return em.createQuery("FROM Ingredient i ORDER BY i.id", Ingredient.class)
                 .getResultList();
     }
 

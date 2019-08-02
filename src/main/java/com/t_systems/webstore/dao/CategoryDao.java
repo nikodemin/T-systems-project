@@ -26,7 +26,7 @@ public class CategoryDao {
     }
 
     public List<Category> getAllCategories() {
-        return em.createQuery("FROM Category", Category.class)
+        return em.createQuery("FROM Category c ORDER BY c.id", Category.class)
                 .getResultList();
     }
 

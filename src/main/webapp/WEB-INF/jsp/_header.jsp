@@ -10,18 +10,20 @@
     <title>PizzaMaker</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/common.css"/>">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <section id="topMenu">
     <nav class="navbar navbar-light fixed-top px-4 bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="resources/img/logo.png" id="logo">
+        <a class="navbar-brand" href="<c:url value="/"/>">
+            <img src="<c:url value="/resources/img/logo.png"/>" id="logo">
             <h3>Pizza Maker</h3>
         </a>
         <ul class="list-unstyled inline-list float-right d-none d-md-block">
             <li class="list-inline-item">
-                <a href="#">
+                <a href="<c:url value="/#menu"/>">
                     <i class="fas fa-book-open"></i> Menu
                 </a>
             </li>
@@ -50,7 +52,7 @@
                 </li>
             </c:if>
             <li class="list-inline-item">
-                <a href="#">
+                <a href="<c:url value="/cart"/>">
                     <i class="fas fa-shopping-cart"></i> Cart
                 </a>
             </li>
@@ -62,16 +64,16 @@
                 Menu
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#"><i class="fas fa-book-open"></i> Menu</a>
+                <a class="dropdown-item" href="<c:url value="/#menu"/>"><i class="fas fa-book-open"></i> Menu</a>
                 <c:if test="${sessionScope.username == null}">
-                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Sign in</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a class="dropdown-item" href="<c:url value="/login"/>"><i class="fas fa-user"></i> Sign in</a>
+                    <a class="dropdown-item" href="<c:url value="/register"/>"><i class="fas fa-user-plus"></i> Sign up</a>
                 </c:if>
                 <c:if test="${sessionScope.username != null}">
-                    <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+                    <a class="dropdown-item" href="<c:url value="/settings"/>"><i class="fas fa-cog"></i> Settings</a>
+                    <a class="dropdown-item" href="<c:url value="/logout"/>"><i class="fas fa-sign-out-alt"></i> Sign out</a>
                 </c:if>
-                <a class="dropdown-item" href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+                <a class="dropdown-item" href="<c:url value="/cart"/>"><i class="fas fa-shopping-cart"></i> Cart</a>
             </div>
         </div>
     </nav>

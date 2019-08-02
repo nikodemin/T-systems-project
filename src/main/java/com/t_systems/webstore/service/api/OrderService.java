@@ -10,4 +10,6 @@ public interface OrderService {
     List<_Order> getAllOrders();
 
     List<_Order> getRecentOrders();
+
+    void changeStatus(Long id, String newStatus);
 }

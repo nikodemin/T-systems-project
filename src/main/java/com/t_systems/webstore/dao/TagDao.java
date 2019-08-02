@@ -22,7 +22,7 @@ public class TagDao {
     }
 
     public List<Tag> getAllTags() {
-        return em.createQuery("FROM Tag", Tag.class).getResultList();
+        return em.createQuery("FROM Tag t ORDER BY t.id", Tag.class).getResultList();
     }
 
     public Tag getTag(String name) {

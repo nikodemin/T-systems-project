@@ -1,6 +1,7 @@
 package com.t_systems.webstore.interceptor;
 
-import com.t_systems.webstore.model.Cart;
+import com.t_systems.webstore.model.dto.OrderDto;
+import com.t_systems.webstore.model.enums.OrderStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,11 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
                              Object handler) throws Exception {
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("cart") == null) {
-            Cart cart = new Cart();
-            cart.setProducts(new ArrayList<>());
-            session.setAttribute("cart", cart);
+        if (session.getAttribute("order") == null) {
+            OrderDto order = new OrderDto();
+            order.setStatus(OrderStatus.UNPAID.toString());
+            order.setItems(new ArrayList<>());
+            session.setAttribute("order", order);
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

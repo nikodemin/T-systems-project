@@ -1,16 +1,12 @@
 package com.t_systems.webstore.controller.REST;
 
-import com.t_systems.webstore.model.dto.CategoryDto;
-import com.t_systems.webstore.model.dto.IngredientDto;
-import com.t_systems.webstore.model.dto.ProductDto;
-import com.t_systems.webstore.model.dto.TagDto;
-import com.t_systems.webstore.model.entity.Category;
-import com.t_systems.webstore.model.entity.Ingredient;
-import com.t_systems.webstore.model.entity.Product;
-import com.t_systems.webstore.model.entity.Tag;
+import com.t_systems.webstore.model.dto.*;
+import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.service.api.FilesService;
 import com.t_systems.webstore.service.api.MappingService;
+import com.t_systems.webstore.service.api.OrderService;
 import com.t_systems.webstore.service.api.ProductService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import javax.persistence.NoResultException;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,6 +27,7 @@ import java.util.stream.Collectors;
 public class AdminRestController {
 
     private final ProductService productService;
+    private final OrderService orderService;
     private final FilesService filesService;
     private final MappingService mappingService;
 
@@ -68,11 +68,7 @@ public class AdminRestController {
                 e2.printStackTrace();
                 return new ResponseEntity<>("Error: " + e2.getMessage(), HttpStatus.BAD_REQUEST);
             }
-
-            Category cat = new Category();
-            cat.setName(category.getName());
-            cat.setImage(path);
-            productService.addCategory(cat);
+            productService.addCategory(mappingService.toCategory(category, path));
 
             return new ResponseEntity<String>("Category added!", HttpStatus.OK);
         }
@@ -120,10 +116,7 @@ public class AdminRestController {
         try {
             productService.getIngredient(ingredientDto.getName());
         } catch (NoResultException e) {
-            Ingredient ingredient = new Ingredient();
-            ingredient.setName(ingredientDto.getName());
-            ingredient.setPrice(ingredientDto.getPrice());
-            productService.addIngredient(ingredient);
+            productService.addIngredient(mappingService.toIngredient(ingredientDto));
             return new ResponseEntity<>("Ingredient added!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Ingredient already exists!", HttpStatus.BAD_REQUEST);
@@ -152,9 +145,7 @@ public class AdminRestController {
         try {
             productService.getTag(tagDto.getName());
         } catch (NoResultException e) {
-            Tag tag = new Tag();
-            tag.setName(tagDto.getName());
-            productService.addTag(tag);
+            productService.addTag(mappingService.toTag(tagDto));
             return new ResponseEntity<>("Tag added!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Tag already exists!", HttpStatus.BAD_REQUEST);
@@ -263,5 +254,57 @@ public class AdminRestController {
     public List<ProductDto> getTopProducts(){
         return productService.getTopProducts().stream().map(p->mappingService.toProductDto(p))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/getOrders")
+    public List<OrderDto> getOrders(){
+        return orderService.getRecentOrders().stream().map(o->mappingService.toOrderDto(o))
+                .collect(Collectors.toList());
+    }
+
+    @PutMapping("/changeOrderStatus/{id}/{newStatus}")
+    public ResponseEntity<?> changeOrderStatus(@PathVariable("id") Long id,
+                                               @PathVariable("newStatus") String newStatus){
+        orderService.changeStatus(id,newStatus);
+        return new ResponseEntity<>("Status changed!",HttpStatus.OK);
+    }
+
+    @GetMapping("/getTotalGain")
+    public TotalGainDto getTotalGain(){
+        TotalGainDto res = new TotalGainDto();
+        Integer forMonth = 0, forWeek = 0;
+
+        LocalDate weekStart = LocalDate.now().with(DayOfWeek.MONDAY);
+        LocalDate monthStart = LocalDate.now().withDayOfMonth(1);
+
+        List<_Order> orders = orderService.getRecentOrders();
+        for (_Order order:orders) {
+            LocalDate orderDate = order.getDate().toInstant().
+                    atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            if (!orderDate.isBefore(monthStart))
+                forMonth += order.getTotal();
+            if (!orderDate.isBefore(weekStart))
+                forWeek += order.getTotal();
+        }
+
+        res.setMonth(forMonth);
+        res.setWeek(forWeek);
+        return res;
+    }
+
+    @GetMapping("/getTopClients")
+    List<UserDto> getTopClients(){
+        Map<User,Integer> map = new HashMap<>();
+        for (_Order order:orderService.getRecentOrders()) {
+            User user = order.getClient();
+            if (map.containsKey(user))
+                map.put(user,map.get(user)+1);
+            else
+                map.put(user,1);
+        }
+
+        return map.entrySet().stream().sorted((e1,e2)->e2.getValue().compareTo(e1.getValue()))
+                .limit(10).map(e->mappingService.toUserDto(e.getKey())).collect(Collectors.toList());
     }
 }

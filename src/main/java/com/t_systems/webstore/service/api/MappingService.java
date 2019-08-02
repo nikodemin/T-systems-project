@@ -1,13 +1,10 @@
 package com.t_systems.webstore.service.api;
 
-import com.t_systems.webstore.model.dto.CategoryDto;
-import com.t_systems.webstore.model.dto.IngredientDto;
-import com.t_systems.webstore.model.dto.ProductDto;
-import com.t_systems.webstore.model.dto.TagDto;
-import com.t_systems.webstore.model.entity.Category;
-import com.t_systems.webstore.model.entity.Ingredient;
-import com.t_systems.webstore.model.entity.Product;
-import com.t_systems.webstore.model.entity.Tag;
+import com.t_systems.webstore.model.dto.*;
+import com.t_systems.webstore.model.entity.*;
+import com.t_systems.webstore.model.enums.DeliveryMethod;
+import com.t_systems.webstore.model.enums.OrderStatus;
+import com.t_systems.webstore.model.enums.PaymentMethod;
 
 public interface MappingService {
     ProductDto toProductDto(Product product);
@@ -19,4 +16,22 @@ public interface MappingService {
     TagDto toTagDto(Tag tag);
 
     Product toProduct(Product product, ProductDto productDto) throws Exception;
+
+    OrderDto toOrderDto(_Order order);
+
+    Category toCategory(CategoryDto categoryDto, String path);
+
+    Ingredient toIngredient(IngredientDto ingredientDto);
+
+    Tag toTag(TagDto tagDto);
+
+    UserDto toUserDto(User user);
+
+    OrderStatus toOrderStatus(String status);
+
+    DeliveryMethod toDeliveryMethod(String method);
+
+    PaymentMethod toPaymentMethod(String type);
+
+    _Order toOrder(OrderDto order) throws Exception;
 }

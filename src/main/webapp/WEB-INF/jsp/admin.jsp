@@ -9,6 +9,7 @@
         <button v-for="cat in categories" @click="getProductsByClick" class="btn btn-primary catBtn ml-3">{{cat.name}}
         </button>
         <button @click="getTopProducts" class="btn btn-primary ml-3">Top products</button>
+        <a href="<c:url value="/admin/stats"/>" class="btn btn-primary ml-3">Stats</a>
     </div>
     <h4>Delete category:</h4>
     <div>
@@ -129,5 +130,5 @@
     </div>
 </section>
 <c:import url="_footer.jsp"></c:import>
-<script src="resources/js/admin.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/css/admin.css">
+<script src="<c:url value="/resources/js/admin.js"/>"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">

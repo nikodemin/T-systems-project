@@ -15,7 +15,7 @@ public class UserDao {
     private EntityManager em;
 
     public List<User> getAllUsers() {
-        return em.createQuery("FROM User", User.class).getResultList();
+        return em.createQuery("FROM User u ORDER BY u.id", User.class).getResultList();
     }
 
     public void addUser(User user) {

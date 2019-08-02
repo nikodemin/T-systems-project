@@ -21,7 +21,7 @@ public class ProductDao {
 
     public List<Product> getProductsByCat(String category) {
         em.clear();
-        List<Product> res = em.createQuery("FROM Product p WHERE p.category=(FROM Category c WHERE c.name=:category)",
+        List<Product> res = em.createQuery("FROM Product p WHERE p.category=(FROM Category c WHERE c.name=:category) ORDER BY p.id",
                 Product.class)
                 .setParameter("category", category).getResultList();
         return res;

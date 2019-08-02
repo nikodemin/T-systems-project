@@ -27,9 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/admin/**")
                 .and()
                 .authorizeRequests()
-                //todo remove comments
-                //.antMatchers("/admin/**")
-                //.access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/admin/**")
+                .access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/", "/**").permitAll()
 
                 .and()

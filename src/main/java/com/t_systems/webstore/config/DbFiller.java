@@ -4,6 +4,7 @@ import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
+import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.model.enums.UserRole;
 import com.t_systems.webstore.service.api.OrderService;
 import com.t_systems.webstore.service.api.ProductService;
@@ -47,7 +48,7 @@ public class DbFiller implements ApplicationListener {
 
             _Order order = new _Order();
             order.setDate(new Date());
-            order.setByCard(true);
+            order.setPaymentMethod(PaymentMethod.CARD);
             order.setClient(user);
             order.setDeliveryMethod(DeliveryMethod.COURIER);
             order.setStatus(OrderStatus.PAID);
@@ -77,7 +78,7 @@ public class DbFiller implements ApplicationListener {
             for (int i = 0; i < 10; i++) {
                 Product product = new Product();
                 product.setName("pizza" + i);
-                product.setImage("resources/img/pizza.jpg");
+                product.setImage("/resources/img/pizza.jpg");
                 product.setCategory(pizza);
                 product.setIngredients(ingredients);
                 product.setPrice(999);
@@ -90,7 +91,7 @@ public class DbFiller implements ApplicationListener {
 
             order = new _Order();
             order.setDate(new Date());
-            order.setByCard(true);
+            order.setPaymentMethod(PaymentMethod.CASH);
             order.setClient(user);
             order.setDeliveryMethod(DeliveryMethod.COURIER);
             order.setStatus(OrderStatus.PAID);

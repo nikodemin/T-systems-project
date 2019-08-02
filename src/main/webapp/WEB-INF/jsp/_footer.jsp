@@ -16,5 +16,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="<c:url value="/resources/js/common.js"/>"></script>
 </body>
 </html>
