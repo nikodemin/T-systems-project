@@ -85,6 +85,7 @@ div.products div.productItem {
 }
 
 footer {
+    clear: both;
     background-color: rgba(0, 0, 0, 0.58);
     padding: 30px;
 }

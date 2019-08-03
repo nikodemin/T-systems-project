@@ -34,4 +34,8 @@ public interface MappingService {
     PaymentMethod toPaymentMethod(String type);
 
     _Order toOrder(OrderDto order) throws Exception;
+
+    Address toAddress(AddressDto addressDto);
+
+    Card toCard(CardDto cardDto);
 }

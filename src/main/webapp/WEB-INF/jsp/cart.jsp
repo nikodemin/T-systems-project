@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <c:import url="_header.jsp"/>
@@ -29,8 +30,7 @@
         </tr>
     </table>
     <div>
-
-        <button></button>
+        <button :disabled="total == 0" @click="redirectToPayment" class="float-right btn btn-primary">To payment</button>
     </div>
 </section>
 <c:import url="_footer.jsp"/>

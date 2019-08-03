@@ -20,6 +20,10 @@ public class _Order extends AbstractEntity{
     private PaymentMethod paymentMethod; //or cash
     private DeliveryMethod deliveryMethod;
     private Date date;
+    @Embedded
+    private Card card;
+    @Embedded
+    private Address address;
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Product> items;

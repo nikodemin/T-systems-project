@@ -7,12 +7,12 @@ import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.service.api.FilesService;
 import com.t_systems.webstore.service.api.MappingService;
+import com.t_systems.webstore.service.api.ProductService;
 import com.t_systems.webstore.service.api.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +23,7 @@ public class MappingServiceImpl implements MappingService {
     private final ModelMapper modelMapper;
     private final FilesService filesService;
     private final UserService userService;
+    private final ProductService productService;
 
     @Override
     public ProductDto toProductDto(Product product) {
@@ -157,17 +158,19 @@ public class MappingServiceImpl implements MappingService {
         res.setStatus(OrderStatus.UNPAID);
         res.setClient(userService.findUser(order.getUsername()));
         res.setDate(new Date());
-        res.setDeliveryMethod(toDeliveryMethod(order.getDeliveryMethod()));
-        res.setPaymentMethod(toPaymentMethod(order.getPaymentMethod()));
-        List<Product> products = order.getItems().stream().map(p-> {
-            try {
-                return toProduct(null,p);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }).collect(Collectors.toList());
+        List<Product> products = order.getItems().stream().map(p->productService
+                .getProduct(p.getName())).collect(Collectors.toList());
         res.setItems(products);
         return res;
+    }
+
+    @Override
+    public Address toAddress(AddressDto addressDto) {
+        return modelMapper.map(addressDto, Address.class);
+    }
+
+    @Override
+    public Card toCard(CardDto cardDto) {
+        return modelMapper.map(cardDto, Card.class);
     }
 }
