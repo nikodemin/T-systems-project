@@ -16,6 +16,7 @@ public class TagDao {
     @PersistenceContext
     private EntityManager em;
     private final ProductDao productDao;
+    private final CategoryDao categoryDao;
 
     public void addTag(Tag tag) {
         em.persist(tag);
@@ -38,5 +39,10 @@ public class TagDao {
                 .getResultList()
                 .forEach(p -> productDao.removeTagFromProduct(p, tag));
         em.remove(tag);
+    }
+
+    public List<Tag> getTagsByCategory(String category) {
+        return em.createQuery("FROM Tag t WHERE :category IN elements(t.categories)", Tag.class)
+                .setParameter("category",categoryDao.getCategory(category)).getResultList();
     }
 }

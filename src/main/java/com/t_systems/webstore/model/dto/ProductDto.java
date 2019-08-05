@@ -1,6 +1,5 @@
 package com.t_systems.webstore.model.dto;
 
-import com.t_systems.webstore.model.entity.Ingredient;
 import lombok.Data;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 

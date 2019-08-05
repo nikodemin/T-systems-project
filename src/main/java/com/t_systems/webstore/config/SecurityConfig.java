@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/admin/**")
                 .access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/payment","/settings")
+                .access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
                 .antMatchers("/", "/**").permitAll()
 
                 .and()
@@ -36,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successForwardUrl("/")
+                .defaultSuccessUrl("/",true)
 
                 .and()
                 .logout()

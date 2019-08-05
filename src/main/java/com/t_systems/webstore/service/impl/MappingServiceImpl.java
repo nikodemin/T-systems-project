@@ -5,6 +5,7 @@ import com.t_systems.webstore.model.entity.*;
 import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.model.enums.PaymentMethod;
+import com.t_systems.webstore.model.enums.UserRole;
 import com.t_systems.webstore.service.api.FilesService;
 import com.t_systems.webstore.service.api.MappingService;
 import com.t_systems.webstore.service.api.ProductService;
@@ -101,7 +102,14 @@ public class MappingServiceImpl implements MappingService {
 
     @Override
     public UserDto toUserDto(User user) {
-        return modelMapper.map(user, UserDto.class);
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        userDto.setCountry(user.getAddress().getCountry());
+        userDto.setCity(user.getAddress().getCity());
+        userDto.setStreet(user.getAddress().getStreet());
+        userDto.setHouse(user.getAddress().getHouse());
+        userDto.setFlat(user.getAddress().getFlat());
+        userDto.setPassword(null);
+        return userDto;
     }
 
     @Override
@@ -172,5 +180,19 @@ public class MappingServiceImpl implements MappingService {
     @Override
     public Card toCard(CardDto cardDto) {
         return modelMapper.map(cardDto, Card.class);
+    }
+
+    @Override
+    public AddressDto toAddressDto(Address address) {
+        return modelMapper.map(address,AddressDto.class);
+    }
+
+    @Override
+    public User toUser(UserDto userDto) {
+        Address address = modelMapper.map(userDto, Address.class);
+        User user = modelMapper.map(userDto, User.class);
+        user.setRole(UserRole.USER);
+        user.setAddress(address);
+        return user;
     }
 }

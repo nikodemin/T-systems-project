@@ -38,4 +38,8 @@ public interface MappingService {
     Address toAddress(AddressDto addressDto);
 
     Card toCard(CardDto cardDto);
+
+    AddressDto toAddressDto(Address address);
+
+    User toUser(UserDto form);
 }

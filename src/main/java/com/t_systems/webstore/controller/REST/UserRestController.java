@@ -10,6 +10,7 @@ import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.service.api.MappingService;
 import com.t_systems.webstore.service.api.OrderService;
 import com.t_systems.webstore.service.api.ProductService;
+import com.t_systems.webstore.service.api.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class UserRestController {
     private final OrderService orderService;
     private final ProductService productService;
     private final MappingService mappingService;
+    private final UserService userService;
     private Address address = null;
     private Card card = null;
 
@@ -89,7 +92,7 @@ public class UserRestController {
     }
 
     @PostMapping("/submitOrder")
-    public ResponseEntity<?> submitOrder(HttpSession session) throws Exception{
+    public ResponseEntity<?> submitOrder(HttpSession session, Principal principal) throws Exception{
         _Order order = mappingService.toOrder((OrderDto)session.getAttribute("order"));
         if (address == null)
             order.setDeliveryMethod(DeliveryMethod.PICKUP);
@@ -111,6 +114,7 @@ public class UserRestController {
         newOrder.setItems(new ArrayList<>());
         session.setAttribute("order", newOrder);
 
+        order.setClient(userService.findUser(principal.getName()));
         orderService.addOrder(order);
         return new ResponseEntity<>("Order submitted!", HttpStatus.OK);
     }

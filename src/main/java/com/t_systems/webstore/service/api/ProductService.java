@@ -1,9 +1,5 @@
 package com.t_systems.webstore.service.api;
 
-import com.t_systems.webstore.model.dto.CategoryDto;
-import com.t_systems.webstore.model.dto.IngredientDto;
-import com.t_systems.webstore.model.dto.ProductDto;
-import com.t_systems.webstore.model.dto.TagDto;
 import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Ingredient;
 import com.t_systems.webstore.model.entity.Product;
@@ -29,6 +25,8 @@ public interface ProductService {
     void addTag(Tag tag);
 
     List<Tag> getAllTags();
+
+    List<Tag> getTagsByCategory(String category);
 
     void removeTag(String name);
 

@@ -6,7 +6,7 @@ public class UserExistsException extends Exception {
         super(message);
     }
 
-    public UserExistsException() {
-        super("User already exists!");
+    public UserExistsException(String username, String email) {
+        super("User ("+username+", "+email+") already exists!");
     }
 }

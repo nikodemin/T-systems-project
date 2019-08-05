@@ -93,15 +93,6 @@
             </tr>
             <tr>
                 <td>
-                    <form:input type="text" class="form-control form-control-sm" placeholder="Post code"
-                                path="postCode"/>
-                </td>
-                <td>
-                    <form:errors path="postCode" cssClass="alert alert-danger" element="div"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <form:input type="text" class="form-control form-control-sm" placeholder="Street" path="street"/>
                 </td>
                 <td>

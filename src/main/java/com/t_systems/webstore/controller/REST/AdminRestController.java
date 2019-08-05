@@ -1,12 +1,13 @@
 package com.t_systems.webstore.controller.REST;
 
 import com.t_systems.webstore.model.dto.*;
-import com.t_systems.webstore.model.entity.*;
+import com.t_systems.webstore.model.entity.Product;
+import com.t_systems.webstore.model.entity.User;
+import com.t_systems.webstore.model.entity._Order;
 import com.t_systems.webstore.service.api.FilesService;
 import com.t_systems.webstore.service.api.MappingService;
 import com.t_systems.webstore.service.api.OrderService;
 import com.t_systems.webstore.service.api.ProductService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,9 @@ import javax.persistence.NoResultException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController

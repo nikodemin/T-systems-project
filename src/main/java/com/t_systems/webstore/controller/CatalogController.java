@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,9 +21,15 @@ public class CatalogController {
 
     @GetMapping("/catalog/{category}")
     public String getCatalogPage(@PathVariable("category") String category, Model model){
-        List<ProductDto> products = productService.getProductsByCategory(category).stream()
-                .map(p->mappingService.toProductDto(p)).collect(Collectors.toList());
-        model.addAttribute("products",products);
+        model.addAttribute("tags", productService.getTagsByCategory(category).stream()
+        .map(t->mappingService.toTagDto(t)).collect(Collectors.toList()));
         return "catalog";
+    }
+
+    @GetMapping("/getProducts/{category}")
+    @ResponseBody
+    public List<ProductDto> getProductsByCategory(@PathVariable("category") String category){
+        return productService.getProductsByCategory(category).stream()
+                .map(p->mappingService.toProductDto(p)).collect(Collectors.toList());
     }
 }

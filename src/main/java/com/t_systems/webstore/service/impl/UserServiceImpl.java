@@ -19,6 +19,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -50,14 +54,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void addUser(User user) throws UserExistsException {
 
-        if (userDao.getUser(user.getUsername()) == null &&
-                userDao.getUserByEmail(user.getEmail()) == null) {
+        if (userDao.existUserByNameOrByEmail(user.getEmail(), user.getUsername())) {
 
             user.setPassword(passwordEncoder().encode(user.getPassword()));
             userDao.addUser(user);
             return;
         }
-        throw new UserExistsException();
+        throw new UserExistsException(user.getUsername(),user.getEmail());
+    }
+
+    @Transactional
+    @Override
+    public void changeUser(String username, UserDto userDto) throws ParseException {
+        User user = userDao.getUser(username);
+        Address address = modelMapper.map(userDto, Address.class);
+        user.setAddress(address);
+        user.setPassword(passwordEncoder().encode(userDto.getPassword()));
+        user.setEmail(userDto.getEmail());
+        user.setUsername(userDto.getUsername());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        user.setDateOfBirth(dateFormat.parse(userDto.getDateOfBirth()));
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+
+        userDao.updateUser(user);
     }
 
     @Transactional(readOnly = true)
@@ -66,15 +86,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (userDao.getUser(username) != null)
             return userDao.getUser(username);
         throw new UsernameNotFoundException("User not found");
-    }
-
-    @Override
-    public User convertToUser(UserDto userDto) {
-        Address address = modelMapper.map(userDto, Address.class);
-        User user = modelMapper.map(userDto, User.class);
-        user.setRole(UserRole.USER);
-        user.setAddress(address);
-        return user;
     }
 
     @Bean

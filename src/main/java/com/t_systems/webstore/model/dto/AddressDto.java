@@ -6,14 +6,14 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class AddressDto {
-    @NotBlank
+    @NotBlank(message = "Please fill it")
     private String country;
-    @NotBlank
+    @NotBlank(message = "Please fill it")
     private String city;
-    @NotBlank
+    @NotBlank(message = "Please fill it")
     private String street;
-    @NotBlank
+    @NotBlank(message = "Please fill it")
     private String house;
-    @NotBlank
+    @NotBlank(message = "Please fill it")
     private String flat;
 }

@@ -2,7 +2,8 @@ package com.t_systems.webstore.model.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.Table;
 
 @Embeddable
 @Table(name = "address")

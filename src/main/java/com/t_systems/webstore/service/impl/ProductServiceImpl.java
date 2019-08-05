@@ -89,6 +89,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Tag> getTagsByCategory(String category) {
+        return tagDao.getTagsByCategory(category);
+    }
+
+    @Override
     public void removeTag(String name) {
         tagDao.removeTag(name);
     }

@@ -33,68 +33,17 @@
 </section>
 <a name="menu"></a>
 <section class="menu">
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/burger.jpg">
-            <p>Burgers</p>
-        </a>
-    </div>
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/drink.jpg">
-            <p>Drinks</p>
-        </a>
-    </div>
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/hot.jpg">
-            <p>Hot</p>
-        </a>
-    </div>
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/pizza.jpg">
-            <p>Pizza</p>
-        </a>
-    </div>
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/set.jpg">
-            <p>Sets</p>
-        </a>
-    </div>
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/sushi.jpg">
-            <p>Sushi</p>
-        </a>
-    </div>
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/sweet.jpg">
-            <p>Desserts</p>
-        </a>
-    </div>
-    <div class="menuItem">
-        <a href="#">
-            <img src="resources/img/cat/wok.jpg">
-            <p>Wok</p>
-        </a>
-    </div>
+    <c:forEach var="category" items="${categories}">
+        <div class="menuItem">
+            <a href="<c:url value="/catalog/${category.name}"/>">
+                <img src="<c:url value="${category.image}"/>">
+                <p>${category.name}</p>
+            </a>
+        </div>
+    </c:forEach>
 </section>
 <section class="leaders">
     <h2 class="mt-2 ml-2">Top sales:</h2>
-    <div class="tags d-block my-4 ml-2">
-        <button class="btn btn-outline-warning" data-toggle="button" aria-pressed="false">
-            <i class="fas fa-plus-circle"></i> Spicy
-        </button>
-        <button class="btn btn-outline-warning" data-toggle="button" aria-pressed="false">
-            <i class="fas fa-plus-circle"></i> Spicy
-        </button>
-        <button class="btn btn-outline-warning" data-toggle="button" aria-pressed="false">
-            <i class="fas fa-plus-circle"></i> Spicy
-        </button>
-    </div>
     <div class="products">
         <c:forEach var="product" items="${leaders}">
             <div class="productItem card">

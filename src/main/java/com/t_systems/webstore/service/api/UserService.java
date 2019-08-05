@@ -3,7 +3,9 @@ package com.t_systems.webstore.service.api;
 import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.dto.UserDto;
 import com.t_systems.webstore.model.entity.User;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface UserService {
@@ -15,5 +17,5 @@ public interface UserService {
 
     void addUser(User user) throws UserExistsException;
 
-    User convertToUser(UserDto userDto);
+    void changeUser(String username, UserDto userDto) throws ParseException;
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public class _Order extends AbstractEntity{
     @ManyToOne(fetch = FetchType.EAGER)
     private User client;
-    private PaymentMethod paymentMethod; //or cash
+    private PaymentMethod paymentMethod;
     private DeliveryMethod deliveryMethod;
     private Date date;
     @Embedded

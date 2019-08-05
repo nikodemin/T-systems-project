@@ -18,6 +18,12 @@ public class UserDao {
         return em.createQuery("FROM User u ORDER BY u.id", User.class).getResultList();
     }
 
+    public Boolean existUserByNameOrByEmail(String email, String username){
+        return em.createQuery("SELECT COUNT(*) FROM User u WHERE u.username=:username OR u.email=:email")
+                .setParameter("username",username)
+                .setParameter("email",email).getResultList().size() > 0;
+    }
+
     public void addUser(User user) {
         em.persist(user);
     }
@@ -38,5 +44,9 @@ public class UserDao {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public void updateUser(User user) {
+        em.merge(user);
     }
 }
