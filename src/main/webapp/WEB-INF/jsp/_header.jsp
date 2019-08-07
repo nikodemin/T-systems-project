@@ -50,6 +50,11 @@
                         <i class="fas fa-sign-out-alt"></i> Sign out
                     </a>
                 </li>
+                <li class="list-inline-item">
+                    <a href="<c:url value="/orders"></c:url>">
+                        <i class="fas fa-folder"></i> My orders
+                    </a>
+                </li>
             </c:if>
             <li class="list-inline-item">
                 <a href="<c:url value="/cart"/>">
@@ -72,6 +77,7 @@
                 <c:if test="${sessionScope.username != null}">
                     <a class="dropdown-item" href="<c:url value="/settings"/>"><i class="fas fa-cog"></i> Settings</a>
                     <a class="dropdown-item" href="<c:url value="/logout"/>"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+                    <a class="dropdown-item" href="<c:url value="/orders"/>"><i class="fas fa-folder"></i> My orders</a>
                 </c:if>
                 <a class="dropdown-item" href="<c:url value="/cart"/>"><i class="fas fa-shopping-cart"></i> Cart</a>
             </div>

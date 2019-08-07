@@ -9,7 +9,9 @@ $(function () {
         categories: [],
         products: [],
         ingredients: [],
-        tags: []
+        tags: [],
+        categoryTags: [],
+        categoryIngs: []
     }
 
     function getCategories() {
@@ -65,6 +67,26 @@ $(function () {
             success: function (data) {
                 vueData.products = data
                 currentCategory = category
+            },
+            error: function (jqXHR, status, errorThrown) {
+                console.log('ERROR: ' + jqXHR.responseText)
+            }
+        })
+        $.ajax({
+            url: baseUrl + '/admin/getCatTags/' + category,
+            type: 'get',
+            success: function (data) {
+                vueData.categoryTags = data
+            },
+            error: function (jqXHR, status, errorThrown) {
+                console.log('ERROR: ' + jqXHR.responseText)
+            }
+        })
+        $.ajax({
+            url: baseUrl + '/admin/getCatIngs/' + category,
+            type: 'get',
+            success: function (data) {
+                vueData.categoryIngs = data
             },
             error: function (jqXHR, status, errorThrown) {
                 console.log('ERROR: ' + jqXHR.responseText)
@@ -139,21 +161,23 @@ $(function () {
             },
             addIng: function (e) {
                 e.preventDefault()
-                var data = new FormData($('#addIngForm')[0])
+                var data = {
+                    name: $('#addIngForm input.name').val().trim(),
+                    price: $('#addIngForm input.price').val().trim(),
+                    categories: $('.ingCatToAddBtn.active').map(function () { return $(this).text().trim()}).get()
+                }
 
                 $.ajax({
                     url: baseUrl + '/admin/addIngredient',
                     type: 'POST',
-                    enctype: 'multipart/form-data',
-                    data: data,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
                     success: function (respond, status, jqXHR) {
 
                         if (typeof respond.error === 'undefined') {
                             console.log("SUCCESS " + respond, jqXHR.responseText)
-                            vueData.ingredients.push({name: data.get('name')})
+                            vueData.ingredients.push({name: data.name})
+                            getProducts()
                         } else {
                             console.log('ERROR: ' + respond.error, jqXHR.responseText)
                         }
@@ -178,21 +202,22 @@ $(function () {
             },
             addTag: function (e) {
                 e.preventDefault()
-                var data = new FormData($('#addTagForm')[0])
+                var data = {
+                    name : $('#addTagForm input').val().trim(),
+                    categories: $('.catToAddBtn.active').map(function () {return $(this).text().trim()}).get()
+                }
 
                 $.ajax({
                     url: baseUrl + '/admin/addTag',
                     type: 'POST',
-                    enctype: 'multipart/form-data',
-                    data: data,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
                     success: function (respond, status, jqXHR) {
 
                         if (typeof respond.error === 'undefined') {
                             console.log("SUCCESS " + respond, jqXHR.responseText)
-                            vueData.tags.push({name: data.get('name')})
+                            vueData.tags.push({name: data.name})
+                            getProducts()
                         } else {
                             console.log('ERROR: ' + respond.error, jqXHR.responseText)
                         }

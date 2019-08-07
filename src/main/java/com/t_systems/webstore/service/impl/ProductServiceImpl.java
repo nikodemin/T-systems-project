@@ -137,6 +137,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void removeCategory(String name) {
+        Category category = categoryDao.getCategory(name);
+        tagDao.removeCategory(category);
+        ingredientDao.removeCategory(category);
         categoryDao.removeCategory(name);
     }
 
@@ -161,5 +164,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(String name) {
         return productDao.getProduct(name);
+    }
+
+    @Override
+    public List<Ingredient> getIngredientsByCategory(String category) {
+        return ingredientDao.getIngredientsByCategory(categoryDao.getCategory(category));
     }
 }

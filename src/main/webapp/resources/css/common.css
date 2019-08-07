@@ -75,6 +75,15 @@ div.products {
     justify-content: center;
 }
 
+div.hot {
+    color: red;
+    margin-right: 3px;
+    margin-bottom: -24px;
+    z-index: 10;
+    text-align: right;
+    text-shadow: black 1px 1px 1px;
+}
+
 div.tags button {
     display: inline-block;
 }

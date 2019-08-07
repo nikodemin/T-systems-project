@@ -12,4 +12,6 @@ public interface OrderService {
     List<_Order> getRecentOrders();
 
     void changeStatus(Long id, String newStatus);
+
+    List<_Order> getOrdersByUser(String user);
 }

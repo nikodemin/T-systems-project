@@ -47,6 +47,11 @@
     <div class="products">
         <c:forEach var="product" items="${leaders}">
             <div class="productItem card">
+                <div class="hot">
+                    <c:forEach begin="1" end="${product.spicy}">
+                        <i class="fas fa-pepper-hot"></i>
+                    </c:forEach>
+                </div>
                 <img class="card-img-top" src="<c:url value="${product.image}"/>">
                 <div class="card-body">
                     <h4 class="card-title productName"><c:out value="${product.name}"></c:out></h4>

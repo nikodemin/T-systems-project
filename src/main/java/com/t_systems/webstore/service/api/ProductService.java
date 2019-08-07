@@ -53,4 +53,6 @@ public interface ProductService {
     void addTagToProduct(String productName, String tag);
 
     Product getProduct(String name);
+
+    List<Ingredient> getIngredientsByCategory(String category);
 }

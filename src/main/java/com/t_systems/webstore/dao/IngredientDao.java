@@ -1,5 +1,6 @@
 package com.t_systems.webstore.dao;
 
+import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Ingredient;
 import com.t_systems.webstore.model.entity.Product;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,19 @@ public class IngredientDao {
                 .getResultList()
                 .forEach(p -> productDao.removeIngredientFromProduct(p, ing));
         em.remove(ing);
+    }
+
+    public List<Ingredient> getIngredientsByCategory(Category category) {
+        return em.createQuery("FROM Ingredient i WHERE :category IN elements(i.categories)",
+                Ingredient.class).setParameter("category",category).getResultList();
+    }
+
+    public void removeCategory(Category category) {
+        List<Ingredient> ingredients = getIngredientsByCategory(category);
+        for (int i = 0; i < ingredients.size(); i++) {
+            ingredients.get(i).getCategories().remove(category);
+            em.persist(ingredients.get(i));
+        }
+        em.flush();
     }
 }

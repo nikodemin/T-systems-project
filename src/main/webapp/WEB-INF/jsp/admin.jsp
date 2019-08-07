@@ -6,14 +6,14 @@
 <section id="app">
     <h4>Show products:</h4>
     <div>
-        <button v-for="cat in categories" @click="getProductsByClick" class="btn btn-primary catBtn ml-3">{{cat.name}}
+        <button v-for="cat in categories" @click="getProductsByClick" class="btn btn-primary catBtn mt-1 ml-3">{{cat.name}}
         </button>
-        <button @click="getTopProducts" class="btn btn-primary ml-3">Top products</button>
-        <a href="<c:url value="/admin/stats"/>" class="btn btn-primary ml-3">Stats</a>
+        <button @click="getTopProducts" class="btn btn-success ml-3 mt-1">Top products</button>
+        <a href="<c:url value="/admin/stats"/>" class="btn btn-success ml-3 mt-1">Stats</a>
     </div>
     <h4>Delete category:</h4>
     <div>
-        <button v-for="cat in categories" @click="deleteCat" class="btn btn-primary btn-danger catBtn ml-3">
+        <button v-for="cat in categories" @click="deleteCat" class="btn btn-primary btn-danger catBtn mt-1 ml-3">
             {{cat.name}}
         </button>
     </div>
@@ -31,7 +31,7 @@
     </form:form>
     <h4>Delete ingredient:</h4>
     <div>
-        <button v-for="ing in ingredients" @click="deleteIng" class="btn btn-primary btn-danger catBtn ml-3">
+        <button v-for="ing in ingredients" @click="deleteIng" class="btn btn-primary btn-danger catBtn mt-1 ml-3">
             {{ing.name}}
         </button>
     </div>
@@ -39,17 +39,23 @@
     <form:form id="addIngForm" modelAttribute="ingredientDto" enctype="multipart/form-data">
         <table>
             <tr>
-                <td><form:input path="name" type="text" placeholder="Name"/></td>
-                <td><form:input path="price" type="number" placeholder="Price"/></td>
+                <td><form:input class="name" path="name" type="text" placeholder="Name"/></td>
+                <td><form:input class="price" path="price" type="number" placeholder="Price"/></td>
                 <td>
                     <button type="button" @click="addIng" class="btn btn-primary">Add</button>
                 </td>
             </tr>
         </table>
     </form:form>
+    <h4>To Categories:</h4>
+    <div>
+        <button v-for="cat in categories" class="btn btn-outline-warning ingCatToAddBtn mt-1 ml-3" data-toggle="button" aria-pressed="false">
+            {{cat.name}}
+        </button>
+    </div>
     <h4>Delete Tags:</h4>
     <div>
-        <button v-for="tag in tags" @click="deleteTag" class="btn btn-primary btn-danger catBtn ml-3">{{tag.name}}
+        <button v-for="tag in tags" @click="deleteTag" class="btn btn-primary btn-danger catBtn mt-1 ml-3">{{tag.name}}
         </button>
     </div>
     <h4>Add tag:</h4>
@@ -63,6 +69,12 @@
             </tr>
         </table>
     </form:form>
+    <h4>To Categories:</h4>
+    <div>
+        <button v-for="cat in categories" class="btn btn-outline-warning catToAddBtn mt-1 ml-3" data-toggle="button" aria-pressed="false">
+            {{cat.name}}
+        </button>
+    </div>
     <h4>Products:</h4>
     <div class="products">
         <div v-for="product in products" class="product">
@@ -98,7 +110,7 @@
                     <form:input path="price" type="number" placeholder="Change price"></form:input>
                 </div>
                 <div>
-                    <form:input cssStyle="width: 205px" path="spicy" type="number" min="0" max="5"
+                    <form:input cssStyle="width: 205px" path="spicy" type="number" min="0" max="3"
                                 placeholder="Change spicy"></form:input>
                 </div>
                 <div>
@@ -109,14 +121,14 @@
                 </div>
                 <div>Add tags:</div>
                 <div>
-                    <button type="button" v-for="tag in tags" @click="addTagToProduct"
-                            class="btn btn-primary catBtn ml-3">{{tag.name}}
+                    <button type="button" v-for="tag in categoryTags" @click="addTagToProduct"
+                            class="btn btn-primary catBtn mt-1 ml-3">{{tag.name}}
                     </button>
                 </div>
                 <div>Add ingredients:</div>
                 <div>
-                    <button type="button" v-for="ing in ingredients" @click="addIngToProduct"
-                            class="btn btn-primary catBtn ml-3">{{ing.name}}
+                    <button type="button" v-for="ing in categoryIngs" @click="addIngToProduct"
+                            class="btn btn-primary catBtn mt-1 ml-3">{{ing.name}}
                     </button>
                 </div>
                 <div>

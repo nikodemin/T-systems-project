@@ -1,5 +1,6 @@
 package com.t_systems.webstore.dao;
 
+import com.t_systems.webstore.model.entity.User;
 import com.t_systems.webstore.model.entity._Order;
 import com.t_systems.webstore.model.enums.OrderStatus;
 import org.springframework.stereotype.Repository;
@@ -35,5 +36,10 @@ public class OrderDao {
                 .setParameter("id",id).getSingleResult();
         order.setStatus(newStatus);
         em.merge(order);
+    }
+
+    public List<_Order> getOrdersByUser(User user) {
+        return em.createQuery("FROM _Order o WHERE o.client=:user", _Order.class)
+                .setParameter("user",user).getResultList();
     }
 }

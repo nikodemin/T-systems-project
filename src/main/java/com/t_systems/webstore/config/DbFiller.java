@@ -16,6 +16,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -55,15 +56,6 @@ public class DbFiller implements ApplicationListener {
             order.setStatus(OrderStatus.PAID);
             List<Product> products = new ArrayList<>();
 
-            List<Ingredient> ingredients = new ArrayList<>();
-            for (int i = 0; i < 6; i++) {
-                Ingredient ingredient = new Ingredient();
-                ingredient.setName("ingredient" + i);
-                ingredient.setPrice(100);
-                productService.addIngredient(ingredient);
-                ingredients.add(ingredient);
-            }
-
             Category category = new Category();
             category.setName("Pizza");
             category.setImage("/resources/img/cat/pizza.jpg");
@@ -98,6 +90,17 @@ public class DbFiller implements ApplicationListener {
             categories.put("Wok",category);
             for (Map.Entry<String,Category> e:categories.entrySet()) {
                 productService.addCategory(e.getValue());
+            }
+
+            List<Ingredient> ingredients = new ArrayList<>();
+            for (int i = 0; i < 6; i++) {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setName("ingredient" + i);
+                ingredient.setPrice(100);
+                ingredient.setCategories(categories.entrySet().stream()
+                        .map(e->e.getValue()).collect(Collectors.toList()));
+                productService.addIngredient(ingredient);
+                ingredients.add(ingredient);
             }
 
             List<Tag> tagList = new ArrayList<>();
@@ -137,6 +140,7 @@ public class DbFiller implements ApplicationListener {
                 product.setCategory(categories.get("Pizza"));
                 product.setIngredients(ingredients);
                 product.setPrice(999);
+                product.setSpicy(2);
                 products.add(product);
                 product.setTags(tagList);
                 productService.addProduct(product);

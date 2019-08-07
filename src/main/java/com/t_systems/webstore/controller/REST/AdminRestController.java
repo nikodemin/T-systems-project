@@ -86,13 +86,7 @@ public class AdminRestController {
 
     @DeleteMapping("/deleteCategory/{category}")
     public ResponseEntity<?> deleteCategory(@PathVariable("category") String category) {
-        try {
-            productService.getCategory(category);
-        } catch (NoResultException e) {
-            return new ResponseEntity<>("Category not exists!", HttpStatus.BAD_REQUEST);
-        }
         productService.removeCategory(category);
-
         return new ResponseEntity<>("Category deleted!", HttpStatus.OK);
     }
 
@@ -115,7 +109,7 @@ public class AdminRestController {
     }
 
     @PostMapping("/addIngredient")
-    public ResponseEntity<?> addIngredient(@ModelAttribute("ingredientDto") IngredientDto ingredientDto) {
+    public ResponseEntity<?> addIngredient(@RequestBody IngredientDto ingredientDto) {
         try {
             productService.getIngredient(ingredientDto.getName());
         } catch (NoResultException e) {
@@ -144,7 +138,7 @@ public class AdminRestController {
     }
 
     @PostMapping("/addTag")
-    public ResponseEntity<?> addTag(@ModelAttribute("tagDto") TagDto tagDto) {
+    public ResponseEntity<?> addTag(@RequestBody TagDto tagDto) {
         try {
             productService.getTag(tagDto.getName());
         } catch (NoResultException e) {
@@ -165,6 +159,18 @@ public class AdminRestController {
             e.printStackTrace();
             return new ResponseEntity<>("Tag not exists!", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/getCatTags/{category}")
+    public List<TagDto> getTagsByCategory(@PathVariable("category") String category){
+        return productService.getTagsByCategory(category).stream()
+                .map(t->mappingService.toTagDto(t)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/getCatIngs/{category}")
+    public List<IngredientDto> getIngsByCategory(@PathVariable("category") String category){
+        return productService.getIngredientsByCategory(category).stream()
+                .map(i->mappingService.toIngredientDto(i)).collect(Collectors.toList());
     }
 
     @DeleteMapping("/deleteIngredient/{category}/{product}/{ingredient}")

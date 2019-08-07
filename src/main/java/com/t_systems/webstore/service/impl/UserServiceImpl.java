@@ -5,7 +5,6 @@ import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.dto.UserDto;
 import com.t_systems.webstore.model.entity.Address;
 import com.t_systems.webstore.model.entity.User;
-import com.t_systems.webstore.model.enums.UserRole;
 import com.t_systems.webstore.service.api.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

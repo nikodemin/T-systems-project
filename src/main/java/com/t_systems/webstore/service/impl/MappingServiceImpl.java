@@ -92,12 +92,20 @@ public class MappingServiceImpl implements MappingService {
 
     @Override
     public Ingredient toIngredient(IngredientDto ingredientDto) {
-        return modelMapper.map(ingredientDto, Ingredient.class);
+        Ingredient res = modelMapper.map(ingredientDto, Ingredient.class);
+        res.setCategories(ingredientDto.getCategories().stream()
+            .map(productService::getCategory).collect(Collectors.toList()));
+        return res;
     }
 
     @Override
     public Tag toTag(TagDto tagDto) {
-        return modelMapper.map(tagDto, Tag.class);
+        List<Category> categories = tagDto.getCategories().stream()
+                .map(productService::getCategory).collect(Collectors.toList());
+        Tag tag = new Tag();
+        tag.setCategories(categories);
+        tag.setName(tagDto.getName());
+        return tag;
     }
 
     @Override

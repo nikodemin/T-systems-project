@@ -5,8 +5,7 @@ $(function () {
     var header = $("meta[name='_csrf_header']").attr("content");
 
     var vueData = {
-        products: [],
-        selectedTags: []
+        products: []
     }
 
     function getProducts(){
@@ -17,7 +16,6 @@ $(function () {
                 xhr.setRequestHeader(header, token);
             },
             success: function (data) {
-                console.log(data)
                 vueData.products = data
             },
             error: function (jqXHR, status, errorThrown) {
@@ -33,6 +31,50 @@ $(function () {
         methods: {
             getImgUrl: function (url) {
                 return baseUrl + url
+            },
+            filterTags: function (e) {
+                var data = $('button.filterTagsBtn.active').map(function () {return {name:$(this).text().trim()}}).get()
+                if (!$(e.target).hasClass('active'))
+                    data.push({name:$(e.target).text().trim()})
+                else
+                    data = data.filter(function (val) {return val.name != $(e.target).text().trim()})
+
+                if(data.length == 9) {
+                    getProducts()
+                    return
+                }
+
+                $.ajax({
+                    url: baseUrl + '/getProductsWithTags/'+category,
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    success: function (data) {
+                        vueData.products = data
+                    },
+                    error: function (jqXHR, status, errorThrown) {
+                        console.log('ERROR: ' + jqXHR.responseText)
+                    }
+                })
+            },
+            addToCart: function (e) {
+                var product = $(e.target).parents('.productItem').find('.productName').text()
+                $.ajax({
+                    url: baseUrl + '/addToCart/' + product,
+                    type: 'PUT',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (jqXHR, status, errorThrown) {
+                        console.log('ERROR: ' + jqXHR.responseText)
+                    }
+                })
             }
         }
     })

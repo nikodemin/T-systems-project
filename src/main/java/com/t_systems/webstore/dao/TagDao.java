@@ -1,5 +1,6 @@
 package com.t_systems.webstore.dao;
 
+import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Product;
 import com.t_systems.webstore.model.entity.Tag;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +45,14 @@ public class TagDao {
     public List<Tag> getTagsByCategory(String category) {
         return em.createQuery("FROM Tag t WHERE :category IN elements(t.categories)", Tag.class)
                 .setParameter("category",categoryDao.getCategory(category)).getResultList();
+    }
+
+    public void removeCategory(Category category) {
+        List<Tag> tags = getTagsByCategory(category.getName());
+        for (int i = 0; i < tags.size(); i++) {
+            tags.get(i).getCategories().remove(category);
+            em.persist(tags.get(i));
+        }
+        em.flush();
     }
 }
