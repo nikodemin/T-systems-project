@@ -32,6 +32,9 @@ $(function () {
             getImgUrl: function (url) {
                 return baseUrl + url
             },
+            calcPrice: function (price) {
+                return price/100;
+            },
             filterTags: function (e) {
                 var data = $('button.filterTagsBtn.active').map(function () {return {name:$(this).text().trim()}}).get()
                 if (!$(e.target).hasClass('active'))

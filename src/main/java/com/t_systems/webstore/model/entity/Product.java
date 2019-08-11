@@ -18,6 +18,8 @@ public class Product extends AbstractEntity {
     private String image;
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
+    @OneToOne
+    private User author;
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "product_tag", joinColumns = @JoinColumn(name = "product_id"),

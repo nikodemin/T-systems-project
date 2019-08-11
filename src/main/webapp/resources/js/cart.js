@@ -38,6 +38,9 @@ $(function () {
         el: '#app',
         data: vueData,
         methods: {
+            calcPrice: function (price) {
+                return price/100;
+            },
             addProduct: function (e) {
                 var name = $(e.target).parents('tr').find('.productName').text()
                 $.ajax({

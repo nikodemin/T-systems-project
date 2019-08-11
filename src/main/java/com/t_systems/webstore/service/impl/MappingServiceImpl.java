@@ -203,4 +203,14 @@ public class MappingServiceImpl implements MappingService {
         user.setAddress(address);
         return user;
     }
+
+    @Override
+    public Product toClientProduct(ProductDto productDto, String username) {
+        Product product = modelMapper.map(productDto, Product.class);
+        product.setAuthor(userService.findUser(username));
+        product.setCategory(productService.getCategory(productDto.getCategory().getName()));
+        product.setIngredients(productDto.getIngredients().stream()
+        .map(i->productService.getIngredient(i.getName())).collect(Collectors.toList()));
+        return product;
+    }
 }

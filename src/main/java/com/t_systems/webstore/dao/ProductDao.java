@@ -1,8 +1,6 @@
 package com.t_systems.webstore.dao;
 
-import com.t_systems.webstore.model.entity.Ingredient;
-import com.t_systems.webstore.model.entity.Product;
-import com.t_systems.webstore.model.entity.Tag;
+import com.t_systems.webstore.model.entity.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -21,7 +19,7 @@ public class ProductDao {
 
     public List<Product> getProductsByCat(String category) {
         em.clear();
-        List<Product> res = em.createQuery("FROM Product p WHERE p.category=(FROM Category c WHERE c.name=:category) ORDER BY p.id",
+        List<Product> res = em.createQuery("FROM Product p WHERE p.author=null AND p.category=(FROM Category c WHERE c.name=:category) ORDER BY p.id",
                 Product.class)
                 .setParameter("category", category).getResultList();
         return res;
@@ -63,5 +61,12 @@ public class ProductDao {
     public Product getProduct(String name) {
         return em.createQuery("FROM Product p WHERE p.name=:name",Product.class)
                 .setParameter("name",name).getSingleResult();
+    }
+
+    public List<Product> getProductsByCatAndUser(Category category, User user) {
+        return em.createQuery("FROM Product p WHERE p.category=:category and p.author=:user",Product.class)
+                .setParameter("category",category)
+                .setParameter("user",user)
+                .getResultList();
     }
 }

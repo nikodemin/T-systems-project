@@ -90,4 +90,9 @@ public class UserController {
         model.addAttribute("orders", orders);
         return "clientOrders";
     }
+
+    @GetMapping("/customProduct")
+    public String getCustomProductPage(){
+        return "customProduct";
+    }
 }

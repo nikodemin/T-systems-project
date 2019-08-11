@@ -17,7 +17,7 @@
         </tr>
         <tr v-for="order in orders" :data-id="order.id">
             <td>{{order.username}}</td>
-            <td>{{order.price}}</td>
+            <td>{{calcPrice(order.price)}}</td>
             <td>{{order.paymentMethod}}</td>
             <td>{{order.deliveryMethod}}</td>
             <td>{{order.date}}</td>
@@ -36,8 +36,8 @@
             <th>Total for week</th>
         </tr>
         <tr>
-            <td>{{total.month}}</td>
-            <td>{{total.week}}</td>
+            <td>{{calcPrice(total.month)}}</td>
+            <td>{{calcPrice(total.week)}}</td>
         </tr>
         <tr class="thead-dark">
             <th><h3>Top clients</h3></th>

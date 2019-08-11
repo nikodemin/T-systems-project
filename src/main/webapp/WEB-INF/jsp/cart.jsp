@@ -14,7 +14,7 @@
         </tr>
         <tr v-for="tuple in products">
             <td class="productName">{{tuple.key.name}}</td>
-            <td>{{tuple.key.price}}$</td>
+            <td>{{calcPrice(tuple.key.price)}}$</td>
             <td>{{tuple.value}}</td>
             <td>
                 <button @click="removeProduct" class="btn btn-primary">-</button>
@@ -26,7 +26,7 @@
             <th>Total</th>
         </tr>
         <tr>
-            <td>{{total}}$</td>
+            <td>{{calcPrice(total)}}$</td>
         </tr>
     </table>
     <div>

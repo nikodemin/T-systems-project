@@ -160,6 +160,13 @@ public class DbFiller implements ApplicationListener {
             order.setItems(products2);
             orderService.addOrder(order);
 
+            Product product = new Product();
+            product.setAuthor(user);
+            product.setCategory(categories.get("Pizza"));
+            product.setName("Pizza Big Lebovsky");
+            product.setPrice(1322);
+            product.setIngredients(ingredients);
+            productService.addProduct(product);
         }
     }
 }

@@ -47,6 +47,9 @@ var vue = new Vue({
     el: '#app',
     data: vueData,
     methods: {
+        calcPrice: function (price) {
+            return price/100;
+        },
         changeStatus: function (e) {
             var newStatus = e.target.value
             var id = $(e.target).parents('tr').attr('data-id')

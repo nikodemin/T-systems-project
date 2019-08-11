@@ -41,6 +41,12 @@
             </a>
         </div>
     </c:forEach>
+    <div class="menuItem">
+        <a href="<c:url value="/customProduct"/>">
+            <img src="<c:url value="/resources/img/gear.png"/>">
+            <p>Create your own design!</p>
+        </a>
+    </div>
 </section>
 <section class="leaders">
     <h2 class="mt-2 ml-2">Top sales:</h2>
@@ -55,7 +61,7 @@
                 <img class="card-img-top" src="<c:url value="${product.image}"/>">
                 <div class="card-body">
                     <h4 class="card-title productName"><c:out value="${product.name}"></c:out></h4>
-                    <h5><c:out value="${product.price}"></c:out> $</h5>
+                    <h5><c:out value="${product.price/100}"></c:out> $</h5>
                     <p class="card-text">
                         <c:forEach var="ingredient" items="${product.subListIngredients}">
                             <c:out value="${ingredient.name}, "></c:out>

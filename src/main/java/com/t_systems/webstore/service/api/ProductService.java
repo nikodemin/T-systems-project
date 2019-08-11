@@ -1,5 +1,6 @@
 package com.t_systems.webstore.service.api;
 
+import com.t_systems.webstore.model.dto.ProductDto;
 import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Ingredient;
 import com.t_systems.webstore.model.entity.Product;
@@ -55,4 +56,6 @@ public interface ProductService {
     Product getProduct(String name);
 
     List<Ingredient> getIngredientsByCategory(String category);
+
+    List<Product> getProductsByCategoryAndUser(String category, String username);
 }

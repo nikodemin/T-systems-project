@@ -18,7 +18,7 @@
             <img class="card-img-top" :src="getImgUrl(product.image)"/>
             <div class="card-body">
                 <h4 class="card-title productName">{{product.name}}</h4>
-                <h5>{{product.price}} $</h5>
+                <h5>{{calcPrice(product.price)}} $</h5>
                 <p class="card-text">
                     <template v-for="ingredient in product.subListIngredients">
                         {{ingredient.name}},

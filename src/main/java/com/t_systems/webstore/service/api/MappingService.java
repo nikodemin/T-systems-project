@@ -42,4 +42,6 @@ public interface MappingService {
     AddressDto toAddressDto(Address address);
 
     User toUser(UserDto form);
+
+    Product toClientProduct(ProductDto productDto, String username);
 }

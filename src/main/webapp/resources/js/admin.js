@@ -26,7 +26,6 @@ $(function () {
             }
         })
     }
-
     getCategories()
 
     function getIngredients() {
@@ -41,7 +40,6 @@ $(function () {
             }
         })
     }
-
     getIngredients()
 
     function getTags() {
@@ -56,7 +54,6 @@ $(function () {
             }
         })
     }
-
     getTags()
 
     function getProducts(category) {
