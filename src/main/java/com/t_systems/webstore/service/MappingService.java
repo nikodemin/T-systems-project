@@ -1,4 +1,4 @@
-package com.t_systems.webstore.service.impl;
+package com.t_systems.webstore.service;
 
 import com.t_systems.webstore.model.dto.*;
 import com.t_systems.webstore.model.entity.*;
@@ -6,10 +6,6 @@ import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.model.enums.UserRole;
-import com.t_systems.webstore.service.api.FilesService;
-import com.t_systems.webstore.service.api.MappingService;
-import com.t_systems.webstore.service.api.ProductService;
-import com.t_systems.webstore.service.api.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,33 +16,28 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class MappingServiceImpl implements MappingService {
+public class MappingService {
     private final ModelMapper modelMapper;
     private final FilesService filesService;
     private final UserService userService;
     private final ProductService productService;
 
-    @Override
     public ProductDto toProductDto(Product product) {
         return modelMapper.map(product, ProductDto.class);
     }
 
-    @Override
     public CategoryDto toCategoryDto(Category category) {
         return modelMapper.map(category, CategoryDto.class);
     }
 
-    @Override
     public IngredientDto toIngredientDto(Ingredient ingredient) {
         return modelMapper.map(ingredient, IngredientDto.class);
     }
 
-    @Override
     public TagDto toTagDto(Tag tag) {
         return modelMapper.map(tag, TagDto.class);
     }
 
-    @Override
     public Product toProduct(Product product, ProductDto productDto) throws Exception{
         if (product == null)
         {
@@ -66,7 +57,6 @@ public class MappingServiceImpl implements MappingService {
         return product;
     }
 
-    @Override
     public OrderDto toOrderDto(_Order order) {
         OrderDto res = new OrderDto();
         res.setDate(order.getDate().toString());
@@ -82,7 +72,6 @@ public class MappingServiceImpl implements MappingService {
         return res;
     }
 
-    @Override
     public Category toCategory(CategoryDto categoryDto, String path) {
         Category category = new Category();
         category.setName(categoryDto.getName());
@@ -90,7 +79,6 @@ public class MappingServiceImpl implements MappingService {
         return category;
     }
 
-    @Override
     public Ingredient toIngredient(IngredientDto ingredientDto) {
         Ingredient res = modelMapper.map(ingredientDto, Ingredient.class);
         res.setCategories(ingredientDto.getCategories().stream()
@@ -98,7 +86,6 @@ public class MappingServiceImpl implements MappingService {
         return res;
     }
 
-    @Override
     public Tag toTag(TagDto tagDto) {
         List<Category> categories = tagDto.getCategories().stream()
                 .map(productService::getCategory).collect(Collectors.toList());
@@ -108,7 +95,6 @@ public class MappingServiceImpl implements MappingService {
         return tag;
     }
 
-    @Override
     public UserDto toUserDto(User user) {
         UserDto userDto = modelMapper.map(user, UserDto.class);
         userDto.setCountry(user.getAddress().getCountry());
@@ -120,7 +106,6 @@ public class MappingServiceImpl implements MappingService {
         return userDto;
     }
 
-    @Override
     public OrderStatus toOrderStatus(String status){
         OrderStatus res = null;
         switch (status)
@@ -138,7 +123,6 @@ public class MappingServiceImpl implements MappingService {
         return res;
     }
 
-    @Override
     public DeliveryMethod toDeliveryMethod(String method){
         DeliveryMethod res = null;
         switch (method)
@@ -153,7 +137,6 @@ public class MappingServiceImpl implements MappingService {
         return res;
     }
 
-    @Override
     public PaymentMethod toPaymentMethod(String method){
         PaymentMethod res = null;
         switch (method)
@@ -168,7 +151,6 @@ public class MappingServiceImpl implements MappingService {
         return res;
     }
 
-    @Override
     public _Order toOrder(OrderDto order) {
         _Order res = new _Order();
         res.setStatus(OrderStatus.UNPAID);
@@ -180,22 +162,18 @@ public class MappingServiceImpl implements MappingService {
         return res;
     }
 
-    @Override
     public Address toAddress(AddressDto addressDto) {
         return modelMapper.map(addressDto, Address.class);
     }
 
-    @Override
     public Card toCard(CardDto cardDto) {
         return modelMapper.map(cardDto, Card.class);
     }
 
-    @Override
     public AddressDto toAddressDto(Address address) {
         return modelMapper.map(address,AddressDto.class);
     }
 
-    @Override
     public User toUser(UserDto userDto) {
         Address address = modelMapper.map(userDto, Address.class);
         User user = modelMapper.map(userDto, User.class);
@@ -204,7 +182,6 @@ public class MappingServiceImpl implements MappingService {
         return user;
     }
 
-    @Override
     public Product toClientProduct(ProductDto productDto, String username) {
         Product product = modelMapper.map(productDto, Product.class);
         product.setAuthor(userService.findUser(username));

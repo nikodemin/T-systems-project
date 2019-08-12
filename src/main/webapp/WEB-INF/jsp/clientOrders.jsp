@@ -25,7 +25,7 @@
                         </c:forEach>
                     </ul>
                 </td>
-                <td>${order.price}</td>
+                <td>${order.price/100}</td>
             </tr>
         </c:forEach>
     </table>

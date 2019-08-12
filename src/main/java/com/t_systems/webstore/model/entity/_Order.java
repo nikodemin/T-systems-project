@@ -17,16 +17,24 @@ import java.util.List;
 public class _Order extends AbstractEntity{
     @ManyToOne(fetch = FetchType.EAGER)
     private User client;
+
     private PaymentMethod paymentMethod;
+
     private DeliveryMethod deliveryMethod;
+
     private Date date;
+
     @Embedded
     private Card card;
+
     @Embedded
     private Address address;
+
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Product> items;
+
     private OrderStatus status;
+
     private Integer total;
 }

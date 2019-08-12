@@ -80,7 +80,7 @@
         <div v-for="product in products" class="product">
             <img :src="getImgUrl(product.image)">
             <h5 class="name">{{product.name}}</h5>
-            <h5>{{product.price}}$</h5>
+            <h5>{{calcPrice(product.price)}}$</h5>
             <h5>Spicy:{{product.spicy}}</h5>
             <h5>Tags:
                 <div v-for="tag in product.tags" :data-name="tag.name">{{tag.name}}

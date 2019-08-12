@@ -1,7 +1,7 @@
 package com.t_systems.webstore.controller;
 
-import com.t_systems.webstore.service.api.MappingService;
-import com.t_systems.webstore.service.api.ProductService;
+import com.t_systems.webstore.service.MappingService;
+import com.t_systems.webstore.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

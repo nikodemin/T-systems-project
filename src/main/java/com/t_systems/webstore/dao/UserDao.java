@@ -19,7 +19,7 @@ public class UserDao {
     }
 
     public Boolean existUserByNameOrByEmail(String email, String username){
-        return em.createQuery("SELECT COUNT(*) FROM User u WHERE u.username=:username OR u.email=:email")
+        return em.createQuery("FROM User u WHERE u.username=:username OR u.email=:email")
                 .setParameter("username",username)
                 .setParameter("email",email).getResultList().size() > 0;
     }

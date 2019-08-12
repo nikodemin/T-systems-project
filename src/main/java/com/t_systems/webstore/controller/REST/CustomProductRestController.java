@@ -4,8 +4,8 @@ import com.t_systems.webstore.model.dto.IngredientDto;
 import com.t_systems.webstore.model.dto.OrderDto;
 import com.t_systems.webstore.model.dto.ProductDto;
 import com.t_systems.webstore.model.entity.Product;
-import com.t_systems.webstore.service.api.MappingService;
-import com.t_systems.webstore.service.api.ProductService;
+import com.t_systems.webstore.service.MappingService;
+import com.t_systems.webstore.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +36,11 @@ public class CustomProductRestController {
 
     @PostMapping("/userProducts")
     public void addUserProduct(@RequestBody ProductDto productDto, Principal principal){
+        Integer total = 0;
+        for (IngredientDto i:productDto.getIngredients()) {
+            total += i.getPrice();
+        }
+        productDto.setPrice(total);
         productService.addProduct(mappingService.toClientProduct(productDto, principal.getName()));
     }
 

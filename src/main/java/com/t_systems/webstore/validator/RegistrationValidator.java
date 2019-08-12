@@ -1,7 +1,7 @@
 package com.t_systems.webstore.validator;
 
 import com.t_systems.webstore.model.dto.UserDto;
-import com.t_systems.webstore.service.api.UserService;
+import com.t_systems.webstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

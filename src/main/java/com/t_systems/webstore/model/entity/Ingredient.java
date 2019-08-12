@@ -16,7 +16,9 @@ import java.util.List;
 public class Ingredient extends AbstractEntity{
     @Column(unique = true, nullable = false)
     private String name;
+
     private Integer price;
+
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Category> categories;

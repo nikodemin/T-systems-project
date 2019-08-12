@@ -5,7 +5,7 @@ import com.t_systems.webstore.model.dto.IngredientDto;
 import com.t_systems.webstore.model.dto.ProductDto;
 import com.t_systems.webstore.model.dto.TagDto;
 import com.t_systems.webstore.model.enums.OrderStatus;
-import com.t_systems.webstore.service.api.ProductService;
+import com.t_systems.webstore.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

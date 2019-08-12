@@ -98,6 +98,9 @@ $(function () {
             getImgUrl: function (url) {
                 return baseUrl + url
             },
+            calcPrice: function (price) {
+                return price/100;
+            },
             addCategory: function (e) {
                 e.preventDefault()
                 var data = new FormData($('#addCatForm')[0])

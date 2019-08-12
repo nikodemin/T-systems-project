@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "tag")
 public class Tag extends AbstractEntity{
     private String name;
+
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Category> categories;

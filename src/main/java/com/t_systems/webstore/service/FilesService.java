@@ -1,6 +1,5 @@
-package com.t_systems.webstore.service.impl;
+package com.t_systems.webstore.service;
 
-import com.t_systems.webstore.service.api.FilesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -17,12 +16,11 @@ import java.util.List;
 
 @Service
 @PropertySource("classpath:server.properties")
-public class FilesServiceImpl implements FilesService {
+public class FilesService {
 
     @Value("${server.uploadDir}")
     private String UPLOAD_DIR;
 
-    @Override
     public List<String> saveUploadedFiles(CommonsMultipartFile[] files) throws IOException {
         // Make sure directory exists!
         File uploadDir = new File(UPLOAD_DIR);
