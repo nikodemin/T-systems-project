@@ -1,5 +1,6 @@
 package com.t_systems.webstore.dao;
 
+import com.t_systems.webstore.model.entity.Product;
 import com.t_systems.webstore.model.entity.User;
 import com.t_systems.webstore.model.entity._Order;
 import com.t_systems.webstore.model.enums.OrderStatus;
@@ -41,5 +42,10 @@ public class OrderDao {
     public List<_Order> getOrdersByUser(User user) {
         return em.createQuery("FROM _Order o WHERE o.client=:user", _Order.class)
                 .setParameter("user",user).getResultList();
+    }
+
+    public boolean isProductInOrder(Product product) {
+        return em.createQuery("FROM _Order o WHERE :product IN elements(o.items)", _Order.class)
+                .setParameter("product", product).getResultList().size() > 0;
     }
 }

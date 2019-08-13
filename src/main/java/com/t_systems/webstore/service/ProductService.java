@@ -1,6 +1,10 @@
 package com.t_systems.webstore.service;
 
 import com.t_systems.webstore.dao.*;
+import com.t_systems.webstore.model.dto.CategoryDto;
+import com.t_systems.webstore.model.dto.IngredientDto;
+import com.t_systems.webstore.model.dto.ProductDto;
+import com.t_systems.webstore.model.dto.TagDto;
 import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Ingredient;
 import com.t_systems.webstore.model.entity.Product;
@@ -24,6 +28,7 @@ public class ProductService {
     private final TagDao tagDao;
     private final CategoryDao categoryDao;
     private final UserDao userDao;
+    private MappingService mappingService;
 
     public void addProduct(Product product) {
         productDao.addProduct(product);
@@ -33,11 +38,11 @@ public class ProductService {
         return productDao.getProductsByCat(category);
     }
 
-    public List<Product> getTopProducts() {
+    public List<ProductDto> getTopProductsDto() {
         //get sorted products from last orders
         List<Product> sortedProducts = orderDao.getRecentOrders().stream()
                 .flatMap(o -> o.getItems().stream())
-                .filter(p->p.getCategory() != null)
+                .filter(p->p.getCategory() != null && p.getAuthor() == null)
                 .sorted((p1, p2) -> p1.getId().compareTo(p2.getId()))
                 .collect(Collectors.toList());
 
@@ -52,15 +57,16 @@ public class ProductService {
 
         //get top products related to it quantity
         return map.entrySet().stream().sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
-                .limit(10).map(e -> e.getKey()).collect(Collectors.toList());
+                .limit(10).map(e -> mappingService.toProductDto(e.getKey())).collect(Collectors.toList());
     }
 
     public void addIngredient(Ingredient ingredient) {
         ingredientDao.addIngredient(ingredient);
     }
 
-    public List<Ingredient> getAllIngredients() {
-        return ingredientDao.getAllIngredients();
+    public List<IngredientDto> getAllIngredientDtos() {
+        return ingredientDao.getAllIngredients().stream().map(e -> mappingService.toIngredientDto(e))
+                .collect(Collectors.toList());
     }
 
     public void removeIngredient(String name) {
@@ -79,8 +85,9 @@ public class ProductService {
         return tagDao.getAllTags();
     }
 
-    public List<Tag> getTagsByCategory(String category) {
-        return tagDao.getTagsByCategory(category);
+    public List<TagDto> getTagDtosByCategory(String category) {
+        return tagDao.getTagsByCategory(category).stream()
+                .map(t->mappingService.toTagDto(t)).collect(Collectors.toList());
     }
 
     public void removeTag(String name) {
@@ -95,8 +102,9 @@ public class ProductService {
         categoryDao.addCategory(category);
     }
 
-    public List<Category> getAllCategories() {
-        return categoryDao.getAllCategories();
+    public List<CategoryDto> getAllCategoryDtos() {
+        return categoryDao.getAllCategories().stream()
+                .map(mappingService::toCategoryDto).collect(Collectors.toList());
     }
 
     public Category getCategory(String name) {
@@ -112,11 +120,15 @@ public class ProductService {
         productDao.updateProduct(product);
     }
 
-    public void removeProduct(String productName) {
+    public void detachOrRemoveProduct(String productName) {
         Product product = productDao.getProduct(productName);
         productDao.detachProduct(product);
+        if (!orderDao.isProductInOrder(product)){
+            productDao.removeProduct(product);
+        }
     }
 
+    //todo check if this behavior is normal
     public void removeCategory(String name) {
         Category category = categoryDao.getCategory(name);
         tagDao.removeCategory(category);
@@ -143,11 +155,77 @@ public class ProductService {
         return productDao.getProduct(name);
     }
 
-    public List<Ingredient> getIngredientsByCategory(String category) {
-        return ingredientDao.getIngredientsByCategory(categoryDao.getCategory(category));
+    public List<IngredientDto> getIngredientDtosByCategory(String category) {
+        return ingredientDao.getIngredientsByCategory(categoryDao.getCategory(category)).stream()
+                .map(i->mappingService.toIngredientDto(i)).collect(Collectors.toList());
     }
 
-    public List<Product> getProductsByCategoryAndUser(String category, String username) {
-        return productDao.getProductsByCatAndUser(categoryDao.getCategory(category), userDao.getUser(username));
+    public List<ProductDto> getProductDtosByCategoryAndUser(String category, String username) {
+        return productDao.getProductsByCatAndUser(categoryDao.getCategory(category), userDao.getUser(username))
+                .stream().map(p->mappingService.toProductDto(p)).collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getProductDtosWithTags(String category, List<TagDto> tags) {
+        return getProductsByCategory(category).stream()
+                .filter(cat->{
+                    boolean res = true;
+                    for (TagDto tag:tags) {
+                        res &= cat.getTags().stream()
+                                .filter(catTag->catTag.getName().equals(tag.getName()))
+                                .count() > 0;
+                    }
+                    return res;
+                })
+                .map(p->mappingService.toProductDto(p)).collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getProductDtosByCategory(String category) {
+        return getProductsByCategory(category).stream()
+                .map(p->mappingService.toProductDto(p)).collect(Collectors.toList());
+    }
+
+    public void setPrice(ProductDto productDto) {
+        Integer total = 0;
+        for (IngredientDto i:productDto.getIngredients()) {
+            total += i.getPrice();
+        }
+        productDto.setPrice(total);
+    }
+
+    public List<TagDto> getAllTagDtos() {
+        return getAllTags().stream().map(t -> mappingService.toTagDto(t))
+                .collect(Collectors.toList());
+    }
+
+    public void setMappingService(MappingService mappingService) {
+        this.mappingService = mappingService;
+    }
+
+    public List<ProductDto> getTopProductsDtoForAdmin() {
+        //get sorted products from last orders
+        List<Product> sortedProducts = orderDao.getRecentOrders().stream()
+                .flatMap(o -> o.getItems().stream())
+                .filter(p->p.getCategory() != null)
+                .sorted((p1, p2) -> p1.getId().compareTo(p2.getId()))
+                .collect(Collectors.toList());
+
+        //map of product and it quantity
+        Map<Product, Integer> map = new HashMap<>();
+        sortedProducts.forEach(p -> {
+            if (map.containsKey(p))
+                map.put(p, map.get(p) + 1);
+            else
+                map.put(p, 1);
+        });
+
+        //get top products related to it quantity
+        return map.entrySet().stream().sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .limit(10).map(e -> {
+                    ProductDto productDto = mappingService.toProductDto(e.getKey());
+                    if (e.getKey().getAuthor() != null) {
+                        productDto.setIsCustom(true);
+                    }
+                    return productDto;
+                }).collect(Collectors.toList());
     }
 }

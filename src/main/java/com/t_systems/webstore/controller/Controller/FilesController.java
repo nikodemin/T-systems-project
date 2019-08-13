@@ -1,4 +1,4 @@
-package com.t_systems.webstore.controller;
+package com.t_systems.webstore.controller.Controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;

@@ -78,21 +78,21 @@
     <h4>Products:</h4>
     <div class="products">
         <div v-for="product in products" class="product">
-            <img :src="getImgUrl(product.image)">
+            <img v-if="product.isCustom == false" :src="getImgUrl(product.image)">
             <h5 class="name">{{product.name}}</h5>
             <h5>{{calcPrice(product.price)}}$</h5>
-            <h5>Spicy:{{product.spicy}}</h5>
-            <h5>Tags:
+            <h5 v-if="product.isCustom == false">Spicy:{{product.spicy}}</h5>
+            <h5 v-if="product.isCustom == false">Tags:
                 <div v-for="tag in product.tags" :data-name="tag.name">{{tag.name}}
-                    <button @click="deleteTagFromProduct" class="btn btn-primary btn-danger">&times;</button>
+                    <button  @click="deleteTagFromProduct" class="btn btn-primary btn-danger">&times;</button>
                 </div>
             </h5>
             <h5>Ingredients:
                 <div v-for="ingredient in product.ingredients" :data-name="ingredient.name">{{ingredient.name}}
-                    <button @click="deleteIngredientFromProduct" class="btn btn-primary btn-danger">&times;</button>
+                    <button v-if="product.isCustom == false" @click="deleteIngredientFromProduct" class="btn btn-primary btn-danger">&times;</button>
                 </div>
             </h5>
-            <button @click="editProduct" class="btn btn-primary">Edit</button>
+            <button v-if="product.isCustom == false" @click="editProduct" class="btn btn-primary">Edit</button>
         </div>
         <div class="product">
             <button @click="addProduct" class="btn btn-primary" style="margin: auto;">Add Product</button>

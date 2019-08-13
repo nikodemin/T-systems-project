@@ -106,7 +106,7 @@ $(function () {
                 })
             },
             addToCart: function (e) {
-                var productName = /(.*)\ [0-9]*\.?[0-9]*\$/g.exec($(e.target).parents('div').find('span.name').text().trim())[1];
+                var productName = /(.*)\ [0-9]*\.?[0-9]*\$/g.exec($(e.target).parents('div.product').find('span.name').text().trim())[1];
                 $.ajax({
                     url: baseUrl + '/addToCart/'+productName,
                     type: 'PUT',

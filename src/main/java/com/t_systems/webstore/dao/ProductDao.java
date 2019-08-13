@@ -69,4 +69,8 @@ public class ProductDao {
                 .setParameter("user",user)
                 .getResultList();
     }
+
+    public void removeProduct(Product product) {
+        em.remove(product);
+    }
 }

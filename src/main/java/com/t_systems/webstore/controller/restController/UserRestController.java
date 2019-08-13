@@ -1,4 +1,4 @@
-package com.t_systems.webstore.controller.REST;
+package com.t_systems.webstore.controller.restController;
 
 import com.t_systems.webstore.model.dto.*;
 import com.t_systems.webstore.model.entity.Address;

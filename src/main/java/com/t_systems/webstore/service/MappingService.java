@@ -8,19 +8,28 @@ import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.model.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Lazy
 @RequiredArgsConstructor
 public class MappingService {
     private final ModelMapper modelMapper;
     private final FilesService filesService;
     private final UserService userService;
     private final ProductService productService;
+
+    @PostConstruct
+    public void init() {
+        productService.setMappingService(this);
+    }
 
     public ProductDto toProductDto(Product product) {
         return modelMapper.map(product, ProductDto.class);

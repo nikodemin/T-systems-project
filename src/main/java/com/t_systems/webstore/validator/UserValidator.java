@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class RegistrationValidator implements Validator {
+public class UserValidator implements Validator {
 
     private final UserService userService;
 

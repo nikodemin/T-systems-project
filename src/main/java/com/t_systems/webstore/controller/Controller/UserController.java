@@ -1,17 +1,21 @@
-package com.t_systems.webstore.controller;
+package com.t_systems.webstore.controller.Controller;
 
+import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.dto.AddressDto;
 import com.t_systems.webstore.model.dto.CardDto;
-import com.t_systems.webstore.model.dto.OrderDto;
 import com.t_systems.webstore.model.dto.UserDto;
+import com.t_systems.webstore.model.entity.User;
 import com.t_systems.webstore.service.MappingService;
-import com.t_systems.webstore.service.OrderService;
 import com.t_systems.webstore.service.UserService;
+import com.t_systems.webstore.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,15 +25,48 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.text.ParseException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
     private final MappingService mappingService;
-    private final OrderService orderService;
+    private final UserValidator validator;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        Object target = binder.getTarget();
+        if (target == null)
+            return;
+
+        if (target.getClass() == UserDto.class)
+            binder.setValidator(validator);
+    }
+
+    @GetMapping("/register")
+    public String getRegisterPage(Model model) {
+        model.addAttribute("form", new UserDto());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String processRegistration(Model model,
+                                      @Validated @ModelAttribute("form") UserDto form,
+                                      BindingResult result) {
+        if (result.hasErrors())
+            return "register";
+
+        User user = mappingService.toUser(form);
+
+        try {
+            userService.addUser(user);
+        } catch (UserExistsException e) {
+            e.printStackTrace();
+            return "register";
+        }
+
+        return "redirect:/login";
+    }
 
     @GetMapping("/settings")
     public String getSettingsPage(Model model, Principal principal) {
@@ -42,8 +79,9 @@ public class UserController {
     public String changeSettings(Model model, @Valid @ModelAttribute("user") UserDto userDto,
                                  BindingResult result, Principal principal,HttpServletRequest request)
             throws ParseException, ServletException {
-        if (result.hasErrors())
+        if (result.hasErrors()) {
             return "settings";
+        }
 
         request.logout();
         userService.changeUser(principal.getName(), userDto);
@@ -81,14 +119,6 @@ public class UserController {
     public String getConfirmationPage(Model model){
         model.addAttribute("text","Order accepted! Wait for phone call!");
         return "text";
-    }
-
-    @GetMapping("/orders")
-    public String getOrdersPage(Model model, Principal principal){
-        List<OrderDto> orders = orderService.getOrdersByUser(principal.getName()).stream()
-                .map(o->mappingService.toOrderDto(o)).collect(Collectors.toList());
-        model.addAttribute("orders", orders);
-        return "clientOrders";
     }
 
     @GetMapping("/customProduct")

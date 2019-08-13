@@ -19,7 +19,7 @@
         <div v-if="error!=null" class="alert alert-danger">{{error}}</div>
         <div class="nameInput mt-3">
             <input v-model="name" placeholder="Enter name for your creation" class="form-control">
-            <p>You will create "{{name}}" with: <span v-for="ing in chosenIngs"><span class="name">{{ing.name}} </span><button @click="deleteIngredient" class="btn btn-danger">&times;</button></span> that will cost <strong>{{total}}$</strong></p>
+            <p>You will create "{{name}}" with: <span v-for="ing in chosenIngs"><span class="name">{{ing.name}} </span><button @click="deleteIngredient" class="btn btn-danger">&times;</button></span> that will cost <strong>{{calcPrice(total)}}$</strong></p>
             <button @click="submit" class="btn btn-primary mt-2">Send</button>
         </div>
     </div>

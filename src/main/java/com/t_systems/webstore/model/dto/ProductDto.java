@@ -17,6 +17,7 @@ public class ProductDto {
     private CommonsMultipartFile[] files;
     private List<TagDto> tags;
     private List<IngredientDto> ingredients;
+    private Boolean isCustom = false;
 
     public List<IngredientDto> getSubListIngredients() {
         if (ingredients.size() >= 2)
