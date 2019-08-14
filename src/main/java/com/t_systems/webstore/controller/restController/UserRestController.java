@@ -9,13 +9,15 @@ import com.t_systems.webstore.model.enums.OrderStatus;
 import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.service.MappingService;
 import com.t_systems.webstore.service.OrderService;
-import com.t_systems.webstore.service.ProductService;
 import com.t_systems.webstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,42 +28,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class UserRestController {
-    private final OrderService orderService;
-    private final ProductService productService;
-    private final MappingService mappingService;
     private final UserService userService;
+    private final OrderService orderService;
+    private final MappingService mappingService;
     private Address address = null;
     private Card card = null;
 
-    @PutMapping("/addToCart/{product}")
-    public ResponseEntity<?> addToCart(@PathVariable("product") String product,
-                                       HttpSession session){
-        OrderDto orderDto = (OrderDto) session.getAttribute("order");
-        ProductDto productDto = mappingService.toProductDto(productService.getProduct(product));
-        orderDto.getItems().add(productDto);
-        session.setAttribute("order",orderDto);
-        return new ResponseEntity<>("Product added to cart!", HttpStatus.OK);
-    }
-
-    @PutMapping("/removeFromCart/{product}")
-    public ResponseEntity<?> removeFromCart(@PathVariable("product") String product,
-                                       HttpSession session){
-        OrderDto orderDto = (OrderDto) session.getAttribute("order");
-        ProductDto productDto = mappingService.toProductDto(productService.getProduct(product));
-        orderDto.getItems().remove(productDto);
-        session.setAttribute("order",orderDto);
-        return new ResponseEntity<>("Product removed from cart!", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/deleteAllFromCart/{product}")
-    public ResponseEntity<?> deleteAllFromCart(@PathVariable("product") String product,
-                                            HttpSession session){
-        OrderDto orderDto = (OrderDto) session.getAttribute("order");
-        ProductDto productDto = mappingService.toProductDto(productService.getProduct(product));
-        orderDto.getItems().removeIf(p->p.equals(productDto));
-        session.setAttribute("order",orderDto);
-        return new ResponseEntity<>("Product deleted from cart!", HttpStatus.OK);
-    }
 
     @GetMapping("/getCartProducts")
     public List<TulipDto<ProductDto,Integer>> getCartProducts(HttpSession session){
@@ -93,7 +65,7 @@ public class UserRestController {
 
     @PostMapping("/submitOrder")
     public ResponseEntity<?> submitOrder(HttpSession session, Principal principal) throws Exception{
-        _Order order = mappingService.toOrder((OrderDto)session.getAttribute("order"));
+        _Order order = mappingService.toOrder((OrderDto)session.getAttribute("order"),principal.getName());
         if (address == null)
             order.setDeliveryMethod(DeliveryMethod.PICKUP);
         else{

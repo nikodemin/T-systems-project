@@ -5,10 +5,7 @@ import com.t_systems.webstore.model.dto.CategoryDto;
 import com.t_systems.webstore.model.dto.IngredientDto;
 import com.t_systems.webstore.model.dto.ProductDto;
 import com.t_systems.webstore.model.dto.TagDto;
-import com.t_systems.webstore.model.entity.Category;
-import com.t_systems.webstore.model.entity.Ingredient;
-import com.t_systems.webstore.model.entity.Product;
-import com.t_systems.webstore.model.entity.Tag;
+import com.t_systems.webstore.model.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,24 +27,25 @@ public class ProductService {
     private final UserDao userDao;
     private MappingService mappingService;
 
-    public void addProduct(Product product) {
+    public void addProduct(AbstractProduct product) {
         productDao.addProduct(product);
     }
 
-    public List<Product> getProductsByCategory(String category) {
+    public List<CatalogProduct> getProductsByCategory(String category) {
         return productDao.getProductsByCat(category);
     }
 
     public List<ProductDto> getTopProductsDto() {
         //get sorted products from last orders
-        List<Product> sortedProducts = orderDao.getRecentOrders().stream()
+        List<CatalogProduct> sortedProducts = orderDao.getRecentOrders().stream()
                 .flatMap(o -> o.getItems().stream())
-                .filter(p->p.getCategory() != null && p.getAuthor() == null)
+                .filter(p->p.getCategory() != null && p instanceof CatalogProduct)
                 .sorted((p1, p2) -> p1.getId().compareTo(p2.getId()))
+                .map(p->(CatalogProduct)p)
                 .collect(Collectors.toList());
 
         //map of product and it quantity
-        Map<Product, Integer> map = new HashMap<>();
+        Map<CatalogProduct, Integer> map = new HashMap<>();
         sortedProducts.forEach(p -> {
             if (map.containsKey(p))
                 map.put(p, map.get(p) + 1);
@@ -112,16 +110,17 @@ public class ProductService {
     }
 
     public void addIngToProduct(String productName, String ingredient) {
-        Product product = productDao.getProduct(productName);
+        CatalogProduct product = ((CatalogProduct) productDao.getProduct(productName, null));
         productDao.addIngToProduct(product, ingredientDao.getIngredient(ingredient));
     }
 
-    public void updateProduct(Product product) {
+    public void updateProduct(CatalogProduct product) {
         productDao.updateProduct(product);
     }
 
-    public void detachOrRemoveProduct(String productName) {
-        Product product = productDao.getProduct(productName);
+    public void detachOrRemoveProduct(String productName, String username) {
+        AbstractProduct product = productDao.getProduct(productName,
+                username==null? null : userDao.getUser(username));
         productDao.detachProduct(product);
         if (!orderDao.isProductInOrder(product)){
             productDao.removeProduct(product);
@@ -137,22 +136,22 @@ public class ProductService {
     }
 
     public void removeIngredientFromProduct(String productName, String ingredient) {
-        Product product = productDao.getProduct(productName);
+        CatalogProduct product = ((CatalogProduct) productDao.getProduct(productName, null));
         productDao.removeIngredientFromProduct(product, ingredientDao.getIngredient(ingredient));
     }
 
     public void removeTagFromProduct(String productName, String tag) {
-        Product product = productDao.getProduct(productName);
+        CatalogProduct product = ((CatalogProduct) productDao.getProduct(productName, null));
         productDao.removeTagFromProduct(product, tagDao.getTag(tag));
     }
 
     public void addTagToProduct(String productName, String tag) {
-        Product product = productDao.getProduct(productName);
+        CatalogProduct product = ((CatalogProduct) productDao.getProduct(productName, null));
         productDao.addTagToProduct(product, tagDao.getTag(tag));
     }
 
-    public Product getProduct(String name) {
-        return productDao.getProduct(name);
+    public AbstractProduct getProduct(String name, String username) {
+        return productDao.getProduct(name, userDao.getUser(username));
     }
 
     public List<IngredientDto> getIngredientDtosByCategory(String category) {
@@ -203,14 +202,14 @@ public class ProductService {
 
     public List<ProductDto> getTopProductsDtoForAdmin() {
         //get sorted products from last orders
-        List<Product> sortedProducts = orderDao.getRecentOrders().stream()
+        List<AbstractProduct> sortedProducts = orderDao.getRecentOrders().stream()
                 .flatMap(o -> o.getItems().stream())
                 .filter(p->p.getCategory() != null)
                 .sorted((p1, p2) -> p1.getId().compareTo(p2.getId()))
                 .collect(Collectors.toList());
 
         //map of product and it quantity
-        Map<Product, Integer> map = new HashMap<>();
+        Map<AbstractProduct, Integer> map = new HashMap<>();
         sortedProducts.forEach(p -> {
             if (map.containsKey(p))
                 map.put(p, map.get(p) + 1);
@@ -222,10 +221,15 @@ public class ProductService {
         return map.entrySet().stream().sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                 .limit(10).map(e -> {
                     ProductDto productDto = mappingService.toProductDto(e.getKey());
-                    if (e.getKey().getAuthor() != null) {
+                    if (e.getKey() instanceof CustomProduct) {
                         productDto.setIsCustom(true);
                     }
                     return productDto;
                 }).collect(Collectors.toList());
+    }
+
+    public boolean isCatalogProductOrCustomProductExists(String name, String username) {
+        return productDao.isCatalogProductExists(name) ||
+                productDao.isCustomProductExists(name,userDao.getUser(username));
     }
 }

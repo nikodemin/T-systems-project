@@ -13,64 +13,95 @@ public class ProductDao {
     @PersistenceContext
     private EntityManager em;
 
-    public void addProduct(Product product) {
-        em.persist(product);
+    public void addProduct(AbstractProduct product) {
+        if (product instanceof CatalogProduct)
+            em.persist((CatalogProduct)product);
+        else if (product instanceof CustomProduct)
+            em.persist((CustomProduct)product);
     }
 
-    public List<Product> getProductsByCat(String category) {
+    public List<CatalogProduct> getProductsByCat(String category) {
         em.clear();
-        List<Product> res = em.createQuery("FROM Product p WHERE p.author=null AND p.category=(FROM Category c WHERE c.name=:category) ORDER BY p.id",
-                Product.class)
+        List<CatalogProduct> res = em.createQuery("FROM CatalogProduct p WHERE p.category=(FROM Category c WHERE c.name=:category) ORDER BY p.id",
+                CatalogProduct.class)
                 .setParameter("category", category).getResultList();
         return res;
     }
 
-    public void detachProduct(Product product) {
+    public void detachProduct(AbstractProduct product) {
         product.setCategory(null);
         product.setIngredients(null);
-        product.setTags(null);
+        if (product instanceof CatalogProduct)
+            ((CatalogProduct)product).setTags(null);
         em.merge(product);
     }
 
-    public void removeIngredientFromProduct(Product product, Ingredient ingredient) {
+    public void removeIngredientFromProduct(AbstractProduct product, Ingredient ingredient) {
         em.createNativeQuery("DELETE FROM product_ingredient WHERE product_id=? AND ingredient_id=?")
                 .setParameter(1, product.getId()).setParameter(2, ingredient.getId())
                 .executeUpdate();
     }
 
-    public void removeTagFromProduct(Product product, Tag tag) {
+    public void removeTagFromProduct(CatalogProduct product, Tag tag) {
         em.createNativeQuery("DELETE FROM product_tag WHERE product_id=? AND tag_id=?")
                 .setParameter(1, product.getId()).setParameter(2, tag.getId())
                 .executeUpdate();
     }
 
-    public void addTagToProduct(Product product, Tag tag) {
+    public void addTagToProduct(CatalogProduct product, Tag tag) {
         product.getTags().add(tag);
         em.merge(product);
     }
 
-    public void addIngToProduct(Product product, Ingredient ingredient) {
+    public void addIngToProduct(CatalogProduct product, Ingredient ingredient) {
         product.getIngredients().add(ingredient);
         em.merge(product);
     }
 
-    public void updateProduct(Product product) {
-        em.merge(product);
+    public void updateProduct(AbstractProduct product) {
+        if (product instanceof CatalogProduct)
+            em.merge((CatalogProduct)product);
+        else if (product instanceof CustomProduct)
+            em.merge((CustomProduct)product);
     }
 
-    public Product getProduct(String name) {
-        return em.createQuery("FROM Product p WHERE p.name=:name",Product.class)
+    public AbstractProduct getProduct(String name, User user) {
+        if (user == null)
+            return em.createQuery("FROM CatalogProduct p WHERE p.name=:name",CatalogProduct.class)
                 .setParameter("name",name).getSingleResult();
+        else
+            return em.createQuery("FROM CustomProduct p WHERE p.name=:name AND p.author=:user",
+                    CustomProduct.class)
+            .setParameter("name", name)
+            .setParameter("user", user)
+            .getSingleResult();
     }
 
-    public List<Product> getProductsByCatAndUser(Category category, User user) {
-        return em.createQuery("FROM Product p WHERE p.category=:category and p.author=:user",Product.class)
+    public List<CustomProduct> getProductsByCatAndUser(Category category, User user) {
+        return em.createQuery("FROM CustomProduct p WHERE p.category=:category and p.author=:user", CustomProduct.class)
                 .setParameter("category",category)
                 .setParameter("user",user)
                 .getResultList();
     }
 
-    public void removeProduct(Product product) {
-        em.remove(product);
+    public void removeProduct(AbstractProduct product) {
+        if (product instanceof CatalogProduct)
+            em.remove((CatalogProduct)product);
+        else if (product instanceof CustomProduct)
+            em.remove((CustomProduct)product);
+    }
+
+    public boolean isCatalogProductExists(String name) {
+        return em.createQuery("FROM CatalogProduct p WHERE p.name=:name",CatalogProduct.class)
+                .setParameter("name",name)
+                .getResultList().size() > 0;
+    }
+
+    public boolean isCustomProductExists(String name, User user) {
+        return em.createQuery("FROM CustomProduct p WHERE p.name=:name AND p.author=:user",
+                CustomProduct.class)
+                .setParameter("name",name)
+                .setParameter("user",user)
+                .getResultList().size() > 0;
     }
 }

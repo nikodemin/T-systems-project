@@ -95,6 +95,7 @@ $(function () {
                         xhr.setRequestHeader(header, token);
                     },
                     success: function (data) {
+                        console.log(data)
                         getIngredients()
                         getUserProducts()
                         vueData.chosenIngs = []
@@ -118,7 +119,25 @@ $(function () {
                     error: function (jqXHR, status, errorThrown) {
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
-                })            }
+                })
+            },
+            deleteProduct: function (e) {
+                var productName = /(.*)\ [0-9]*\.?[0-9]*\$/g.exec($(e.target).parents('div.product').find('span.name').text().trim())[1];
+                $.ajax({
+                    url: baseUrl + '/userProducts/'+productName,
+                    type: 'DELETE',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    success: function (data) {
+                        getUserProducts()
+                        console.log(data)
+                    },
+                    error: function (jqXHR, status, errorThrown) {
+                        console.log('ERROR: ' + jqXHR.responseText)
+                    }
+                })
+            }
         }
     })
 })

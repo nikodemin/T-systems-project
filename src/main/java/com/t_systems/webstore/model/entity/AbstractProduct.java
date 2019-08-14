@@ -8,29 +8,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
 @Data
-public class Product extends AbstractEntity {
-    @Column(unique = true, nullable = false)
-    private String name;
-
+@Inheritance(strategy = InheritanceType.JOINED)
+public class AbstractProduct extends AbstractEntity {
     private Integer price;
-
-    private Integer spicy;
-
-    private String image;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
-
-    @OneToOne
-    private User author;
-
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "product_tag", joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tag> tags;
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)

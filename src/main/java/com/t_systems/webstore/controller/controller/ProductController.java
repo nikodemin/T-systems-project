@@ -1,4 +1,4 @@
-package com.t_systems.webstore.controller.Controller;
+package com.t_systems.webstore.controller.controller;
 
 import com.t_systems.webstore.model.dto.CategoryDto;
 import com.t_systems.webstore.model.dto.IngredientDto;
@@ -34,10 +34,9 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public String getIndexPage(Model model) throws Exception {
-        throw new Exception("MY EXCEPTION!");
-        //model.addAttribute("leaders", productService.getTopProductsDto());
-        //model.addAttribute("categories",productService.getAllCategoryDtos());
-        //return "index";
+    public String getIndexPage(Model model) {
+        model.addAttribute("leaders", productService.getTopProductsDto());
+        model.addAttribute("categories",productService.getAllCategoryDtos());
+        return "index";
     }
 }

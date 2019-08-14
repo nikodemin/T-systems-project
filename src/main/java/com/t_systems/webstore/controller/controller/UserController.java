@@ -1,4 +1,4 @@
-package com.t_systems.webstore.controller.Controller;
+package com.t_systems.webstore.controller.controller;
 
 import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.dto.AddressDto;
@@ -103,7 +103,7 @@ public class UserController {
     @GetMapping("/logout")
     public String getAfterLogoutPage(HttpServletRequest request) throws ServletException {
         request.logout();
-        return "index";
+        return "login";
     }
 
     @GetMapping("/payment")

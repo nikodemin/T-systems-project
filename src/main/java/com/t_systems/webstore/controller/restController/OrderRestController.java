@@ -21,24 +21,24 @@ public class OrderRestController {
     private final OrderService orderService;
     private final MappingService mappingService;
 
-    @GetMapping("/getOrders")
+    @GetMapping("admin/getOrders")
     public List<OrderDto> getOrders(){
         return orderService.getRecentOrderDtos();
     }
 
-    @PutMapping("/changeOrderStatus/{id}/{newStatus}")
+    @PutMapping("admin/changeOrderStatus/{id}/{newStatus}")
     public ResponseEntity<?> changeOrderStatus(@PathVariable("id") Long id,
                                                @PathVariable("newStatus") String newStatus){
         orderService.changeStatus(id,newStatus);
         return new ResponseEntity<>("Status changed!", HttpStatus.OK);
     }
 
-    @GetMapping("/getTotalGain")
+    @GetMapping("admin/getTotalGain")
     public TotalGainDto getTotalGain(){
         return orderService.getTotalGainDto();
     }
 
-    @GetMapping("/getTopClients")
+    @GetMapping("admin/getTopClients")
     List<UserDto> getTopClients(){
         return orderService.getTopClients();
     }

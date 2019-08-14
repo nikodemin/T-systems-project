@@ -5,7 +5,7 @@ import com.t_systems.webstore.dao.UserDao;
 import com.t_systems.webstore.model.dto.OrderDto;
 import com.t_systems.webstore.model.dto.TotalGainDto;
 import com.t_systems.webstore.model.dto.UserDto;
-import com.t_systems.webstore.model.entity.Product;
+import com.t_systems.webstore.model.entity.AbstractProduct;
 import com.t_systems.webstore.model.entity.User;
 import com.t_systems.webstore.model.entity._Order;
 import com.t_systems.webstore.model.enums.OrderStatus;
@@ -31,7 +31,7 @@ public class OrderService {
 
     public void addOrder(_Order order) {
         Integer sum = 0;
-        for (Product product:order.getItems()) {
+        for (AbstractProduct product:order.getItems()) {
             sum += product.getPrice();
         }
         order.setTotal(sum);

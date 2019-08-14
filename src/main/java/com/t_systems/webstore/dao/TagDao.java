@@ -1,7 +1,7 @@
 package com.t_systems.webstore.dao;
 
+import com.t_systems.webstore.model.entity.CatalogProduct;
 import com.t_systems.webstore.model.entity.Category;
-import com.t_systems.webstore.model.entity.Product;
 import com.t_systems.webstore.model.entity.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -35,8 +35,8 @@ public class TagDao {
 
     public void removeTag(String name) {
         Tag tag = getTag(name);
-        em.createQuery("FROM Product p WHERE :tag IN elements(p.tags)",
-                Product.class).setParameter("tag", tag)
+        em.createQuery("FROM CatalogProduct p WHERE :tag IN elements(p.tags)",
+                CatalogProduct.class).setParameter("tag", tag)
                 .getResultList()
                 .forEach(p -> productDao.removeTagFromProduct(p, tag));
         em.remove(tag);

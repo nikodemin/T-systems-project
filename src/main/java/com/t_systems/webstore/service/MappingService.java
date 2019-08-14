@@ -8,7 +8,6 @@ import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.model.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +30,11 @@ public class MappingService {
         productService.setMappingService(this);
     }
 
-    public ProductDto toProductDto(Product product) {
-        return modelMapper.map(product, ProductDto.class);
+    public ProductDto toProductDto(AbstractProduct product) {
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
+        if (product instanceof CustomProduct)
+            productDto.setIsCustom(true);
+        return productDto;
     }
 
     public CategoryDto toCategoryDto(Category category) {
@@ -47,10 +49,10 @@ public class MappingService {
         return modelMapper.map(tag, TagDto.class);
     }
 
-    public Product toProduct(Product product, ProductDto productDto) throws Exception{
+    public CatalogProduct toProduct(CatalogProduct product, ProductDto productDto) throws Exception{
         if (product == null)
         {
-            product = new Product();
+            product = new CatalogProduct();
             product.setName(String.valueOf((new Date()).getTime()));
         }
         if (productDto.getName() != null && productDto.getName().trim().length() != 0)
@@ -160,13 +162,17 @@ public class MappingService {
         return res;
     }
 
-    public _Order toOrder(OrderDto order) {
+    public _Order toOrder(OrderDto order, String username) {
         _Order res = new _Order();
         res.setStatus(OrderStatus.UNPAID);
         res.setClient(userService.findUser(order.getUsername()));
         res.setDate(new Date());
-        List<Product> products = order.getItems().stream().map(p->productService
-                .getProduct(p.getName())).collect(Collectors.toList());
+        List<AbstractProduct> products = order.getItems().stream()
+                .map(p->{
+                    String user = p.getIsCustom()? username : null;
+                    return (AbstractProduct) productService.getProduct(p.getName(),user);
+                })
+                .collect(Collectors.toList());
         res.setItems(products);
         return res;
     }
@@ -191,8 +197,8 @@ public class MappingService {
         return user;
     }
 
-    public Product toClientProduct(ProductDto productDto, String username) {
-        Product product = modelMapper.map(productDto, Product.class);
+    public CustomProduct toClientProduct(ProductDto productDto, String username) {
+        CustomProduct product = modelMapper.map(productDto, CustomProduct.class);
         product.setAuthor(userService.findUser(username));
         product.setCategory(productService.getCategory(productDto.getCategory().getName()));
         product.setIngredients(productDto.getIngredients().stream()

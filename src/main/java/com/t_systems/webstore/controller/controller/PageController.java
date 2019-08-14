@@ -1,4 +1,4 @@
-package com.t_systems.webstore.controller.Controller;
+package com.t_systems.webstore.controller.controller;
 
 import com.t_systems.webstore.model.enums.OrderStatus;
 import lombok.RequiredArgsConstructor;

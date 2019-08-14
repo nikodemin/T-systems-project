@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebConfig.class})
@@ -83,7 +84,7 @@ public class DbTests {
         tag.setName("cheese");
         productService.addTag(tag);
 
-        Product product = new Product();
+        CatalogProduct product = new CatalogProduct();
         product.setCategory(productService.getCategory("Pizza"));
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(ingredient);
@@ -106,7 +107,8 @@ public class DbTests {
         order.setDeliveryMethod(DeliveryMethod.PICKUP);
         order.setDate(new Date());
         order.setStatus(OrderStatus.PAID);
-        order.setItems(productService.getProductsByCategory("Pizza"));
+        order.setItems(productService.getProductsByCategory("Pizza").stream()
+        .map(p-> ((AbstractProduct) p)).collect(Collectors.toList()));
         orderService.addOrder(order);
 
         Assert.assertEquals(3, orderService.getAllOrders().size());

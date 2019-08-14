@@ -1,8 +1,8 @@
 package com.t_systems.webstore.dao;
 
+import com.t_systems.webstore.model.entity.AbstractProduct;
 import com.t_systems.webstore.model.entity.Category;
 import com.t_systems.webstore.model.entity.Ingredient;
-import com.t_systems.webstore.model.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -35,8 +35,8 @@ public class IngredientDao {
 
     public void removeIngredient(String name) {
         Ingredient ing = getIngredient(name);
-        em.createQuery("FROM Product p WHERE :ingredient IN elements(p.ingredients)",
-                Product.class).setParameter("ingredient", ing)
+        em.createQuery("FROM AbstractProduct p WHERE :ingredient IN elements(p.ingredients)",
+                AbstractProduct.class).setParameter("ingredient", ing)
                 .getResultList()
                 .forEach(p -> productDao.removeIngredientFromProduct(p, ing));
         em.remove(ing);

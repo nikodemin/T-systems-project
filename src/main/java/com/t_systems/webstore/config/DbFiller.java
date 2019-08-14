@@ -54,7 +54,7 @@ public class DbFiller implements ApplicationListener {
             order.setClient(user);
             order.setDeliveryMethod(DeliveryMethod.COURIER);
             order.setStatus(OrderStatus.PAID);
-            List<Product> products = new ArrayList<>();
+            List<AbstractProduct> products = new ArrayList<>();
 
             Category category = new Category();
             category.setName("Pizza");
@@ -134,7 +134,7 @@ public class DbFiller implements ApplicationListener {
             }
 
             for (int i = 0; i < 10; i++) {
-                Product product = new Product();
+                CatalogProduct product = new CatalogProduct();
                 product.setName("pizza" + i);
                 product.setImage("/resources/img/pizza.jpg");
                 product.setCategory(categories.get("Pizza"));
@@ -154,13 +154,14 @@ public class DbFiller implements ApplicationListener {
             order.setClient(user);
             order.setDeliveryMethod(DeliveryMethod.COURIER);
             order.setStatus(OrderStatus.PAID);
-            List<Product> products2 = productService.getProductsByCategory("Pizza");
+            List<AbstractProduct> products2 = productService.getProductsByCategory("Pizza").stream()
+                    .map(p->(AbstractProduct)p).collect(Collectors.toList());
             products2.remove(9);
             products2.remove(8);
             order.setItems(products2);
             orderService.addOrder(order);
 
-            Product product = new Product();
+            CustomProduct product = new CustomProduct();
             product.setAuthor(user);
             product.setCategory(categories.get("Pizza"));
             product.setName("Pizza Big Lebovsky");

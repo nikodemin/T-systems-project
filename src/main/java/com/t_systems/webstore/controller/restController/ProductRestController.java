@@ -1,7 +1,8 @@
 package com.t_systems.webstore.controller.restController;
 
 import com.t_systems.webstore.model.dto.*;
-import com.t_systems.webstore.model.entity.Product;
+import com.t_systems.webstore.model.entity.AbstractProduct;
+import com.t_systems.webstore.model.entity.CatalogProduct;
 import com.t_systems.webstore.service.FilesService;
 import com.t_systems.webstore.service.MappingService;
 import com.t_systems.webstore.service.ProductService;
@@ -48,30 +49,92 @@ public class ProductRestController {
         return productService.getProductDtosWithTags(category,tags);
     }
 
-    @GetMapping("customProduct/ingredients/{category}")
+    @PutMapping("/addToCart/{product}")
+    public ResponseEntity<?> addToCart(@PathVariable("product") String product,
+                                       HttpSession session){
+        OrderDto orderDto = (OrderDto) session.getAttribute("order");
+        ProductDto productDto = mappingService.toProductDto(productService.getProduct(product, null));
+        orderDto.getItems().add(productDto);
+        session.setAttribute("order",orderDto);
+        return new ResponseEntity<>("CatalogProduct added to cart!", HttpStatus.OK);
+    }
+
+    @PostMapping("/addToCart/")
+    public ResponseEntity<?> addToCart(@RequestBody ProductDto product,
+                                       HttpSession session,
+                                       Principal principal){
+        OrderDto orderDto = (OrderDto) session.getAttribute("order");
+        ProductDto productDto = mappingService.toProductDto(productService.getProduct(product.getName(),
+                product.getIsCustom()? principal.getName() : null));
+        orderDto.getItems().add(productDto);
+        session.setAttribute("order",orderDto);
+        return new ResponseEntity<>("CatalogProduct added to cart!", HttpStatus.OK);
+    }
+
+    @PostMapping("/removeFromCart")
+    public ResponseEntity<?> removeFromCart(@RequestBody ProductDto product,
+                                            HttpSession session,
+                                            Principal principal){
+        OrderDto orderDto = (OrderDto) session.getAttribute("order");
+        ProductDto productDto = mappingService.toProductDto(productService.getProduct(product.getName(),
+                product.getIsCustom()? principal.getName() : null));
+        orderDto.getItems().remove(productDto);
+        session.setAttribute("order",orderDto);
+        return new ResponseEntity<>("CatalogProduct removed from cart!", HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteAllFromCart")
+    public ResponseEntity<?> deleteAllFromCart(@RequestBody ProductDto product,
+                                               HttpSession session,
+                                               Principal principal){
+        OrderDto orderDto = (OrderDto) session.getAttribute("order");
+        ProductDto productDto = mappingService.toProductDto(productService.getProduct(product.getName(),
+                product.getIsCustom()? principal.getName() : null));
+        orderDto.getItems().removeIf(p->p.equals(productDto));
+        session.setAttribute("order",orderDto);
+        return new ResponseEntity<>("CatalogProduct deleted from cart!", HttpStatus.OK);
+    }
+
+    //Custom product page
+    @GetMapping("/customProduct/ingredients/{category}")
     public List<IngredientDto> getIngredients(@PathVariable("category") String category){
         return productService.getIngredientDtosByCategory(category);
     }
 
-    @GetMapping("customProduct/userProducts/{category}")
+    @GetMapping("/customProduct/userProducts/{category}")
     public List<ProductDto> getUserProductsByCategory(@PathVariable("category") String category,
                                                       Principal principal){
         return productService.getProductDtosByCategoryAndUser(category, principal.getName());
     }
 
-    @PostMapping("customProduct/userProducts")
-    public void addUserProduct(@RequestBody ProductDto productDto, Principal principal){
+    @PostMapping("/customProduct/userProducts")
+    public ResponseEntity<?> addUserProduct(@RequestBody ProductDto productDto, Principal principal){
         productService.setPrice(productDto);
-        productService.addProduct(mappingService.toClientProduct(productDto, principal.getName()));
+        if (!productService.isCatalogProductOrCustomProductExists(productDto.getName(), principal.getName())) {
+            productService.addProduct(mappingService.toClientProduct(productDto, principal.getName()));
+            return new ResponseEntity<>("Product added!", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("Product already exists in catalog!", HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @PutMapping("customProduct/addToCart/{product}")
-    public void addToCart(@PathVariable("product") String product,
-                          HttpSession session){
+    @PutMapping("/customProduct/addToCart/{product}")
+    public ResponseEntity<?> addToCart(@PathVariable("product") String product,
+                          HttpSession session,
+                          Principal principal){
         OrderDto order = (OrderDto)session.getAttribute("order");
-        Product clientProduct = productService.getProduct(product);
+        AbstractProduct clientProduct = productService.getProduct(product, principal.getName());
         order.getItems().add(mappingService.toProductDto(clientProduct));
         session.setAttribute("order",order);
+        return new ResponseEntity<>("Product added to cart!", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/customProduct/userProducts/{product}")
+    public ResponseEntity<?> removeCustomProduct(@PathVariable("product") String product,
+                                                 Principal principal){
+        productService.detachOrRemoveProduct(product, principal.getName());
+        return new ResponseEntity<>("Product deleted!",HttpStatus.OK);
     }
 
     //Admin page
@@ -162,7 +225,7 @@ public class ProductRestController {
     public ResponseEntity<?> addTagToProduct(@PathVariable("category") String category,
                                              @PathVariable("product") String product,
                                              @PathVariable("tag") String tag) {
-        if (productService.getProduct(product).getTags().contains(productService.getTag(tag)))
+        if (((CatalogProduct) productService.getProduct(product, null)).getTags().contains(productService.getTag(tag)))
             return new ResponseEntity<>("Tag already exists!", HttpStatus.BAD_REQUEST);
 
         productService.addTagToProduct(product, tag);
@@ -173,7 +236,7 @@ public class ProductRestController {
     public ResponseEntity<?> addIngToProduct(@PathVariable("category") String category,
                                              @PathVariable("product") String product,
                                              @PathVariable("ingredient") String ingredient) {
-        if (productService.getProduct(product).getIngredients().contains(productService.getIngredient(ingredient)))
+        if (((CatalogProduct) productService.getProduct(product, null)).getIngredients().contains(productService.getIngredient(ingredient)))
             return new ResponseEntity<>("Ingredient already exists!", HttpStatus.BAD_REQUEST);
 
         productService.addIngToProduct(product, ingredient);
@@ -184,26 +247,26 @@ public class ProductRestController {
     public ResponseEntity<?> updateProduct(@PathVariable("category") String category,
                                            @PathVariable("product") String productName,
                                            @ModelAttribute("productDto") ProductDto productDto) throws Exception {
-        Product product = productService.getProduct(productName);
+        CatalogProduct product = ((CatalogProduct) productService.getProduct(productName, null));
         mappingService.toProduct(product,productDto);
         productService.updateProduct(product);
-        return new ResponseEntity<>("Product updated!", HttpStatus.OK);
+        return new ResponseEntity<>("CatalogProduct updated!", HttpStatus.OK);
     }
 
     @PostMapping("/admin/addProdcut/{category}")
     public ResponseEntity<?> addProduct(@PathVariable("category") String category,
                                         @ModelAttribute("productDto") ProductDto productDto) throws Exception{
-        Product product = mappingService.toProduct(null,productDto);
+        CatalogProduct product = mappingService.toProduct(null,productDto);
         product.setCategory(productService.getCategory(category));
         productService.addProduct(product);
-        return new ResponseEntity<>("Product added!", HttpStatus.OK);
+        return new ResponseEntity<>("CatalogProduct added!", HttpStatus.OK);
     }
 
     @DeleteMapping ("/admin/deleteProduct/{category}/{product}")
     public ResponseEntity<?> deleteProduct(@PathVariable("category") String category,
                                            @PathVariable("product") String productName) {
-        productService.detachOrRemoveProduct(productName);
-        return new ResponseEntity<>("Product removed!", HttpStatus.OK);
+        productService.detachOrRemoveProduct(productName,null);
+        return new ResponseEntity<>("CatalogProduct removed!", HttpStatus.OK);
     }
 
     @GetMapping("/admin/getTopProducts")

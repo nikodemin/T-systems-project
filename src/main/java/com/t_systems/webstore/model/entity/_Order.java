@@ -32,7 +32,7 @@ public class _Order extends AbstractEntity{
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Product> items;
+    private List<AbstractProduct> items;
 
     private OrderStatus status;
 

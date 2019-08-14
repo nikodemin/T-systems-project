@@ -43,9 +43,12 @@ $(function () {
             },
             addProduct: function (e) {
                 var name = $(e.target).parents('tr').find('.productName').text()
+                var data = vueData.products.filter(function (p) {return p.key.name==name})[0].key
                 $.ajax({
-                    url: baseUrl + '/addToCart/'+name,
-                    type: 'PUT',
+                    url: baseUrl + '/addToCart/',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader(header, token);
                     },
@@ -59,10 +62,14 @@ $(function () {
                 })
             },
             removeProduct: function (e) {
-                var name = $(e.target).parents('tr').find('.productName').text()
+                var name = $(e.target).parents('tr').find('.productName').text().trim()
+                var data = vueData.products.filter(function (p) {return p.key.name==name})[0].key
+                console.log(data)
                 $.ajax({
-                    url: baseUrl + '/removeFromCart/'+name,
-                    type: 'PUT',
+                    url: baseUrl + '/removeFromCart/',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader(header, token);
                     },
@@ -77,9 +84,12 @@ $(function () {
             },
             deleteProduct:function (e) {
                 var name = $(e.target).parents('tr').find('.productName').text()
+                var data = vueData.products.filter(function (p) {return p.key.name==name})[0].key
                 $.ajax({
-                    url: baseUrl + '/deleteAllFromCart/'+name,
-                    type: 'DELETE',
+                    url: baseUrl + '/deleteAllFromCart/',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader(header, token);
                     },
