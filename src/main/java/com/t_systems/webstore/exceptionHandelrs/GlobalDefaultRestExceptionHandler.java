@@ -1,4 +1,4 @@
-package com.t_systems.webstore.controller.exceptionHandelrs;
+package com.t_systems.webstore.exceptionHandelrs;
 
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;

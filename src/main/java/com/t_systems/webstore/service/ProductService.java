@@ -27,6 +27,10 @@ public class ProductService {
     private final UserDao userDao;
     private MappingService mappingService;
 
+    public void setMappingService(MappingService mappingService) {
+        this.mappingService = mappingService;
+    }
+
     public void addProduct(AbstractProduct product) {
         productDao.addProduct(product);
     }
@@ -126,7 +130,6 @@ public class ProductService {
             productDao.removeProduct(product);
         }
     }
-
     //todo check if this behavior is normal
     public void removeCategory(String name) {
         Category category = categoryDao.getCategory(name);
@@ -166,10 +169,10 @@ public class ProductService {
 
     public List<ProductDto> getProductDtosWithTags(String category, List<TagDto> tags) {
         return getProductsByCategory(category).stream()
-                .filter(cat->{
+                .filter(product->{
                     boolean res = true;
                     for (TagDto tag:tags) {
-                        res &= cat.getTags().stream()
+                        res &= product.getTags().stream()
                                 .filter(catTag->catTag.getName().equals(tag.getName()))
                                 .count() > 0;
                     }
@@ -186,7 +189,7 @@ public class ProductService {
     public void setPrice(ProductDto productDto) {
         Integer total = 0;
         for (IngredientDto i:productDto.getIngredients()) {
-            total += i.getPrice();
+            total += ingredientDao.getIngredient(i.getName()).getPrice();
         }
         productDto.setPrice(total);
     }
@@ -194,10 +197,6 @@ public class ProductService {
     public List<TagDto> getAllTagDtos() {
         return getAllTags().stream().map(t -> mappingService.toTagDto(t))
                 .collect(Collectors.toList());
-    }
-
-    public void setMappingService(MappingService mappingService) {
-        this.mappingService = mappingService;
     }
 
     public List<ProductDto> getTopProductsDtoForAdmin() {

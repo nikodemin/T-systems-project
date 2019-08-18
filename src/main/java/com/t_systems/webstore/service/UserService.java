@@ -79,7 +79,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.getUser(username);
         if (user != null) {
-            UserDetails userDetails = new UserDetails() {
+            return new UserDetails() {
                 @Override
                 public Collection<? extends GrantedAuthority> getAuthorities() {
                     List<GrantedAuthority> authorities = new ArrayList<>();
@@ -117,7 +117,6 @@ public class UserService implements UserDetailsService {
                     return true;
                 }
             };
-            return userDetails;
         }
         throw new UsernameNotFoundException("User not found");
     }

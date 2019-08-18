@@ -2,9 +2,7 @@ package com.t_systems.webstore.service;
 
 import com.t_systems.webstore.model.dto.*;
 import com.t_systems.webstore.model.entity.*;
-import com.t_systems.webstore.model.enums.DeliveryMethod;
 import com.t_systems.webstore.model.enums.OrderStatus;
-import com.t_systems.webstore.model.enums.PaymentMethod;
 import com.t_systems.webstore.model.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -129,34 +127,6 @@ public class MappingService {
                 break;
             case "Delivered":
                 res = OrderStatus.DELIVERED;
-                break;
-        }
-        return res;
-    }
-
-    public DeliveryMethod toDeliveryMethod(String method){
-        DeliveryMethod res = null;
-        switch (method)
-        {
-            case "Courier":
-                res = DeliveryMethod.COURIER;
-                break;
-            case "Pick up":
-                res = DeliveryMethod.PICKUP;
-                break;
-        }
-        return res;
-    }
-
-    public PaymentMethod toPaymentMethod(String method){
-        PaymentMethod res = null;
-        switch (method)
-        {
-            case "Cash":
-                res = PaymentMethod.CASH;
-                break;
-            case "Card":
-                res = PaymentMethod.CARD;
                 break;
         }
         return res;

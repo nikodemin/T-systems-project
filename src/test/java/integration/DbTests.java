@@ -1,3 +1,5 @@
+package integration;
+
 import com.t_systems.webstore.config.WebConfig;
 import com.t_systems.webstore.exception.UserExistsException;
 import com.t_systems.webstore.model.entity.*;

@@ -22,10 +22,9 @@ public class ProductDao {
 
     public List<CatalogProduct> getProductsByCat(String category) {
         em.clear();
-        List<CatalogProduct> res = em.createQuery("FROM CatalogProduct p WHERE p.category=(FROM Category c WHERE c.name=:category) ORDER BY p.id",
+        return em.createQuery("FROM CatalogProduct p WHERE p.category=(FROM Category c WHERE c.name=:category) ORDER BY p.id",
                 CatalogProduct.class)
                 .setParameter("category", category).getResultList();
-        return res;
     }
 
     public void detachProduct(AbstractProduct product) {
@@ -92,16 +91,16 @@ public class ProductDao {
     }
 
     public boolean isCatalogProductExists(String name) {
-        return em.createQuery("FROM CatalogProduct p WHERE p.name=:name",CatalogProduct.class)
+        return !em.createQuery("FROM CatalogProduct p WHERE p.name=:name",CatalogProduct.class)
                 .setParameter("name",name)
-                .getResultList().size() > 0;
+                .getResultList().isEmpty();
     }
 
     public boolean isCustomProductExists(String name, User user) {
-        return em.createQuery("FROM CustomProduct p WHERE p.name=:name AND p.author=:user",
+        return !em.createQuery("FROM CustomProduct p WHERE p.name=:name AND p.author=:user",
                 CustomProduct.class)
                 .setParameter("name",name)
                 .setParameter("user",user)
-                .getResultList().size() > 0;
+                .getResultList().isEmpty();
     }
 }
