@@ -38,7 +38,6 @@ public class UserController {
         Object target = binder.getTarget();
         if (target == null)
             return;
-
         if (target.getClass() == UserDto.class)
             binder.setValidator(validator);
     }
@@ -68,27 +67,6 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/settings")
-    public String getSettingsPage(Model model, Principal principal) {
-        UserDto userDto = mappingService.toUserDto(userService.findUser(principal.getName()));
-        model.addAttribute("user", userDto);
-        return "settings";
-    }
-
-    @PostMapping("/changeSettings")
-    public String changeSettings(Model model, @Valid @ModelAttribute("user") UserDto userDto,
-                                 BindingResult result, Principal principal,HttpServletRequest request)
-            throws ParseException, ServletException {
-        if (result.hasErrors()) {
-            return "settings";
-        }
-
-        request.logout();
-        userService.changeUser(principal.getName(), userDto);
-        model.addAttribute("text","Changes accepted!");
-        return "text";
-    }
-
     @GetMapping("/cart")
     public String getCartPage(Model model, HttpSession session) {
         model.addAttribute("cart", session.getAttribute("cart"));
@@ -103,7 +81,7 @@ public class UserController {
     @GetMapping("/logout")
     public String getAfterLogoutPage(HttpServletRequest request) throws ServletException {
         request.logout();
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/payment")

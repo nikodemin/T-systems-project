@@ -1,15 +1,13 @@
 package com.t_systems.webstore.service;
 
 import com.t_systems.webstore.dao.*;
-import com.t_systems.webstore.model.dto.CategoryDto;
-import com.t_systems.webstore.model.dto.IngredientDto;
-import com.t_systems.webstore.model.dto.ProductDto;
-import com.t_systems.webstore.model.dto.TagDto;
+import com.t_systems.webstore.model.dto.*;
 import com.t_systems.webstore.model.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -230,5 +228,13 @@ public class ProductService {
     public boolean isCatalogProductOrCustomProductExists(String name, String username) {
         return productDao.isCatalogProductExists(name) ||
                 productDao.isCustomProductExists(name,userDao.getUser(username));
+    }
+
+    public void removeProductFromCart(HttpSession session, String product) {
+        OrderDto order = (OrderDto)session.getAttribute("order");
+        List<ProductDto> products = order.getItems().stream()
+                .filter(p -> !p.getName().equals(product)).collect(Collectors.toList());
+        order.setItems(products);
+        session.setAttribute("order",order);
     }
 }

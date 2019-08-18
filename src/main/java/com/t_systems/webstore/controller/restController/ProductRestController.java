@@ -16,6 +16,7 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -132,8 +133,10 @@ public class ProductRestController {
 
     @DeleteMapping("/customProduct/userProducts/{product}")
     public ResponseEntity<?> removeCustomProduct(@PathVariable("product") String product,
-                                                 Principal principal){
+                                                 Principal principal,
+                                                 HttpSession session){
         productService.detachOrRemoveProduct(product, principal.getName());
+        productService.removeProductFromCart(session,product);
         return new ResponseEntity<>("Product deleted!",HttpStatus.OK);
     }
 
