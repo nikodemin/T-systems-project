@@ -28,6 +28,7 @@ $(function () {
                 })
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -57,6 +58,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -78,6 +80,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -98,6 +101,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -124,6 +128,7 @@ $(function () {
                         vueData.cardEmpty = data
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -148,6 +153,7 @@ $(function () {
                             vueData.addressError = data
                         },
                         error: function (jqXHR, status, errorThrown) {
+                            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                             console.log('ERROR: ' + jqXHR.responseText)
                         }
                     })
@@ -168,6 +174,7 @@ $(function () {
                             vueData.cardError = data
                         },
                         error: function (jqXHR, status, errorThrown) {
+                            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                             console.log('ERROR: ' + jqXHR.responseText)
                         }
                     })
@@ -182,6 +189,7 @@ $(function () {
                             window.location = baseUrl + '/confirmation'
                         },
                         error: function (jqXHR, status, errorThrown) {
+                            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                             console.log('ERROR: ' + jqXHR.responseText)
                         }
                     })

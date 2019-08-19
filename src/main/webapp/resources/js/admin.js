@@ -22,6 +22,7 @@ $(function () {
                 vueData.categories = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -36,6 +37,7 @@ $(function () {
                 vueData.ingredients = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -50,6 +52,7 @@ $(function () {
                 vueData.tags = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -66,6 +69,7 @@ $(function () {
                 currentCategory = category
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -76,6 +80,7 @@ $(function () {
                 vueData.categoryTags = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -86,6 +91,7 @@ $(function () {
                 vueData.categoryIngs = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -115,14 +121,15 @@ $(function () {
                     contentType: false,
                     success: function (respond, status, jqXHR) {
 
-                        if (typeof respond.error === 'undefined') {
-                            console.log("SUCCESS " + respond, jqXHR.responseText)
-                            vueData.categories.push({name: data.get('name')})
+                        if (typeof respond.popup === 'undefined') {
+                            raisePopup("SUCCESS " + respond,'warning');                          vueData.categories.push({name: data.get('name')})
                         } else {
-                            console.log('ERROR: ' + respond.error, jqXHR.responseText)
+                            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
+                            console.log('ERROR: ' + jqXHR.responseText)
                         }
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -142,6 +149,7 @@ $(function () {
                         getCategories()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -155,6 +163,7 @@ $(function () {
                         getIngredients()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -174,15 +183,16 @@ $(function () {
                     contentType: 'application/json',
                     success: function (respond, status, jqXHR) {
 
-                        if (typeof respond.error === 'undefined') {
-                            console.log("SUCCESS " + respond, jqXHR.responseText)
-                            vueData.ingredients.push({name: data.name})
+                        if (typeof respond.popup === 'undefined') {
+                            raisePopup("SUCCESS " + respond,'warning');                            vueData.ingredients.push({name: data.name})
                             getProducts()
                         } else {
-                            console.log('ERROR: ' + respond.error, jqXHR.responseText)
+                            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
+                            console.log('ERROR: ' + jqXHR.responseText)
                         }
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -196,6 +206,7 @@ $(function () {
                         getTags()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -214,15 +225,16 @@ $(function () {
                     contentType: 'application/json',
                     success: function (respond, status, jqXHR) {
 
-                        if (typeof respond.error === 'undefined') {
-                            console.log("SUCCESS " + respond, jqXHR.responseText)
-                            vueData.tags.push({name: data.name})
+                        if (typeof respond.popup === 'undefined') {
+                            raisePopup("SUCCESS " + respond,'warning');                            vueData.tags.push({name: data.name})
                             getProducts()
                         } else {
-                            console.log('ERROR: ' + respond.error, jqXHR.responseText)
+                            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
+                            console.log('ERROR: ' + jqXHR.responseText)
                         }
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -238,6 +250,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -253,6 +266,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -284,14 +298,15 @@ $(function () {
                     contentType: false,
                     success: function (respond, status, jqXHR) {
 
-                        if (typeof respond.error === 'undefined') {
-                            console.log("SUCCESS " + respond, jqXHR.responseText)
+                        if (typeof respond.popup === 'undefined') {
+                            raisePopup("SUCCESS " + respond,'warning')
                             getProducts()
                         } else {
-                            console.log('ERROR: ' + respond.error, jqXHR.responseText)
+                            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         }
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -304,6 +319,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -317,6 +333,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -330,6 +347,7 @@ $(function () {
                         getProducts()
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -351,6 +369,7 @@ $(function () {
                         vueData.products = data
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })

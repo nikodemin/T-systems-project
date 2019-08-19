@@ -13,6 +13,7 @@ function getOrders() {
             vueData.orders = data
         },
         error: function (jqXHR, status, errorThrown) {
+            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
             console.log('ERROR: ' + jqXHR.responseText)
         }
     })
@@ -23,6 +24,7 @@ function getOrders() {
             vueData.total = data
         },
         error: function (jqXHR, status, errorThrown) {
+            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
             console.log('ERROR: ' + jqXHR.responseText)
         }
     })
@@ -37,6 +39,7 @@ function getTopClients() {
             vueData.topClients = data
         },
         error: function (jqXHR, status, errorThrown) {
+            raisePopup('ERROR: ' + jqXHR.responseText,'danger')
             console.log('ERROR: ' + jqXHR.responseText)
         }
     })
@@ -57,10 +60,11 @@ var vue = new Vue({
                 url: baseUrl + '/admin/changeOrderStatus/'+id+'/'+newStatus,
                 type: 'PUT',
                 success: function (data) {
-                    console.log(data)
+                    raisePopup(data,'warning')
                     getOrders()
                 },
                 error: function (jqXHR, status, errorThrown) {
+                    raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                     console.log('ERROR: ' + jqXHR.responseText)
                 }
             })

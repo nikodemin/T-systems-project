@@ -19,6 +19,7 @@ $(function () {
                 vueData.products = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -59,6 +60,7 @@ $(function () {
                         vueData.products = data
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -72,9 +74,10 @@ $(function () {
                         xhr.setRequestHeader(header, token);
                     },
                     success: function (data) {
-                        console.log(data)
+                        raisePopup(data,'warning')
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })

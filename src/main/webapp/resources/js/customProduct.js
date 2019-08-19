@@ -24,6 +24,7 @@ $(function () {
                 vueData.ingredients = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -41,6 +42,7 @@ $(function () {
                 vueData.products = data
             },
             error: function (jqXHR, status, errorThrown) {
+                raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                 console.log('ERROR: ' + jqXHR.responseText)
             }
         })
@@ -95,13 +97,14 @@ $(function () {
                         xhr.setRequestHeader(header, token);
                     },
                     success: function (data) {
-                        console.log(data)
+                        raisePopup(data,'warning')
                         getIngredients()
                         getUserProducts()
                         vueData.chosenIngs = []
                         vueData.total = 0
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -115,8 +118,10 @@ $(function () {
                         xhr.setRequestHeader(header, token);
                     },
                     success: function (data) {
+                        raisePopup(data,'warning')
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })
@@ -131,9 +136,10 @@ $(function () {
                     },
                     success: function (data) {
                         getUserProducts()
-                        console.log(data)
+                        raisePopup(data,'warning')
                     },
                     error: function (jqXHR, status, errorThrown) {
+                        raisePopup('ERROR: ' + jqXHR.responseText,'danger')
                         console.log('ERROR: ' + jqXHR.responseText)
                     }
                 })

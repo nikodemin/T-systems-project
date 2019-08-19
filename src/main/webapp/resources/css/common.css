@@ -98,3 +98,21 @@ footer {
     background-color: rgba(0, 0, 0, 0.58);
     padding: 30px;
 }
+
+#popupContainer{
+    z-index: 99;
+    position: fixed;
+    max-width: 300px;
+    right: 10%;
+    bottom: 0;
+}
+
+#popupContainer div.popup{
+    margin-top: 10px;
+    max-width: 250px;
+}
+
+#popupContainer div.popup span.close{
+    float: right;
+    cursor: pointer;
+}
